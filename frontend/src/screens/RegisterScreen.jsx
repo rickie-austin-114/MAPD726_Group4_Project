@@ -51,8 +51,8 @@ const RegisterScreen = ({ navigation }) => {
       <SafeAreaView className="flex">
         <View className="flex-row justify-center">
           <Image
-            source={require("../assets/sencare.png")}
-            style={{ width: 350, height: 100, resizeMode: "stretch" }}
+          source={require("../assets/tourvia.png")}
+          style={{ width: 200, height: 200, resizeMode: "stretch" }}
           />
         </View>
       </SafeAreaView>
@@ -74,10 +74,10 @@ const RegisterScreen = ({ navigation }) => {
         />
 
 
-        <Text className="text-gray-700 ml-4">Self Introduction</Text>
+        <Text className="text-gray-700 ml-4">Phone</Text>
         <TextInput
           className="p-4 bg-gray-100 text-gray-700 rounded-2xl mb-3"
-          placeholder="Introduction" value={introduction} onChangeText={setIntroduction}         />
+          placeholder="Phone" value={introduction} onChangeText={setIntroduction}         />
 
         <Text className="text-gray-700 ml-4">Email Address</Text>
         <TextInput

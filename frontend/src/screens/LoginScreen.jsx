@@ -22,7 +22,7 @@ const LoginScreen = ({ navigation }) => {
       // Store token and navigate to Account
       const token = response.data.token;
       // You might want to store the token using AsyncStorage for later use
-      navigation.navigate('ListPatients', { token });
+      navigation.navigate('Main', { token });
     } catch (error) {
       Alert.alert('Login Failed', error.response.data.message);
     }
@@ -53,8 +53,8 @@ const LoginScreen = ({ navigation }) => {
     <SafeAreaView className="flex">
       <View className="flex-row justify-center">
         <Image
-          source={require("../assets/sencare.png")}
-          style={{ width: 350, height: 100, resizeMode: "stretch" }}
+          source={require("../assets/tourvia.png")}
+          style={{ width: 300, height: 300, resizeMode: "stretch" }}
         />
       </View>
     </SafeAreaView>
