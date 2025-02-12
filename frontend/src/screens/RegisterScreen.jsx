@@ -16,7 +16,6 @@ import "../../global.css";
 import { storeColors } from "../theme";
 import { SafeAreaView } from "react-native-safe-area-context";
 
-
 const RegisterScreen = ({ navigation }) => {
   const [name, setName] = useState("");
   const [introduction, setIntroduction] = useState("");
@@ -51,8 +50,8 @@ const RegisterScreen = ({ navigation }) => {
       <SafeAreaView className="flex">
         <View className="flex-row justify-center">
           <Image
-          source={require("../assets/tourvia.png")}
-          style={{ width: 200, height: 200, resizeMode: "stretch" }}
+            source={require("../assets/tourvia.png")}
+            style={{ width: 200, height: 200, resizeMode: "stretch" }}
           />
         </View>
       </SafeAreaView>
@@ -70,35 +69,43 @@ const RegisterScreen = ({ navigation }) => {
         <Text className="text-gray-700 ml-4">Name</Text>
         <TextInput
           className="p-4 bg-gray-100 text-gray-700 rounded-2xl mb-3"
-          placeholder="Name" value={name} onChangeText={setName}
+          placeholder="Name"
+          value={name}
+          onChangeText={setName}
+          style={{ backgroundColor: storeColors.placeHolders }}
         />
-
 
         <Text className="text-gray-700 ml-4">Phone</Text>
         <TextInput
           className="p-4 bg-gray-100 text-gray-700 rounded-2xl mb-3"
-          placeholder="Phone" value={introduction} onChangeText={setIntroduction}         />
+          style={{ backgroundColor: storeColors.placeHolders }}
+          placeholder="Phone"
+          value={introduction}
+          onChangeText={setIntroduction}
+        />
 
         <Text className="text-gray-700 ml-4">Email Address</Text>
         <TextInput
           className="p-4 bg-gray-100 text-gray-700 rounded-2xl mb-3"
-          placeholder="Email" value={email} onChangeText={setEmail}
-                  />
-
+          style={{ backgroundColor: storeColors.placeHolders }}
+          placeholder="Email"
+          value={email}
+          onChangeText={setEmail}
+        />
 
         <Text className="text-gray-700 ml-4">Password</Text>
         <TextInput
           className="p-4 bg-gray-100 text-gray-700 rounded-2xl mb-3"
-          placeholder="Password" value={password} onChangeText={setPassword} secureTextEntry        />
+          style={{ backgroundColor: storeColors.placeHolders }}
+          placeholder="Password"
+          value={password}
+          onChangeText={setPassword}
+          secureTextEntry
+        />
 
-<Pressable
-        onPress={
-          handleRegister
-        }
-        style={styles.button}
-      >
-        <Text style={styles.text}>Register</Text>
-      </Pressable>
+        <Pressable onPress={handleRegister} style={styles.button}>
+          <Text style={styles.text}>Register</Text>
+        </Pressable>
       </View>
     </View>
   );
@@ -111,7 +118,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#ffffc5",
   },
   button: {
-    backgroundColor: "#6200ee",
+    backgroundColor: "#213638",
     padding: 10,
     borderRadius: 5,
     alignItems: "center",
