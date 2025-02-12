@@ -1,66 +1,26 @@
-import React, { useState } from 'react';
-import { StyleSheet, Text, View, TextInput, Button } from 'react-native';
+// App.tsx
+import React from 'react';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import MainScreen from './src/screens/MainScreen';
+import LoginScreen from './src/screens/LoginScreen';
+import RegisterScreen from './src/screens/RegisterScreen';
+import "./global.css"
+
+const Stack = createNativeStackNavigator();
 
 const App = () => {
-  const [age, setAge] = useState('');
-  const [budget, setBudget] = useState('');
-  const [travelTime, setTravelTime] = useState('');
-
-  const handleSubmit = () => {
-    alert(`Age: ${age}, Budget: ${budget}, Travel Time: ${travelTime}`);
-  };
-
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>Travel Information</Text>
-      
-      <TextInput
-        style={styles.input}
-        placeholder="Enter your age"
-        keyboardType="numeric"
-        value={age}
-        onChangeText={setAge}
-      />
-      
-      <TextInput
-        style={styles.input}
-        placeholder="Enter your budget"
-        keyboardType="numeric"
-        value={budget}
-        onChangeText={setBudget}
-      />
-      
-      <TextInput
-        style={styles.input}
-        placeholder="Enter travel time (days)"
-        keyboardType="numeric"
-        value={travelTime}
-        onChangeText={setTravelTime}
-      />
-      
-      <Button title="Submit" onPress={handleSubmit} />
-    </View>
+    <NavigationContainer>
+      <Stack.Navigator initialRouteName="Main">
+        <Stack.Screen name="Login" component={LoginScreen} />
+        <Stack.Screen name="Register" component={RegisterScreen} />
+
+        <Stack.Screen name="Main" component={MainScreen} />
+        {/* <Stack.Screen name="ViewRecord" component={ViewRecordScreen} /> */}
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    padding: 20,
-  },
-  title: {
-    fontSize: 24,
-    textAlign: 'center',
-    marginBottom: 20,
-  },
-  input: {
-    height: 40,
-    borderColor: 'gray',
-    borderWidth: 1,
-    marginBottom: 15,
-    paddingHorizontal: 10,
-  },
-});
 
 export default App;

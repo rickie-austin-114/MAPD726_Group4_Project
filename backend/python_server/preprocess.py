@@ -23,4 +23,4 @@ df1 = df[["Destination", "Duration (days)", "Traveler age", "Traveler gender", "
 
 df1["cost"] = df["Accommodation cost"] + df["Transportation cost"]
 
-df1.to_csv("cleaned_data.csv", index=False)
+df1.to_csv("./data/cleaned_data.csv", index=False)

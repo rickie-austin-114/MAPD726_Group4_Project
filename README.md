@@ -19,6 +19,7 @@ uvicorn main:app --reload
 ```
 cd backend/python_server
 pip install -r requirements.txt
+python preprocess.py
 python train.py
 ```
 
@@ -29,3 +30,6 @@ npm install
 npx expo start
 ```
 Then press i for ios or a for android
+
+## Links
+Datasets: https://www.kaggle.com/datasets/rkiattisak/traveler-trip-data?resource=download
