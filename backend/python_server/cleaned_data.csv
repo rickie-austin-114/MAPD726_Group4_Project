@@ -1,0 +1,137 @@
+Destination,Duration (days),Traveler age,Traveler gender,Traveler nationality,Accommodation type,Transportation type,cost
+"London, UK",7.0,35.0,Male,American,Hotel,Flight,1800
+"Phuket, Thailand",5.0,28.0,Female,Canadian,Resort,Flight,1300
+"Bali, Indonesia",7.0,45.0,Male,Korean,Villa,Flight,1700
+"New York, USA",14.0,29.0,Female,British,Hotel,Flight,3000
+"Tokyo, Japan",7.0,26.0,Female,Vietnamese,Airbnb,Train,900
+"Paris, France",5.0,42.0,Male,American,Hotel,Flight,2300
+"Sydney, Australia",10.0,33.0,Female,Australian,Hostel,Flight,1700
+"Rio de Janeiro, Brazil",7.0,25.0,Male,Brazilian,Airbnb,Flight,1500
+"Amsterdam, Netherlands",7.0,31.0,Female,Dutch,Hotel,Train,1400
+"Dubai, United Arab Emirates",7.0,39.0,Male,Emirati,Resort,Flight,3300
+"Cancun, Mexico",7.0,27.0,Female,Mexican,Hotel,Flight,1500
+"Barcelona, Spain",7.0,36.0,Male,Spanish,Airbnb,Train,900
+"Honolulu, Hawaii",8.0,29.0,Female,Chinese,Resort,Flight,4200
+"Berlin, Germany",9.0,48.0,Male,German,Hotel,Flight,2100
+"Marrakech, Morocco",7.0,26.0,Female,Moroccan,Riad,Flight,1000
+"Edinburgh, Scotland",7.0,32.0,Male,Scottish,Hotel,Train,1050
+Paris,9.0,30.0,Female,American,Hotel,Plane,1300
+Bali,10.0,28.0,Male,Chinese,Resort,Plane,2200
+London,6.0,35.0,Female,British,Hotel,Train,1350
+Tokyo,10.0,45.0,Male,Japanese,Hotel,Plane,2000
+New York,5.0,27.0,Female,American,Airbnb,Bus,700
+Sydney,7.0,32.0,Male,Australian,Hotel,Plane,1600
+Rome,7.0,29.0,Female,Italian,Airbnb,Train,780
+Bangkok,8.0,40.0,Male,Indian,Hostel,Plane,900
+Paris,6.0,24.0,Female,Vietnamese,Hotel,Train,1500
+Hawaii,9.0,34.0,Male,Korean,Resort,Plane,2800
+Barcelona,8.0,31.0,Female,Spanish,Hotel,Train,1250
+Japan,8.0,30.0,Female,American,Hotel,Plane,1300
+Thailand,7.0,45.0,Male,Canadian,Hostel,Train,350
+France,9.0,25.0,Male,Korean,Airbnb,Car rental,900
+Australia,13.0,28.0,Female,British,Hotel,Car rental,1500
+Brazil,9.0,33.0,Female,Australian,Hostel,Bus,200
+Greece,8.0,20.0,Male,American,Airbnb,Plane,1000
+Egypt,7.0,37.0,Female,Canadian,Hotel,Train,800
+Mexico,10.0,42.0,Male,British,Airbnb,Plane,1300
+Italy,6.0,31.0,Female,American,Hostel,Train,300
+Spain,8.0,27.0,Male,Korean,Hotel,Car rental,1300
+Canada,7.0,38.0,Female,Australian,Airbnb,Bus,425
+"Paris, France",7.0,25.0,Female,American,Hotel,Plane,2000
+"Sydney, Australia",7.0,33.0,Male,Canadian,Airbnb,Train,950
+"Tokyo, Japan",8.0,28.0,Female,Chinese,Hostel,Plane,1400
+"Cancun, Mexico",7.0,45.0,Male,American,Resort,Plane,3000
+"Rio de Janeiro, Brazil",7.0,30.0,Female,Brazilian,Hotel,Plane,1900
+"London, UK",7.0,55.0,Male,British,Airbnb,Train,1000
+"Barcelona, Spain",7.0,27.0,Female,Spanish,Hostel,Plane,1200
+"New York City, USA",7.0,41.0,Male,American,Hotel,Plane,2000
+"Bangkok, Thailand",6.0,29.0,Female,Indian,Airbnb,Bus,550
+"Vancouver, Canada",7.0,24.0,Male,Korean,Hostel,Train,550
+"Amsterdam, Netherlands",8.0,31.0,Female,Dutch,Hotel,Plane,1800
+"Paris, France",7.0,31.0,Female,Canadian,Hotel,Train,1500
+"Tokyo, Japan",10.0,25.0,Male,American,Hostel,Bus,600
+"Sydney, AUS",7.0,27.0,Female,South Korean,Airbnb,Car rental,1100
+"New York, USA",7.0,28.0,Female,Canadian,Hotel,Flight,2200
+"Rio de Janeiro, Brazil",9.0,30.0,Male,Brazilian,Airbnb,Train,950
+"Bangkok, Thailand",8.0,23.0,Female,Indian,Hostel,Bus,450
+"London, UK",8.0,35.0,Male,British,Hotel,Train,1200
+"Barcelona, Spain",8.0,29.0,Female,Spanish,Airbnb,Car rental,950
+"Seoul, South Korea",8.0,27.0,Male,South Korean,Hostel,Subway,520
+"Los Angeles, USA",7.0,26.0,Male,Chinese,Hotel,Car rental,1500
+"Rome, Italy",8.0,33.0,Female,Italian,Airbnb,Train,900
+Paris,6.0,35.0,Female,American,Hotel,Plane,2000
+Tokyo,7.0,28.0,Male,Japanese,Hostel,Train,700
+Cape Town,9.0,29.0,Female,British,Vacation rental,Car rental,1000
+Sydney,6.0,43.0,Male,Australian,Hotel,Plane,2700
+Barcelona,7.0,31.0,Female,Spanish,Vacation rental,Plane,1600
+Bali,7.0,27.0,Male,American,Resort,Plane,3200
+Paris,6.0,39.0,Female,French,Hotel,Train,1300
+New York,6.0,25.0,Male,American,Vacation rental,Plane,1800
+Bangkok,8.0,33.0,Female,Indian,Hostel,Plane,1000
+Rome,6.0,41.0,Male,Italian,Hotel,Train,1400
+Bali,8.0,37.0,Female,British,Resort,Plane,2800
+"Bali, Indonesia",7.0,35.0,Female,South Korean,Resort,Plane,1300
+"Tokyo, Japan",8.0,29.0,Male,American,Hotel,Train,1200
+"Cancun, Mexico",7.0,42.0,Female,Mexican,Resort,Plane,1300
+"Paris, France",7.0,46.0,Male,British,Hotel,Plane,1900
+"Cape Town, SA",9.0,31.0,Male,South African,Guesthouse,Car,700
+"Bali, Indonesia",7.0,25.0,Female,Taiwanese,Resort,Plane,1300
+"Sydney, Aus",7.0,38.0,Male,Australian,Hotel,Plane,1500
+"Bangkok, Thai",7.0,27.0,Female,Korean,Hotel,Plane,800
+"New York, USA",7.0,60.0,Male,American,Hotel,Plane,2500
+"Phuket, Thai",7.0,32.0,Female,British,Resort,Plane,1500
+Paris,6.0,35.0,Male,American,Hotel,Plane,1300
+Tokyo,10.0,28.0,Female,Korean,Airbnb,Train,800
+Bali,11.0,42.0,Female,Spanish,Resort,Plane,1900
+Sydney,9.0,45.0,Male,Australian,Hotel,Plane,1500
+New York,6.0,31.0,Female,American,Airbnb,Car rental,900
+London,11.0,29.0,Male,British,Hostel,Plane,700
+Dubai,8.0,24.0,Female,Emirati,Hotel,Plane,1800
+Bangkok,7.0,26.0,Male,Vietnamese,Airbnb,Train,500
+Rome,11.0,30.0,Female,Italian,Hostel,Plane,550
+Bali,11.0,33.0,Male,Indonesian,Villa,Car rental,1800
+Seoul,10.0,27.0,Female,Korean,Hotel,Train,950
+Paris,5.0,35.0,Male,USA,Hotel,Plane,1300
+Tokyo,9.0,28.0,Female,Canada,Airbnb,Train,600
+Sydney,9.0,45.0,Male,South Korea,Hostel,Plane,1400
+London,5.0,37.0,Female,UK,Hotel,Plane,1300
+New York,6.0,50.0,Male,China,Airbnb,Car rental,1100
+Rome,7.0,31.0,Female,Taiwan,Hotel,Plane,1600
+Bangkok,8.0,42.0,Male,Japan,Hostel,Train,400
+Cape Town,8.0,27.0,Female,Spain,Airbnb,Plane,2000
+Rio de Janeiro,7.0,33.0,Male,Brazil,Hotel,Car rental,1300
+Bali,6.0,29.0,Female,South Korea,Villa,Plane,2200
+Amsterdam,7.0,41.0,Male,Germany,Hotel,Train,750
+Paris,5.0,35.0,Male,USA,Hotel,Plane,1800
+Tokyo,9.0,28.0,Female,South Korea,Airbnb,Train,1300
+New York,5.0,42.0,Male,Hong Kong,Hotel,Car rental,1400
+Bali,8.0,30.0,Female,Taiwan,Resort,Plane,2700
+Sydney,9.0,26.0,Male,Canada,Hostel,Plane,1200
+London,5.0,38.0,Female,United Kingdom,Hotel,Train,1050
+Phuket,7.0,45.0,Male,Singapore,Villa,Plane,2700
+Rome,7.0,31.0,Female,Italy,Hotel,Train,1350
+Santorini,7.0,27.0,Male,Greece,Airbnb,Ferry,1150
+Dubai,5.0,29.0,Female,United Arab Emirates,Hotel,Car rental,1800
+Phnom Penh,5.0,33.0,Male,Cambodia,Hostel,Plane,700
+"Tokyo, Japan",9.0,32.0,Female,American,Hotel,Plane,1700
+"Paris, France",7.0,47.0,Male,Canadian,Hotel,Train,1700
+"Sydney, Aus",11.0,26.0,Female,Chinese,Airbnb,Plane,1800
+"Rome, Italy",7.0,38.0,Male,Korean,Hotel,Train,1300
+"Bali, Indonesia",10.0,29.0,Female,Korean,Hostel,Plane,1300
+"Cancun, Mexico",8.0,41.0,Male,American,Hotel,Plane,1900
+"Athens, Greece",10.0,35.0,Female,Korean,Airbnb,Plane,1600
+"Tokyo, Japan",8.0,24.0,Male,Korean,Hotel,Plane,1900
+"Sydney, Aus",10.0,30.0,Female,Chinese,Airbnb,Plane,1900
+"Paris, France",8.0,28.0,Male,American,Hostel,Plane,1100
+"Bali, Indonesia",8.0,33.0,Female,Canadian,Hotel,Plane,1600
+"Paris, France",6.0,35.0,Male,American,Hotel,Airplane,7500
+"Tokyo, Japan",7.0,28.0,Female,British,Airbnb,Train,8500
+"Cape Town, South Africa",9.0,45.0,Male,South African,Hostel,Car,5000
+"Sydney, Australia",6.0,31.0,Female,Australian,Hotel,Airplane,9000
+"Rome, Italy",7.0,42.0,Male,Korean,Airbnb,Train,5500
+"New York City, USA",7.0,27.0,Female,American,Hotel,Airplane,10500
+"Rio de Janeiro, Brazil",9.0,37.0,Male,Brazilian,Hostel,Car,4500
+"Vancouver, Canada",6.0,29.0,Female,Canadian,Hotel,Airplane,8000
+"Bangkok, Thailand",7.0,34.0,Male,Chinese,Hostel,Train,3000
+"Barcelona, Spain",7.0,25.0,Female,Spanish,Airbnb,Airplane,8500
+"Auckland, New Zealand",7.0,39.0,Male,New Zealander,Hotel,Train,9500
