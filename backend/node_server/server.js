@@ -5,6 +5,8 @@ const bodyParser = require("body-parser");
 const cors = require("cors");
 
 const User = require("./models/User"); // Assuming you'll create a User model
+const Patient = require("./models/Patient"); // Assuming you'll create a User model
+
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 
@@ -18,7 +20,9 @@ const MONGODB_URI = process.env.MONGODB_URI;
 app.use(cors());
 app.use(bodyParser.json());
 
-
+async function isCritical(id) {
+  return false;
+}
 // MongoDB connection
 mongoose
   .connect(MONGODB_URI, {
@@ -63,8 +67,7 @@ app.post("/api/login", async (req, res) => {
   res.json({ token });
 });
 
-
-app.put('/api/forgetPassword', async (req, res) => {
+app.put("/api/forgetPassword", async (req, res) => {
   const { email, password } = req.body;
   const hashedPassword = await bcrypt.hash(password, 10);
 
@@ -77,16 +80,151 @@ app.put('/api/forgetPassword', async (req, res) => {
     );
 
     if (!updatedUser) {
-      return res.status(404).json({ message: 'User not found' });
+      return res.status(404).json({ message: "User not found" });
     }
 
-    res.status(200).json({ message: 'User age updated', user: updatedUser });
+    res.status(200).json({ message: "User age updated", user: updatedUser });
   } catch (error) {
-    res.status(500).json({ message: 'Error updating age', error });
+    res.status(500).json({ message: "Error updating age", error });
   }
 });
 
+// GET all patients
+app.get("/api/patients", async (req, res) => {
+  try {
+    const search = req.query.search ?? "";
+    /*
+    if (!search) {
+      search = ""
+    }
+*/
+    const patients = await Patient.find({
+      name: { $regex: new RegExp(`^${search}`, "i") },
+    }); // 'i' for case-insensitive
 
+    res.json(patients);
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+});
+
+// GET a single patient by id
+app.get("/api/patients/:id", async (req, res) => {
+  try {
+    let patient = await Patient.findOne({ _id: req.params.id });
+    if (!patient) return res.status(404).json({ message: "Patient not found" });
+    patient = patient.toObject();
+    const crit = await isCritical(req.params.id);
+    patient.condition = crit;
+
+    res.json(patient);
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+});
+
+// GET a single patient by id
+app.get("/api/patients/:id", async (req, res) => {
+  try {
+    let patient = await Patient.findOne({ _id: req.params.id });
+    if (!patient) return res.status(404).json({ message: "Patient not found" });
+    patient = patient.toObject();
+    const crit = await isCritical(req.params.id);
+    patient.condition = crit;
+
+    res.json(patient);
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+});
+
+// GET all patients with condition "Critical"
+app.get("/api/critical", async (req, res) => {
+  try {
+    let search = req.query.search ?? "";
+
+    const patients = await Patient.find({
+      condition: "Critical",
+      name: { $regex: new RegExp(`^${search}`, "i") },
+    });
+
+    res.json(patients);
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+});
+
+// POST a new patient
+app.post("/api/patients", async (req, res) => {
+  const { name, age, gender, address, zipCode, profilePicture } = req.body;
+
+  const patient = new Patient({
+    name,
+    age,
+    gender,
+    address,
+    zipCode,
+    profilePicture,
+  });
+
+  try {
+    const savedPatient = await patient.save();
+    res.status(201).json(savedPatient);
+  } catch (err) {
+    if (err.code === 11000) {
+      return res
+        .status(400)
+        .json({ message: "Patient with this name already exists" });
+    }
+    res.status(500).json({ message: err.message });
+  }
+});
+
+// PUT update a patient by name
+app.put("/api/patients/:id", async (req, res) => {
+  try {
+    const { name, age, gender, address, zipCode, profilePicture } = req.body;
+
+    const updateData = {
+      updatedAt: Date.now(),
+      name,
+      age,
+      gender,
+      address,
+      zipCode,
+      profilePicture,
+    };
+
+    const updatedPatient = await Patient.findOneAndUpdate(
+      { _id: req.params.id },
+      updateData,
+      { new: true, runValidators: true }
+    );
+
+    if (!updatedPatient)
+      return res.status(404).json({ message: "Patient not found" });
+    res.json(updatedPatient);
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+});
+
+// POST a new patient
+app.delete("/api/patients/:id", async (req, res) => {
+  try {
+    const result = await Patient.findByIdAndDelete(req.params.id);
+    if (result) {
+      return res
+        .status(200)
+        .json({ message: `Successfully deleted patient with id` });
+    } else {
+      return res.status(400).json({ error: "patient not found" });
+    }
+  } catch (error) {
+    return res.status(400).json({ error: "error" });
+  }
+  return res.status(400).json({ error: "patient not found" });
+});
 
 // Start the server
 app.listen(PORT, () => {
