@@ -1,12 +1,18 @@
 # MAPD726 Group 1
 
-## Start Node.js backend
+## Start Node.js backend (without docker)
 ```
 cd backend/node_server
 npm install
 npm start
 ```
 
+## Start Node.js backend with docker
+```
+cd backend/node_server
+docker build -t node_api .
+docker run -p 5001:5001 node_api
+```
 
 ## Start Python backend
 ```
