@@ -15,8 +15,16 @@ import "../../global.css";
 import { storeColors } from "../theme";
 import { SafeAreaView } from "react-native-safe-area-context";
 
-const ForgetPasswordScreen = ({ navigation }) => {
-  const [email, setEmail] = useState("");
+const ResetPasswordScreen = ({ route, navigation}) => {
+
+    const { email } = route.params;
+
+  //const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+//   useEffect(() => {
+//     setEmail(userEmail);
+// }, [])
 
   const baseURL =
     Platform.OS === "android"
@@ -25,15 +33,12 @@ const ForgetPasswordScreen = ({ navigation }) => {
 
   const handleRegister = async () => {
     try {
-
-
-        /*
       await axios.put(`${baseURL}api/forgetPassword`, {
         email,
         password,
       });
-      Alert.alert("Password Reset Successful!");*/
-      navigation.navigate("ResetPassword", { email });
+      Alert.alert("Password Reset Successful!");
+      navigation.navigate("Login");
     } catch (error) {
       Alert.alert("Password Reset Failed", error.response.data.message);
     }
@@ -62,10 +67,10 @@ const ForgetPasswordScreen = ({ navigation }) => {
           className="text-gray-900 ml-4"
           style={{ fontSize: 40, fontWeight: "bold" }}
         >
-Forget password
+        Reset password
         </Text>
         <Text className="text-gray-700 ml-4">
-            Create a new password
+            Enter your new password
         </Text>
 
         <Text className="text-gray-700 ml-4">
@@ -73,15 +78,24 @@ Forget password
         </Text>
 
 
-        <Text className="text-gray-700 ml-4">Email Address</Text>
+        {/* <Text className="text-gray-700 ml-4">Email Address</Text>
         <TextInput
           className="p-4 bg-gray-100 text-gray-700 rounded-2xl mb-3"
           style={{ backgroundColor: storeColors.placeHolders }}
           placeholder="Email"
           value={email}
           onChangeText={setEmail}
-        />
+        /> */}
 
+        <Text className="text-gray-700 ml-4">Password</Text>
+        <TextInput
+          className="p-4 bg-gray-100 text-gray-700 rounded-2xl mb-3"
+          style={{ backgroundColor: storeColors.placeHolders }}
+          placeholder="Password"
+          value={password}
+          onChangeText={setPassword}
+          secureTextEntry
+        />
 
         <Pressable onPress={handleRegister} style={styles.button}>
           <Text style={styles.text}>Reset Password</Text>
@@ -114,4 +128,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default ForgetPasswordScreen;
+export default ResetPasswordScreen;
