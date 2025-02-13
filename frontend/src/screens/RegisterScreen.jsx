@@ -18,7 +18,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 
 const RegisterScreen = ({ navigation }) => {
   const [name, setName] = useState("");
-  const [introduction, setIntroduction] = useState("");
+  const [phone, setPhone] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -31,7 +31,7 @@ const RegisterScreen = ({ navigation }) => {
     try {
       await axios.post(`${baseURL}api/register`, {
         name,
-        introduction,
+        phone,
         email,
         password,
       });
@@ -47,6 +47,7 @@ const RegisterScreen = ({ navigation }) => {
       className="flex-1 bg-white"
       style={{ backgroundColor: storeColors.bg }}
     >
+{/* 
       <SafeAreaView className="flex">
         <View className="flex-row justify-center">
           <Image
@@ -54,17 +55,26 @@ const RegisterScreen = ({ navigation }) => {
             style={{ width: 200, height: 200, resizeMode: "stretch" }}
           />
         </View>
-      </SafeAreaView>
+      </SafeAreaView> */}
+      
       <View
         className="flex-1 bg-white px-8 pt-8"
-        style={{ borderTopLeftRadius: 50, borderTopRightRadius: 50 }}
-      >
+        style={{ backgroundColor: storeColors.bg }}
+        >
         <Text
           className="text-gray-900 ml-4"
           style={{ fontSize: 40, fontWeight: "bold" }}
         >
-          Register
+          Sign Up
         </Text>
+        <Text className="text-gray-700 ml-4">
+            Create Your Account
+        </Text>
+
+        <Text className="text-gray-700 ml-4">
+
+        </Text>
+
 
         <Text className="text-gray-700 ml-4">Name</Text>
         <TextInput
@@ -80,8 +90,8 @@ const RegisterScreen = ({ navigation }) => {
           className="p-4 bg-gray-100 text-gray-700 rounded-2xl mb-3"
           style={{ backgroundColor: storeColors.placeHolders }}
           placeholder="Phone"
-          value={introduction}
-          onChangeText={setIntroduction}
+          value={phone}
+          onChangeText={setPhone}
         />
 
         <Text className="text-gray-700 ml-4">Email Address</Text>
@@ -104,9 +114,11 @@ const RegisterScreen = ({ navigation }) => {
         />
 
         <Pressable onPress={handleRegister} style={styles.button}>
-          <Text style={styles.text}>Register</Text>
+          <Text style={styles.text}>Sign Up</Text>
         </Pressable>
-      </View>
+
+        
+      </View> *
     </View>
   );
 };
