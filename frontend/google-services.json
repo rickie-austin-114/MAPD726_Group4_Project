@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "518815540074",
+    "project_id": "authentication1-1f950",
+    "storage_bucket": "authentication1-1f950.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:518815540074:android:92a3501c9a5f766e9d7b13",
+        "android_client_info": {
+          "package_name": "com.galaxies.firebase"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDqihBUEPn2S4OCqw7rh2yPF_8om2x0_Eo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

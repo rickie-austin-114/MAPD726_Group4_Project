@@ -48,3 +48,14 @@ npx expo run:android
 
 ## Links
 Datasets: https://www.kaggle.com/datasets/rkiattisak/traveler-trip-data?resource=download
+
+## Development Environment:
+Node.js v22.9.0
+Expo: 6.3.12
+
+# Emulator
+iOS: 18.2
+
+# Hardware info
+MacOS: 15.3.1
+MacBook Air 13 inch, 8GB ram, M2 processor

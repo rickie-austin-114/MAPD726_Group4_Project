@@ -79,7 +79,6 @@ app.post("/api/login", async (req, res) => {
   } catch (error) {
     return res.status(401).json({ message: "Invalid credentials" });
   }
-
 });
 
 app.put("/api/forgetPassword", async (req, res) => {

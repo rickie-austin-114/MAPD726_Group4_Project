@@ -16,6 +16,33 @@ import "../../global.css";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { storeColors } from "../theme";
 
+import { GoogleSignin } from "@react-native-google-signin/google-signin";
+
+//import auth from "@react-native-firebase/auth"
+import {
+  createUserWithEmailAndPassword,
+  signInWithRedirect,
+  signInWithEmailAndPassword,
+  signInWithPopup,
+  signInWithCredential,
+} from "@react-native-firebase/auth";
+
+
+
+const firebaseConfig = {
+  apiKey: "AIzaSyD6YwgGgxoZIqTLLLARRvzPJ2EX7muNVgo",
+  authDomain: "authentication1-1f950.firebaseapp.com",
+  projectId: "authentication1-1f950",
+  storageBucket: "authentication1-1f950.firebasestorage.app",
+  messagingSenderId: "518815540074",
+  appId: "1:518815540074:web:52b0ab4804b97f009d7b13",
+  measurementId: "G-JX7SBC3G33",
+};
+
+const app = initializeApp(firebaseConfig);
+
+const auth = getAuth(app);
+
 const LoginScreen = ({ navigation }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -23,6 +50,16 @@ const LoginScreen = ({ navigation }) => {
     Platform.OS === "android"
       ? "http://10.0.2.2:5001/"
       : "http://localhost:5001/";
+
+
+      useEffect(() => {
+        // Configure Google Sign-In
+        GoogleSignin.configure({
+          webClientId:
+            "518815540074-n01vhhjpeacntd87utfrnuquaei4pmpq.apps.googleusercontent.com", // From Firebase Console
+          offlineAccess: true,
+        });
+      }, []);
 
   const handleLogin = async () => {
     try {

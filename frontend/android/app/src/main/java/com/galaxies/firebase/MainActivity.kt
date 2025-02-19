@@ -1,4 +1,4 @@
-package com.anonymous.frontend
+package com.galaxies.firebase
 
 import android.os.Build
 import android.os.Bundle
