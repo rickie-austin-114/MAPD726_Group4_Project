@@ -18,7 +18,6 @@ import {
 import axios from "axios";
 import { useIsFocused } from "@react-navigation/native";
 import "../../global.css";
-
 import { SafeAreaView } from "react-native-safe-area-context";
 import { LinearGradient } from "expo-linear-gradient";
 import {

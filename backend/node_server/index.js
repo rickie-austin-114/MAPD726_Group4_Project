@@ -2,6 +2,8 @@ require("dotenv").config();
 const express = require("express");
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
+const Stripe = require('stripe');
+
 const cors = require("cors");
 
 const User = require("./models/User"); // Assuming you'll create a User model
@@ -19,6 +21,24 @@ const MONGODB_URI = process.env.MONGODB_URI;
 // Middleware
 app.use(cors());
 app.use(bodyParser.json());
+
+// Endpoint to create a payment intent
+app.post('/create-payment-intent', async (req, res) => {
+  const { amount } = req.body;
+
+  try {
+    const paymentIntent = await stripe.paymentIntents.create({
+      amount: amount, // Amount in cents
+      currency: 'cad',
+    });
+
+    res.send({
+      clientSecret: paymentIntent.client_secret,
+    });
+  } catch (error) {
+    res.status(500).send({ error: error.message });
+  }
+});
 
 async function isCritical(id) {
   return false;

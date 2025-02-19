@@ -91,6 +91,7 @@ const LoginScreen = ({ navigation }) => {
       if (idToken !== null) {
         console.log("User signed in successfully with Google!");
         Alert.alert("Login Successful!");
+        const token = "google"// response.data.token;
         navigation.navigate("Main", { token });
       } else {
         Alert.alert("Login Failed", error.response.data.message);

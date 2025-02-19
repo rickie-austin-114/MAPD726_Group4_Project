@@ -34,6 +34,9 @@ python train.py
 cd frontend
 npm install
 npx expo prebuild --clean
+cd ios
+pod install
+cd ..
 npx expo run:ios
 ```
 
