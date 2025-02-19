@@ -29,13 +29,22 @@ python preprocess.py
 python train.py
 ```
 
-## Start frontend
+## Start frontend (iOS)
 ```
 cd frontend
 npm install
-npx expo start
+npx expo prebuild --clean
+npx expo run:ios
 ```
-Then press i for ios or a for android
+
+
+## Start frontend (Android)
+```
+cd frontend
+npm install
+npx expo prebuild --clean
+npx expo run:android
+```
 
 ## Links
 Datasets: https://www.kaggle.com/datasets/rkiattisak/traveler-trip-data?resource=download
