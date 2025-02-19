@@ -1,7 +1,7 @@
 // models/Patient.js
 const mongoose = require('mongoose');
 // Patient schema
-const patientSchema = new mongoose.Schema({
+const destinationSchema = new mongoose.Schema({
   name: { type: String, required: true },
   age: { type: Number, default: null },
   gender: { type: String, default: null },
@@ -12,4 +12,4 @@ const patientSchema = new mongoose.Schema({
   updatedAt: { type: Date, default: Date.now }
 });
 
-module.exports = mongoose.model('Patient', patientSchema);
+module.exports = mongoose.model('Destination', destinationSchema);

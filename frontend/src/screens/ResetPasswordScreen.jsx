@@ -33,6 +33,9 @@ const ResetPasswordScreen = ({ route, navigation}) => {
 
   const handleRegister = async () => {
     try {
+
+      
+
       await axios.put(`${baseURL}api/forgetPassword`, {
         email,
         password,

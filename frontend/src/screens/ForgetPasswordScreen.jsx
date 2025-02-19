@@ -15,6 +15,14 @@ import "../../global.css";
 import { storeColors } from "../theme";
 import { SafeAreaView } from "react-native-safe-area-context";
 
+import {
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  sendPasswordResetEmail
+} from "@react-native-firebase/auth";
+
+import { app, auth } from "../../firebaseConfig";
+
 const ForgetPasswordScreen = ({ navigation }) => {
   const [email, setEmail] = useState("");
 
@@ -31,9 +39,13 @@ const ForgetPasswordScreen = ({ navigation }) => {
       await axios.put(`${baseURL}api/forgetPassword`, {
         email,
         password,
-      });
-      Alert.alert("Password Reset Successful!");*/
-      navigation.navigate("ResetPassword", { email });
+      });*/
+
+      sendPasswordResetEmail(auth, email);
+      Alert.alert("Password Reset Successful!");
+      navigation.navigate("Login");
+
+
     } catch (error) {
       Alert.alert("Password Reset Failed", error.response.data.message);
     }

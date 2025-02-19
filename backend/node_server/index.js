@@ -5,7 +5,7 @@ const bodyParser = require("body-parser");
 const cors = require("cors");
 
 const User = require("./models/User"); // Assuming you'll create a User model
-const Patient = require("./models/Patient"); // Assuming you'll create a User model
+const Destination = require("./models/Destination"); // Assuming you'll create a User model
 
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
@@ -79,6 +79,7 @@ app.post("/api/login", async (req, res) => {
   } catch (error) {
     return res.status(401).json({ message: "Invalid credentials" });
   }
+
 });
 
 app.put("/api/forgetPassword", async (req, res) => {
@@ -112,11 +113,11 @@ app.get("/api/patients", async (req, res) => {
       search = ""
     }
 */
-    const patients = await Patient.find({
+    const destinations = await Destination.find({
       name: { $regex: new RegExp(`^${search}`, "i") },
     }); // 'i' for case-insensitive
 
-    res.json(patients);
+    res.json(destinations);
   } catch (err) {
     res.status(500).json({ message: err.message });
   }
@@ -125,28 +126,28 @@ app.get("/api/patients", async (req, res) => {
 // GET a single patient by id
 app.get("/api/patients/:id", async (req, res) => {
   try {
-    let patient = await Patient.findOne({ _id: req.params.id });
-    if (!patient) return res.status(404).json({ message: "Patient not found" });
-    patient = patient.toObject();
+    let destinations = await Destination.findOne({ _id: req.params.id });
+    if (!destinations) return res.status(404).json({ message: "Patient not found" });
+    destinations = destinations.toObject();
     const crit = await isCritical(req.params.id);
-    patient.condition = crit;
+    destinations.condition = crit;
 
-    res.json(patient);
+    res.json(destinations);
   } catch (err) {
     res.status(500).json({ message: err.message });
   }
 });
 
-// GET a single patient by id
+// GET a single destination by id
 app.get("/api/patients/:id", async (req, res) => {
   try {
-    let patient = await Patient.findOne({ _id: req.params.id });
-    if (!patient) return res.status(404).json({ message: "Patient not found" });
-    patient = patient.toObject();
+    let destination = await Destination.findOne({ _id: req.params.id });
+    if (!destination) return res.status(404).json({ message: "Patient not found" });
+    destination = destination.toObject();
     const crit = await isCritical(req.params.id);
-    patient.condition = crit;
+    destination.condition = crit;
 
-    res.json(patient);
+    res.json(destination);
   } catch (err) {
     res.status(500).json({ message: err.message });
   }
@@ -157,12 +158,12 @@ app.get("/api/critical", async (req, res) => {
   try {
     let search = req.query.search ?? "";
 
-    const patients = await Patient.find({
+    const destinations = await Destination.find({
       condition: "Critical",
       name: { $regex: new RegExp(`^${search}`, "i") },
     });
 
-    res.json(patients);
+    res.json(destinations);
   } catch (err) {
     res.status(500).json({ message: err.message });
   }
@@ -172,7 +173,7 @@ app.get("/api/critical", async (req, res) => {
 app.post("/api/patients", async (req, res) => {
   const { name, age, gender, address, zipCode, profilePicture } = req.body;
 
-  const patient = new Patient({
+  const destination = new Destination({
     name,
     age,
     gender,
@@ -182,8 +183,8 @@ app.post("/api/patients", async (req, res) => {
   });
 
   try {
-    const savedPatient = await patient.save();
-    res.status(201).json(savedPatient);
+    const savedDestination = await destination.save();
+    res.status(201).json(savedDestination);
   } catch (err) {
     if (err.code === 11000) {
       return res
@@ -209,15 +210,15 @@ app.put("/api/patients/:id", async (req, res) => {
       profilePicture,
     };
 
-    const updatedPatient = await Patient.findOneAndUpdate(
+    const updatedDestination = await Destination.findOneAndUpdate(
       { _id: req.params.id },
       updateData,
       { new: true, runValidators: true }
     );
 
-    if (!updatedPatient)
+    if (!updatedDestination)
       return res.status(404).json({ message: "Patient not found" });
-    res.json(updatedPatient);
+    res.json(updatedDestination);
   } catch (err) {
     res.status(500).json({ message: err.message });
   }
@@ -226,7 +227,7 @@ app.put("/api/patients/:id", async (req, res) => {
 // POST a new patient
 app.delete("/api/patients/:id", async (req, res) => {
   try {
-    const result = await Patient.findByIdAndDelete(req.params.id);
+    const result = await Destination.findByIdAndDelete(req.params.id);
     if (result) {
       return res
         .status(200)

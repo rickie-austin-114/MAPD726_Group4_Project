@@ -35,7 +35,7 @@ import {
 import { withDecay } from "react-native-reanimated";
 import { storeColors } from "../theme";
 
-const MainScreen = ({ navigation }) => {
+const MainScreen = ({ route, navigation }) => {
   const [patients, setPatients] = useState([]);
   const [error, setError] = useState("");
   const [listCritical, setListCritical] = useState(false);
@@ -45,6 +45,9 @@ const MainScreen = ({ navigation }) => {
 
   const categories = ["All", "Sightseeing", "Adventure", "Cultural"];
   const [activeCategory, setActiveCategory] = useState("All");
+
+  const { token } = route.params;
+
 
   const backendURL =
     Platform.OS === "android"

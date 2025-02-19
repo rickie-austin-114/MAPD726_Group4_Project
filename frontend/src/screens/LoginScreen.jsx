@@ -1,5 +1,5 @@
 // screens/LoginScreen.js
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   View,
   TextInput,
@@ -10,6 +10,7 @@ import {
   Image,
   Text,
   Pressable,
+  TouchableOpacity
 } from "react-native";
 import axios from "axios";
 import "../../global.css";
@@ -18,16 +19,13 @@ import { storeColors } from "../theme";
 
 import { GoogleSignin } from "@react-native-google-signin/google-signin";
 
-//import auth from "@react-native-firebase/auth"
 import {
   createUserWithEmailAndPassword,
-  signInWithRedirect,
   signInWithEmailAndPassword,
-  signInWithPopup,
-  signInWithCredential,
+  sendPasswordResetEmail
 } from "@react-native-firebase/auth";
 
-
+import { app, auth } from "../../firebaseConfig";
 
 const firebaseConfig = {
   apiKey: "AIzaSyD6YwgGgxoZIqTLLLARRvzPJ2EX7muNVgo",
@@ -39,9 +37,9 @@ const firebaseConfig = {
   measurementId: "G-JX7SBC3G33",
 };
 
-const app = initializeApp(firebaseConfig);
+// const app = initializeApp(firebaseConfig);
 
-const auth = getAuth(app);
+// const auth = getAuth(app);
 
 const LoginScreen = ({ navigation }) => {
   const [email, setEmail] = useState("");
@@ -51,29 +49,54 @@ const LoginScreen = ({ navigation }) => {
       ? "http://10.0.2.2:5001/"
       : "http://localhost:5001/";
 
-
-      useEffect(() => {
-        // Configure Google Sign-In
-        GoogleSignin.configure({
-          webClientId:
-            "518815540074-n01vhhjpeacntd87utfrnuquaei4pmpq.apps.googleusercontent.com", // From Firebase Console
-          offlineAccess: true,
-        });
-      }, []);
+  useEffect(() => {
+    // Configure Google Sign-In
+    GoogleSignin.configure({
+      webClientId:
+        "518815540074-n01vhhjpeacntd87utfrnuquaei4pmpq.apps.googleusercontent.com", // From Firebase Console
+      offlineAccess: true,
+    });
+  }, []);
 
   const handleLogin = async () => {
     try {
+
+      await signInWithEmailAndPassword(auth, email, password);
+      /*
       const response = await axios.post(`${baseURL}api/login`, {
         email,
         password,
-      });
+      });*/
       Alert.alert("Login Successful!");
       // Store token and navigate to Account
-      const token = response.data.token;
+      const token = "rickie"// response.data.token;
       // You might want to store the token using AsyncStorage for later use
       navigation.navigate("Main", { token });
     } catch (error) {
       Alert.alert("Login Failed", error.response.data.message);
+    }
+  };
+
+  const handleGoogleLogin = async () => {
+    try {
+      // Step 1: Start the Google sign-in flow
+      await GoogleSignin.hasPlayServices(); // Ensure that Google Play services are available
+      const userInfo = await GoogleSignin.signIn(); // Perform Google Sign-In
+
+      // Step 2: Get Google ID token and access token
+      const idToken = userInfo.data.idToken;
+
+      console.log(idToken);
+
+      if (idToken !== null) {
+        console.log("User signed in successfully with Google!");
+        Alert.alert("Login Successful!");
+        navigation.navigate("Main", { token });
+      } else {
+        Alert.alert("Login Failed", error.response.data.message);
+      }
+    } catch (error) {
+      console.error("Error during Google sign-in:", error);
     }
   };
 
@@ -86,10 +109,10 @@ const LoginScreen = ({ navigation }) => {
     }
   };
 
-
   const handleForgetPassword = async () => {
     try {
       // You might want to store the token using AsyncStorage for later use
+      
       navigation.navigate("ForgetPassword");
     } catch (error) {
       Alert.alert("Error", error.response.data.message);
@@ -120,7 +143,7 @@ const LoginScreen = ({ navigation }) => {
       <View
         className="flex-1 bg-white px-8 pt-8"
         style={{ backgroundColor: storeColors.bg }}
-        >
+      >
         <Text
           className="text-gray-900 ml-4"
           style={{ fontSize: 40, fontWeight: "bold" }}
@@ -129,9 +152,10 @@ const LoginScreen = ({ navigation }) => {
         </Text>
         <Text> </Text>
 
-        <Text className="text-gray-700 ml-4">Enter your credentials to login</Text>
+        <Text className="text-gray-700 ml-4">
+          Enter your credentials to login
+        </Text>
         <Text> </Text>
-
 
         <Text className="text-gray-700 ml-4">Email Address</Text>
         <TextInput
@@ -158,10 +182,16 @@ const LoginScreen = ({ navigation }) => {
           <Text style={styles.text}>Register</Text>
         </Pressable>
         <Text> </Text>
-
         <Pressable onPress={handleForgetPassword} style={styles.button}>
           <Text style={styles.text}>Forget Password</Text>
         </Pressable>
+
+        <TouchableOpacity onPress={handleGoogleLogin}>
+          <Image
+            source={require("../assets/google-signin-button-1024x260.png")} // Replace with your image URL
+            style={styles.image}
+          />
+        </TouchableOpacity>
       </View>
     </View>
   );
@@ -186,6 +216,11 @@ const styles = StyleSheet.create({
     color: "white",
     fontSize: 16,
   },
+  image: {
+    width: 200,  // Set your desired width
+    height: 100, // Set your desired height
+    resizeMode: 'contain',
+},
 });
 
 export default LoginScreen;

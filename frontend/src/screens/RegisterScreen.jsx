@@ -15,6 +15,12 @@ import axios from "axios";
 import "../../global.css";
 import { storeColors } from "../theme";
 import { SafeAreaView } from "react-native-safe-area-context";
+import {
+  createUserWithEmailAndPassword,
+  sendEmailVerification
+} from "@react-native-firebase/auth";
+
+import { app, auth } from "../../firebaseConfig";
 
 const RegisterScreen = ({ navigation }) => {
   const [name, setName] = useState("");
@@ -29,6 +35,16 @@ const RegisterScreen = ({ navigation }) => {
 
   const handleRegister = async () => {
     try {
+
+      const userCredential = await createUserWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
+
+      // Send verification email
+      await userCredential.user.sendEmailVerification();
+      
       await axios.post(`${baseURL}api/register`, {
         name,
         phone,
@@ -118,7 +134,7 @@ const RegisterScreen = ({ navigation }) => {
         </Pressable>
 
         
-      </View> *
+      </View>
     </View>
   );
 };
