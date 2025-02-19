@@ -71,6 +71,13 @@ const ViewDestinationScreen = ({ route, navigation }) => {
           {patient.gender}
         </Text>
 
+              <StripeProvider
+              publishableKey="pk_test_51QuLVCPlUnLIZAQCnwrRbSpCJhgJZsH1PLPQEh9Jt9YUlJauxShMIQbxNKdKYmRkSP83OSsJeZQdsDwrK5IYwjvi00d0lp5KXm"
+        
+              >
+                <PaymentScreen amount={patient.age} />
+              </StripeProvider>
+
 
         <Text> </Text>
 
