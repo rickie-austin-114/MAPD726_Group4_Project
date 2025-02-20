@@ -28,9 +28,9 @@ const stripe = new Stripe('sk_test_51QuLVCPlUnLIZAQCClpe9GrFfw1Ui8wJwxtRXx9RaLR0
 
 
 // just to test whether the api is hosted on cloud
-app.get('/test-deployment', async (req, res) => {
+app.get('/', async (req, res) => {
 
-  res.status_code(200).json({"message": "successfully deployed on google cloud"})
+  return res.status_code(200).json({"message": "successfully deployed on google cloud"})
 })
 
 
