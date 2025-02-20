@@ -1,45 +1,37 @@
 {
   "project_info": {
-    "project_number": "518815540074",
-    "project_id": "authentication1-1f950",
-    "storage_bucket": "authentication1-1f950.firebasestorage.app"
+    "project_number": "252067972937",
+    "project_id": "mapd726-group4-project",
+    "storage_bucket": "mapd726-group4-project.firebasestorage.app"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:518815540074:android:92a3501c9a5f766e9d7b13",
+        "mobilesdk_app_id": "1:252067972937:android:5fe57f196e1ddc3d04bc98",
         "android_client_info": {
           "package_name": "com.galaxies.firebase"
         }
       },
       "oauth_client": [
         {
-          "client_id": "518815540074-77rch8af4dufesi6rb38f22j25vgms16.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.galaxies.firebase",
-            "certificate_hash": "0db7de317de216a2dd44822b1be1ef9571b24f70"
-          }
-        },
-        {
-          "client_id": "518815540074-n01vhhjpeacntd87utfrnuquaei4pmpq.apps.googleusercontent.com",
+          "client_id": "252067972937-0ta4jn0rtj24qlq6f1ak06taf88qekob.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyDqihBUEPn2S4OCqw7rh2yPF_8om2x0_Eo"
+          "current_key": "AIzaSyDjp2NsWE7GatcMOsqwN3ppYEvdV8OQesg"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "518815540074-n01vhhjpeacntd87utfrnuquaei4pmpq.apps.googleusercontent.com",
+              "client_id": "252067972937-0ta4jn0rtj24qlq6f1ak06taf88qekob.apps.googleusercontent.com",
               "client_type": 3
             },
             {
-              "client_id": "518815540074-9vhlqv8dd6mnnh8da9ktmrqo0lpcpvm0.apps.googleusercontent.com",
+              "client_id": "252067972937-unerqfe4b001e6qihu7usn9i85gal21c.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
                 "bundle_id": "com.galaxies.firebase"

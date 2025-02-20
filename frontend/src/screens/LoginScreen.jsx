@@ -39,7 +39,7 @@ const LoginScreen = ({ navigation }) => {
     // Configure Google Sign-In
     GoogleSignin.configure({
       webClientId:
-        "518815540074-n01vhhjpeacntd87utfrnuquaei4pmpq.apps.googleusercontent.com", // From Firebase Console
+        "252067972937-0ta4jn0rtj24qlq6f1ak06taf88qekob.apps.googleusercontent.com", // From Firebase Console
       offlineAccess: true,
     });
   }, []);
