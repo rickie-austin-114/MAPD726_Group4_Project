@@ -56,10 +56,10 @@ const MainScreen = ({ route, navigation }) => {
   const fetchPatients = async () => {
     try {
       if (activeCategory === "All") {
-        const response = await axios.get(`${backendURL}api/patients`);
+        const response = await axios.get(`${backendURL}api/tours`);
         setPatients(response.data);
       } else {
-        const response = await axios.get(`${backendURL}api/patients`);
+        const response = await axios.get(`${backendURL}api/tours`);
 
 //        const response = await axios.get(`${backendURL}api/critical`);
         setPatients(response.data);
@@ -173,7 +173,7 @@ const MainScreen = ({ route, navigation }) => {
                       />
 
                       <Text className="text-xs text-gray-700">
-                        Rating: {patient.age}
+                        Rating: {patient.ratings}
                       </Text>
                     </View>
                   </View>

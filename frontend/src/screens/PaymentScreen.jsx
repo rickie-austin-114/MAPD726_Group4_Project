@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, Button, Alert } from 'react-native';
+import { View, Text, Button,   Platform, Alert } from 'react-native';
 import { useStripe } from '@stripe/stripe-react-native';
 
 function PaymentScreen(props) {

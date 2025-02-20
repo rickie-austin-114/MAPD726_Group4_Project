@@ -1,5 +1,6 @@
 // screens/LoginScreen.js
 import React, { useState } from "react";
+import { StripeProvider, useStripe } from '@stripe/stripe-react-native';
 import {
   View,
   TextInput,
@@ -10,11 +11,14 @@ import {
   Image,
   Text,
   Pressable,
+  ScrollView,
+
 } from "react-native";
 import axios from "axios";
 import "../../global.css";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { storeColors } from "../theme";
+import PaymentScreen from "./PaymentScreen";
 
 const ViewDestinationScreen = ({ route, navigation }) => {
   const { patient } = route.params;
@@ -53,6 +57,8 @@ const ViewDestinationScreen = ({ route, navigation }) => {
         style={{ borderTopLeftRadius: 50, borderTopRightRadius: 50 }}
 
         >
+                <ScrollView>
+
         <Text
           className="text-gray-900 ml-4"
           style={{ fontSize: 40, fontWeight: "bold" }}
@@ -62,20 +68,20 @@ const ViewDestinationScreen = ({ route, navigation }) => {
 
         <Text> </Text>
 
-        <Text className="text-gray-700 ml-4">Rating: {patient.age}</Text>
+        <Text className="text-gray-700 ml-4">Rating: {patient.ratings}</Text>
 
         <Text> </Text>
 
 
         <Text className="text-gray-700 ml-4">
-          {patient.gender}
+          {patient.description}
         </Text>
 
               <StripeProvider
               publishableKey="pk_test_51QuLVCPlUnLIZAQCnwrRbSpCJhgJZsH1PLPQEh9Jt9YUlJauxShMIQbxNKdKYmRkSP83OSsJeZQdsDwrK5IYwjvi00d0lp5KXm"
         
               >
-                <PaymentScreen amount={patient.age} />
+                <PaymentScreen amount={patient.price} />
               </StripeProvider>
 
 
@@ -83,6 +89,7 @@ const ViewDestinationScreen = ({ route, navigation }) => {
 
         <Text> </Text>
 
+        </ScrollView>
 
       </View>
     </View>
