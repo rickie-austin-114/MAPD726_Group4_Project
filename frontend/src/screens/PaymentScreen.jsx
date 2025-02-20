@@ -50,8 +50,6 @@ function PaymentScreen(props) {
       <Pressable onPress={handlePayment} style={styles.button}>
         <Text style={styles.text}>Pay ${props.amount}</Text>
       </Pressable>
-
-      {/* <Button title="Pay" onPress={handlePayment} /> */}
     </View>
   );
 }
@@ -62,6 +60,7 @@ const styles = StyleSheet.create({
     padding: 10,
     borderRadius: 5,
     alignItems: "center",
+    width:200
   },
   buttonPressed: {
     backgroundColor: "#3700b3",

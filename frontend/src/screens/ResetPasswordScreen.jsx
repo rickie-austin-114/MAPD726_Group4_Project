@@ -17,7 +17,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 
 const ResetPasswordScreen = ({ route, navigation}) => {
 
-    const { email } = route.params;
+  const { email } = route.params;
 
   //const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");

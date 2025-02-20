@@ -69,8 +69,11 @@ const ViewDestinationScreen = ({ route, navigation }) => {
           <Text className="text-gray-700 ml-4">Price: {patient.price}</Text>
 
           <Text> </Text>
-          
+
           <Text className="text-gray-700 ml-4">{patient.description}</Text>
+          <Text> </Text>
+
+
 
           <StripeProvider publishableKey="pk_test_51QuLVCPlUnLIZAQCnwrRbSpCJhgJZsH1PLPQEh9Jt9YUlJauxShMIQbxNKdKYmRkSP83OSsJeZQdsDwrK5IYwjvi00d0lp5KXm">
             <PaymentScreen amount={patient.price} />
