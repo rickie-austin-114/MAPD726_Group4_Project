@@ -9,6 +9,7 @@ import RegisterScreen from './src/screens/RegisterScreen';
 import ForgetPasswordScreen from './src/screens/ForgetPasswordScreen';
 import ResetPasswordScreen from './src/screens/ResetPasswordScreen';
 import ViewDestinationScreen from './src/screens/ViewDestinationScreen';
+import ViewFolderScreen from "./src/screens/ViewFolderScreen";
 
 const Stack = createNativeStackNavigator();
 
@@ -23,6 +24,10 @@ const App = () => {
 
         <Stack.Screen name="Main" component={MainScreen} />
         <Stack.Screen name="ViewDestination" component={ViewDestinationScreen} />
+
+        <Stack.Screen name="ViewFolder" component={ViewFolderScreen} />
+        <Stack.Screen name="FolderList" component={ViewFolderScreen} />
+
 
         {/* <Stack.Screen name="ViewRecord" component={ViewRecordScreen} /> */}
       </Stack.Navigator>

@@ -129,7 +129,7 @@ app.put("/api/forgetPassword", async (req, res) => {
   }
 });
 
-// GET all patients
+// GET all tours
 app.get("/api/tours", async (req, res) => {
   try {
     const search = req.query.search ?? "";
@@ -138,11 +138,11 @@ app.get("/api/tours", async (req, res) => {
       search = ""
     }
 */
-    const destinations = await Destination.find({
+    const tours = await Destination.find({
       name: { $regex: new RegExp(`^${search}`, "i") },
     }); // 'i' for case-insensitive
 
-    res.json(destinations);
+    res.json(tours);
   } catch (err) {
     res.status(500).json({ message: err.message });
   }
@@ -166,45 +166,45 @@ app.get("/api/tours", async (req, res) => {
 // GET a single destination by id
 app.get("/api/tours/:id", async (req, res) => {
   try {
-    let destination = await Destination.findOne({ _id: req.params.id });
-    if (!destination) return res.status(404).json({ message: "Patient not found" });
-    destination = destination.toObject();
+    let tour = await Destination.findOne({ _id: req.params.id });
+    if (!tour) return res.status(404).json({ message: "Patient not found" });
+    tour = tour.toObject();
     // const crit = await isCritical(req.params.id);
     // destination.condition = crit;
 
-    res.json(destination);
+    res.json(tour);
   } catch (err) {
     res.status(500).json({ message: err.message });
   }
 });
 
-// GET all patients with condition "Critical"
-app.get("/api/critical", async (req, res) => {
-  try {
-    let search = req.query.search ?? "";
+// // GET all patients with condition "Critical"
+// app.get("/api/critical", async (req, res) => {
+//   try {
+//     let search = req.query.search ?? "";
 
-    const destinations = await Destination.find({
-      condition: "Critical",
-      name: { $regex: new RegExp(`^${search}`, "i") },
-    });
+//     const destinations = await Destination.find({
+//       condition: "Critical",
+//       name: { $regex: new RegExp(`^${search}`, "i") },
+//     });
 
-    res.json(destinations);
-  } catch (err) {
-    res.status(500).json({ message: err.message });
-  }
-});
+//     res.json(destinations);
+//   } catch (err) {
+//     res.status(500).json({ message: err.message });
+//   }
+// });
 
-// POST a new patient
+// POST a new tour
 app.post("/api/tours", async (req, res) => {
   const { name, ratings, price, duration, description, itinerary, inclusions, exclusions, profilePicture  } = req.body;
 
-  const destination = new Destination({
+  const tour = new Destination({
     name, ratings, price, duration, description, itinerary, inclusions, exclusions, profilePicture
   });
 
   try {
-    const savedDestination = await destination.save();
-    res.status(201).json(savedDestination);
+    const savedTour = await tour.save();
+    res.status(201).json(savedTour);
   } catch (err) {
     if (err.code === 11000) {
       return res
@@ -227,21 +227,21 @@ app.put("/api/tours/:id", async (req, res) => {
       name, ratings, price, duration, description, itinerary, inclusions, exclusions, profilePicture
     };
 
-    const updatedDestination = await Destination.findOneAndUpdate(
+    const updatedTour = await Destination.findOneAndUpdate(
       { _id: req.params.id },
       updateData,
       { new: true, runValidators: true }
     );
 
-    if (!updatedDestination)
+    if (!updatedTour)
       return res.status(404).json({ message: "Patient not found" });
-    res.json(updatedDestination);
+    res.json(updatedTour);
   } catch (err) {
     res.status(500).json({ message: err.message });
   }
 });
 
-// POST a new patient
+// DELETE a tours
 app.delete("/api/tours/:id", async (req, res) => {
   try {
     const result = await Destination.findByIdAndDelete(req.params.id);
@@ -257,6 +257,114 @@ app.delete("/api/tours/:id", async (req, res) => {
   }
   return res.status(400).json({ error: "tour not found" });
 });
+
+
+
+
+// Create a folder
+app.post('/folders', async (req, res) => {
+  const { userId, name } = req.body;
+
+  try {
+    const folder = new Folder({ name, owner: userId, destinations: [] });
+    await folder.save();
+    res.status(201).json(folder);
+  } catch (err) {
+    res.status(400).json({ error: err.message });
+  }
+});
+
+// Read all folders
+app.get('/folders', async (req, res) => {
+  try {
+    const folders = await Folder.find().populate('owner').populate('destinations');
+    res.json(folders);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+// Read folders by user ID
+app.get('/folders/user/:userId', async (req, res) => {
+  const { userId } = req.params;
+
+  try {
+    const folders = await Folder.find({ owner: userId }).populate('destinations');
+    res.json(folders);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+// Read destinations in a folder
+app.get('/folders/:folderId/destinations', async (req, res) => {
+  const { folderId } = req.params;
+
+  try {
+    const folder = await Folder.findById(folderId).populate('destinations');
+    res.json(folder.destinations);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+// Update a folder by adding a destination
+app.put('/folders/:folderId/destinations/:destinationId', async (req, res) => {
+  const { folderId, destinationId } = req.params;
+
+  try {
+    const folder = await Folder.findByIdAndUpdate(
+      folderId,
+      { $addToSet: { destinations: destinationId } },
+      { new: true }
+    ).populate('destinations');
+    res.json(folder);
+  } catch (err) {
+    res.status(400).json({ error: err.message });
+  }
+});
+
+// Delete a destination from a folder
+app.delete('/folders/:folderId/destinations/:destinationId', async (req, res) => {
+  const { folderId, destinationId } = req.params;
+
+  try {
+    const folder = await Folder.findByIdAndUpdate(
+      folderId,
+      { $pull: { destinations: destinationId } },
+      { new: true }
+    ).populate('destinations');
+    res.json(folder);
+  } catch (err) {
+    res.status(400).json({ error: err.message });
+  }
+});
+
+// Delete a folder
+app.delete('/folders/:folderId', async (req, res) => {
+  const { folderId } = req.params;
+
+  try {
+    await Folder.findByIdAndDelete(folderId);
+    res.status(204).send();
+  } catch (err) {
+    res.status(400).json({ error: err.message });
+  }
+});
+
+mongoose.connect('mongodb://localhost:27017/yourdbname', { useNewUrlParser: true, useUnifiedTopology: true })
+  .then(() => {
+    app.listen(PORT, () => {
+      console.log(`Server is running on port ${PORT}`);
+    });
+  })
+  .catch(err => console.error(err));
+
+
+
+
+
+
 
 // Start the server
 app.listen(PORT, () => {

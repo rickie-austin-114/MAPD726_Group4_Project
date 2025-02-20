@@ -34,7 +34,7 @@ import {
 import { withDecay } from "react-native-reanimated";
 import { storeColors } from "../theme";
 
-const MainScreen = ({ route, navigation }) => {
+const FoldersListScreen = ({ route, navigation }) => {
   const [patients, setPatients] = useState([]);
   const [error, setError] = useState("");
   const [listCritical, setListCritical] = useState(false);
@@ -263,4 +263,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default MainScreen;
+export default FoldersListScreen;
