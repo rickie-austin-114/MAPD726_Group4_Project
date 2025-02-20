@@ -1,7 +1,7 @@
 // models/Patient.js
 const mongoose = require('mongoose');
 // Patient schema
-const destinationSchema = new mongoose.Schema({
+const tourSchema = new mongoose.Schema({
   name: { type: String, required: true },
   ratings: { type: Number, default: null },
   price: { type: Number, default: null },
@@ -15,4 +15,4 @@ const destinationSchema = new mongoose.Schema({
   updatedAt: { type: Date, default: Date.now }
 });
 
-module.exports = mongoose.model('Destination', destinationSchema);
+module.exports = mongoose.model('Tour', tourSchema);

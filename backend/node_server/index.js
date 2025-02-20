@@ -6,8 +6,10 @@ const Stripe = require('stripe');
 
 const cors = require("cors");
 
-const User = require("./models/User"); // Assuming you'll create a User model
-const Destination = require("./models/Destination"); // Assuming you'll create a User model
+const User = require("./models/User"); // User model
+const Tour = require("./models/Tour"); // Tour model
+const Folder = require('./models/Folder'); // The Folder model we just created
+
 
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
@@ -23,7 +25,6 @@ app.use(cors());
 app.use(bodyParser.json());
 
 const stripe = new Stripe('sk_test_51QuLVCPlUnLIZAQCClpe9GrFfw1Ui8wJwxtRXx9RaLR0SrVpTKaygWEMIpXAsfTjROJDIO9xP8dn1BpQdaaTXGg700G1iaVNNx'); // Replace with your secret key
-
 
 // Endpoint to create a payment intent
 app.post('/create-payment-intent', async (req, res) => {
@@ -45,9 +46,6 @@ app.post('/create-payment-intent', async (req, res) => {
   }
 });
 
-async function isCritical(id) {
-  return false;
-}
 // MongoDB connection
 mongoose
   .connect(MONGODB_URI, {
@@ -138,7 +136,7 @@ app.get("/api/tours", async (req, res) => {
       search = ""
     }
 */
-    const tours = await Destination.find({
+    const tours = await Tour.find({
       name: { $regex: new RegExp(`^${search}`, "i") },
     }); // 'i' for case-insensitive
 
@@ -166,8 +164,8 @@ app.get("/api/tours", async (req, res) => {
 // GET a single destination by id
 app.get("/api/tours/:id", async (req, res) => {
   try {
-    let tour = await Destination.findOne({ _id: req.params.id });
-    if (!tour) return res.status(404).json({ message: "Patient not found" });
+    let tour = await Tour.findOne({ _id: req.params.id });
+    if (!tour) return res.status(404).json({ message: "Tour not found" });
     tour = tour.toObject();
     // const crit = await isCritical(req.params.id);
     // destination.condition = crit;
@@ -198,7 +196,7 @@ app.get("/api/tours/:id", async (req, res) => {
 app.post("/api/tours", async (req, res) => {
   const { name, ratings, price, duration, description, itinerary, inclusions, exclusions, profilePicture  } = req.body;
 
-  const tour = new Destination({
+  const tour = new Tour({
     name, ratings, price, duration, description, itinerary, inclusions, exclusions, profilePicture
   });
 
@@ -215,11 +213,9 @@ app.post("/api/tours", async (req, res) => {
   }
 });
 
-// PUT update a patient by name
+// PUT update a tour by name
 app.put("/api/tours/:id", async (req, res) => {
   try {
-
-
     const { name, ratings, price, duration, description, itinerary, inclusions, exclusions, profilePicture  } = req.body;
 
     const updateData = {
@@ -227,14 +223,14 @@ app.put("/api/tours/:id", async (req, res) => {
       name, ratings, price, duration, description, itinerary, inclusions, exclusions, profilePicture
     };
 
-    const updatedTour = await Destination.findOneAndUpdate(
+    const updatedTour = await Tour.findOneAndUpdate(
       { _id: req.params.id },
       updateData,
       { new: true, runValidators: true }
     );
 
     if (!updatedTour)
-      return res.status(404).json({ message: "Patient not found" });
+      return res.status(404).json({ message: "Tour not found" });
     res.json(updatedTour);
   } catch (err) {
     res.status(500).json({ message: err.message });
@@ -244,7 +240,7 @@ app.put("/api/tours/:id", async (req, res) => {
 // DELETE a tours
 app.delete("/api/tours/:id", async (req, res) => {
   try {
-    const result = await Destination.findByIdAndDelete(req.params.id);
+    const result = await Tour.findByIdAndDelete(req.params.id);
     if (result) {
       return res
         .status(200)
@@ -266,7 +262,7 @@ app.post('/folders', async (req, res) => {
   const { userId, name } = req.body;
 
   try {
-    const folder = new Folder({ name, owner: userId, destinations: [] });
+    const folder = new Folder({ name, owner: userId, tours: [] });
     await folder.save();
     res.status(201).json(folder);
   } catch (err) {
@@ -277,7 +273,7 @@ app.post('/folders', async (req, res) => {
 // Read all folders
 app.get('/folders', async (req, res) => {
   try {
-    const folders = await Folder.find().populate('owner').populate('destinations');
+    const folders = await Folder.find().populate('owner').populate('tours');
     res.json(folders);
   } catch (err) {
     res.status(500).json({ error: err.message });
@@ -289,51 +285,51 @@ app.get('/folders/user/:userId', async (req, res) => {
   const { userId } = req.params;
 
   try {
-    const folders = await Folder.find({ owner: userId }).populate('destinations');
+    const folders = await Folder.find({ owner: userId }).populate('tours');
     res.json(folders);
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
 });
 
-// Read destinations in a folder
-app.get('/folders/:folderId/destinations', async (req, res) => {
+// Read tours in a folder
+app.get('/folders/:folderId/tours', async (req, res) => {
   const { folderId } = req.params;
 
   try {
-    const folder = await Folder.findById(folderId).populate('destinations');
-    res.json(folder.destinations);
+    const folder = await Folder.findById(folderId).populate('tours');
+    res.json(folder.tours);
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
 });
 
-// Update a folder by adding a destination
-app.put('/folders/:folderId/destinations/:destinationId', async (req, res) => {
-  const { folderId, destinationId } = req.params;
+// Update a folder by adding a tour
+app.put('/folders/:folderId/tours/:tourId', async (req, res) => {
+  const { folderId, tourId } = req.params;
 
   try {
     const folder = await Folder.findByIdAndUpdate(
       folderId,
-      { $addToSet: { destinations: destinationId } },
+      { $addToSet: { tours: tourId } },
       { new: true }
-    ).populate('destinations');
+    ).populate('tours');
     res.json(folder);
   } catch (err) {
     res.status(400).json({ error: err.message });
   }
 });
 
-// Delete a destination from a folder
-app.delete('/folders/:folderId/destinations/:destinationId', async (req, res) => {
-  const { folderId, destinationId } = req.params;
+// Delete a tour from a folder
+app.delete('/folders/:folderId/tours/:tourId', async (req, res) => {
+  const { folderId, tourId } = req.params;
 
   try {
     const folder = await Folder.findByIdAndUpdate(
       folderId,
-      { $pull: { destinations: destinationId } },
+      { $pull: { tours: tourId } },
       { new: true }
-    ).populate('destinations');
+    ).populate('tours');
     res.json(folder);
   } catch (err) {
     res.status(400).json({ error: err.message });
@@ -351,14 +347,6 @@ app.delete('/folders/:folderId', async (req, res) => {
     res.status(400).json({ error: err.message });
   }
 });
-
-mongoose.connect('mongodb://localhost:27017/yourdbname', { useNewUrlParser: true, useUnifiedTopology: true })
-  .then(() => {
-    app.listen(PORT, () => {
-      console.log(`Server is running on port ${PORT}`);
-    });
-  })
-  .catch(err => console.error(err));
 
 
 
