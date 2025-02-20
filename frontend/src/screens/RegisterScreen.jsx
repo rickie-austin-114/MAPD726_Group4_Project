@@ -36,6 +36,19 @@ const RegisterScreen = ({ navigation }) => {
   const handleRegister = async () => {
     try {
 
+      const res = await axios.post(`${baseURL}api/register`, {
+        name,
+        phone,
+        email,
+        password,
+      });
+
+      console.log(res.status)
+      
+      if (res.status !== 201) {
+        throw new Error("User already exist!");
+      }
+
       const userCredential = await createUserWithEmailAndPassword(
         auth,
         email,
@@ -45,12 +58,7 @@ const RegisterScreen = ({ navigation }) => {
       // Send verification email
       await userCredential.user.sendEmailVerification();
       
-      await axios.post(`${baseURL}api/register`, {
-        name,
-        phone,
-        email,
-        password,
-      });
+
       Alert.alert("Registration Successful!");
       navigation.navigate("Login");
     } catch (error) {

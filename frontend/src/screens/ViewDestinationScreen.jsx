@@ -1,5 +1,5 @@
 // screens/LoginScreen.js
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { StripeProvider, useStripe } from "@stripe/stripe-react-native";
 import {
   View,
@@ -20,6 +20,8 @@ import { storeColors } from "../theme";
 import PaymentScreen from "./PaymentScreen";
 
 const ViewDestinationScreen = ({ route, navigation }) => {
+
+  const [folder, setFolder] = useState([]);
   const { tour } = route.params;
 
   const baseURL =
@@ -27,6 +29,21 @@ const ViewDestinationScreen = ({ route, navigation }) => {
       ? "http://10.0.2.2:5001/"
       : "http://localhost:5001/";
 
+
+      const fetchFolders = async () => {
+        try {
+          //if (activeCategory === "All") {
+            const response = await axios.get(`${backendURL}folders`);
+            setFolder(response.data);
+          //}
+        } catch (error) {
+          setError(error.response?.data?.message || "An error occurred");
+        }
+      };
+
+      useEffect(() => {
+        fetchFolders()
+      }, [])
   return (
     // <View style={styles.container}>
     //   <TextInput placeholder="Email" value={email} onChangeText={setEmail} />

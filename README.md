@@ -18,7 +18,7 @@ docker run -p 5001:5001 node_api
 ```
 cd backend/python_server
 pip install -r requirements.txt
-uvicorn main:app --reload
+uvicorn server:app --reload
 ```
 
 ## Train the model from scratch (optional)

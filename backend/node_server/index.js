@@ -55,9 +55,19 @@ mongoose
   .then(() => console.log("MongoDB connected"))
   .catch((err) => console.error("MongoDB connection error:", err));
 
+// registration endpoint for the 
 app.post("/api/register", async (req, res) => {
   try {
+
     const { name, phone, email, password } = req.body;
+
+    const existingUser = await User.findOne({ email: email });
+
+    console.log(existingUser);
+    
+    if (existingUser) {
+      return res.status(400).json({ error: "User with this email already exists." });
+    }
     const hashedPassword = await bcrypt.hash(password, 10);
     const user = new User({
       name,
@@ -70,7 +80,6 @@ app.post("/api/register", async (req, res) => {
   } catch (error) {
     res.status(400).json({ message: "Error" });
   }
-
 });
 
 
@@ -89,6 +98,73 @@ app.post("/api/login", async (req, res) => {
   }
 
 });
+
+
+// CRUD Endpoints
+
+// Create a user from google
+app.post("/api/users", async (req, res) => {
+  try {
+    const { name, email, profilePicture } = req.body;
+
+    const existingUser = await User.findOne({ email: email });
+
+    console.log(existingUser);
+    
+    if (!existingUser) {
+      const user = new User({
+        name,
+        email,
+        profilePicture,
+      });
+      await user.save();
+      return res.status(201).json(user);
+    }  else {
+      return res.status(201).json(existingUser);
+    }
+
+
+  } catch (error) {
+    res.status(400).json({ error: error.message });
+  }
+});
+
+// Read a user by ID
+app.get("/api/users/:id", async (req, res) => {
+  try {
+    const user = await User.findById(req.params.id);
+    if (!user) return res.status(404).json({ message: "User not found" });
+    res.json(user);
+  } catch (error) {
+    res.status(400).json({ error: error.message });
+  }
+});
+
+// Update a user by ID
+app.put("/api/users/:id", async (req, res) => {
+  try {
+    const user = await User.findByIdAndUpdate(req.params.id, req.body, {
+      new: true,
+      runValidators: true,
+    });
+    if (!user) return res.status(404).json({ message: "User not found" });
+    res.json(user);
+  } catch (error) {
+    res.status(400).json({ error: error.message });
+  }
+});
+
+// Delete a user by ID
+app.delete("/api/users/:id", async (req, res) => {
+  try {
+    const user = await User.findByIdAndDelete(req.params.id);
+    if (!user) return res.status(404).json({ message: "User not found" });
+    res.json({ message: "User deleted successfully" });
+  } catch (error) {
+    res.status(400).json({ error: error.message });
+  }
+});
+
 
 // app.post("/api/login", async (req, res) => {
 //   try {

@@ -11,6 +11,7 @@ import ResetPasswordScreen from './src/screens/ResetPasswordScreen';
 import ViewDestinationScreen from './src/screens/ViewDestinationScreen';
 import ViewFolderScreen from "./src/screens/ViewFolderScreen";
 import FoldersListScreen from "./src/screens/FoldersListScreen";
+import ViewProfileScreen from "./src/screens/ViewProfileScreen";
 
 const Stack = createNativeStackNavigator();
 
@@ -28,6 +29,9 @@ const App = () => {
 
         <Stack.Screen name="ViewFolder" component={ViewFolderScreen} />
         <Stack.Screen name="FoldersList" component={FoldersListScreen} />
+
+        <Stack.Screen name="ViewProfile" component={ViewProfileScreen} />
+
 
 
         {/* <Stack.Screen name="ViewRecord" component={ViewRecordScreen} /> */}

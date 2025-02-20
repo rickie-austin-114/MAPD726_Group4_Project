@@ -34,6 +34,9 @@ import {
 } from "react-native-heroicons/solid";
 import { withDecay } from "react-native-reanimated";
 import { storeColors } from "../theme";
+import StarRating from "./StarRating";
+
+
 
 const MainScreen = ({ route, navigation }) => {
   const [tours, setTours] = useState([]);
@@ -81,6 +84,10 @@ const MainScreen = ({ route, navigation }) => {
     navigation.navigate("FoldersList");
   };
 
+  const navigateToProfile = () => {
+    navigation.navigate("ViewProfile", {id: "67b73ee28885fbfe362254a1"});
+  };
+
 
   return (
     <LinearGradient
@@ -91,10 +98,17 @@ const MainScreen = ({ route, navigation }) => {
         <View className="flex-row justify-between items-center px-4">
           <Bars3CenterLeftIcon color={storeColors.text} size="30" />
 
+
+          <TouchableOpacity onPress={navigateToProfile}>
+            <UserCircleIcon color={storeColors.text} size="30" />
+</TouchableOpacity>
+
           <TouchableOpacity onPress={navigateToFavorites}>
 
             <StarIcon color={storeColors.text} size="30" />
           </TouchableOpacity>
+
+      
 
           <BellIcon color={storeColors.text} size="30" />
         </View>
@@ -178,9 +192,15 @@ const MainScreen = ({ route, navigation }) => {
                         className="text-blue-500"
                       />
 
+
+
                       <Text className="text-xs text-gray-700">
-                        Rating: {tour.ratings}
+                        Rating:
                       </Text>
+
+
+                        <StarRating numberOfStars={tour.ratings} />
+                      {}
                     </View>
                   </View>
                 </View>
@@ -266,6 +286,9 @@ const styles = StyleSheet.create({
     flexDirection: "row", // Aligns children horizontally
     justifyContent: "space-around", // Adjusts spacing between buttons
     alignItems: "center", // Centers buttons vertically
+  },
+  starContainer: {
+    flexDirection: 'row',
   },
 });
 

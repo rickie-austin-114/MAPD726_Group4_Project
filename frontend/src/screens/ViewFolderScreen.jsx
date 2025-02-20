@@ -131,12 +131,10 @@ const ViewFolderScreen = ({ route, navigation }) => {
       </View>
       <Text> </Text>
 
-      <Text
-                          style={{ color: storeColors.text }}
-                    className="font-semibold"
-      >Folder Name: {name}</Text>
-            <Text> </Text>
-
+      <Text style={{ color: storeColors.text }} className="font-semibold">
+        Folder Name: {name}
+      </Text>
+      <Text> </Text>
 
       {error ? <Text style={styles.errorText}>{error}</Text> : null}
       <ScrollView style={{ height: 550 }} showsVerticalScrollIndicator={false}>

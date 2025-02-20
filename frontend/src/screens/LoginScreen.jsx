@@ -27,19 +27,7 @@ import {
 
 import { app, auth } from "../../firebaseConfig";
 
-const firebaseConfig = {
-  apiKey: "AIzaSyD6YwgGgxoZIqTLLLARRvzPJ2EX7muNVgo",
-  authDomain: "authentication1-1f950.firebaseapp.com",
-  projectId: "authentication1-1f950",
-  storageBucket: "authentication1-1f950.firebasestorage.app",
-  messagingSenderId: "518815540074",
-  appId: "1:518815540074:web:52b0ab4804b97f009d7b13",
-  measurementId: "G-JX7SBC3G33",
-};
 
-// const app = initializeApp(firebaseConfig);
-
-// const auth = getAuth(app);
 
 const LoginScreen = ({ navigation }) => {
   const [email, setEmail] = useState("");
@@ -61,6 +49,7 @@ const LoginScreen = ({ navigation }) => {
   const handleLogin = async () => {
     try {
 
+
       await signInWithEmailAndPassword(auth, email, password);
       /*
       const response = await axios.post(`${baseURL}api/login`, {
@@ -79,6 +68,8 @@ const LoginScreen = ({ navigation }) => {
 
   const handleGoogleLogin = async () => {
     try {
+
+
       // Step 1: Start the Google sign-in flow
       await GoogleSignin.hasPlayServices(); // Ensure that Google Play services are available
       const userInfo = await GoogleSignin.signIn(); // Perform Google Sign-In
@@ -90,8 +81,20 @@ const LoginScreen = ({ navigation }) => {
 
       console.log(userInfo);
 
-      console.log(userInfo.data.user);
-      //console.log(userInfo.data.user.name);
+      const user = userInfo.data.user;
+
+      console.log(user);
+
+      const email = user["email"]
+      const name = user["name"];
+      const profilePicture = user["photo"]
+
+
+      const res = await axios.post(`${baseURL}api/users`, {
+        name,
+        email,
+        profilePicture
+      });
 
 
       if (idToken !== null) {
