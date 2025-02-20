@@ -30,7 +30,7 @@ const App = () => {
         <Stack.Screen name="ViewFolder" component={ViewFolderScreen} />
         <Stack.Screen name="FoldersList" component={FoldersListScreen} />
 
-        <Stack.Screen name="ViewProfile" component={ViewProfileScreen} />
+        {/* <Stack.Screen name="ViewProfile" component={ViewProfileScreen} /> */}
 
 
 

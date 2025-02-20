@@ -41,7 +41,7 @@ const EditProfileScreen = ({ navigation, route }) => {
 
   const fetchUserInformation = async () => {
     try {
-      
+
       const user = await axios.get(`${baseURL}api/users/${id}`); //67b73ee28885fbfe362254a1
 
 
@@ -54,8 +54,6 @@ const EditProfileScreen = ({ navigation, route }) => {
       setProfilePicture(user.data.profilePicture)
       setMinimumBudget(user.data.minimumBudget)
       setMaximumBudget(user.data.maximumBudget)
-
-
 
 
 
