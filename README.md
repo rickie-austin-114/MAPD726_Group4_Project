@@ -46,6 +46,17 @@ npx expo run:ios
 cd frontend
 npm install
 npx expo prebuild --clean
+cd android
+echo "sdk.dir=/Users/rickie/Library/Android/sdk" >> local.properties
+```
+replace /Users/rickie/Library/Android/sdk with your android sdk
+```
+./gradlew signingReport
+
+```
+copy the SHA1 signing and generate a new google-services.json file
+
+```
 npx expo run:android
 ```
 
