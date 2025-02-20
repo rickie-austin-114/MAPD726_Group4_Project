@@ -21,7 +21,7 @@ import {
 } from "@react-native-firebase/auth";
 
 import { app, auth } from "../../firebaseConfig";
-import { backendURL } from '../config';
+import { backendURL } from '../config.js';
 
 
 const EditProfileScreen = ({ navigation, route }) => {

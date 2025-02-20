@@ -14,8 +14,7 @@ import axios from "axios";
 import "../../global.css";
 import { storeColors } from "../theme";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { backendURL } from '../config';
-
+import { backendURL } from '../config.js';
 
 const ResetPasswordScreen = ({ route, navigation}) => {
 
