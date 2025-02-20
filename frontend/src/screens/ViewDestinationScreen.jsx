@@ -1,6 +1,6 @@
 // screens/LoginScreen.js
 import React, { useState } from "react";
-import { StripeProvider, useStripe } from '@stripe/stripe-react-native';
+import { StripeProvider, useStripe } from "@stripe/stripe-react-native";
 import {
   View,
   TextInput,
@@ -12,7 +12,6 @@ import {
   Text,
   Pressable,
   ScrollView,
-
 } from "react-native";
 import axios from "axios";
 import "../../global.css";
@@ -28,9 +27,6 @@ const ViewDestinationScreen = ({ route, navigation }) => {
       ? "http://10.0.2.2:5001/"
       : "http://localhost:5001/";
 
-
-
-
   return (
     // <View style={styles.container}>
     //   <TextInput placeholder="Email" value={email} onChangeText={setEmail} />
@@ -44,53 +40,46 @@ const ViewDestinationScreen = ({ route, navigation }) => {
       className="flex-1 bg-white"
       style={{ backgroundColor: storeColors.bg }}
     >
-       <SafeAreaView className="flex">
+      <SafeAreaView className="flex">
         <View className="flex-row justify-center">
           <Image
-          source={{ uri: patient.profilePicture }}
-          style={{ width: 300, height: 300, resizeMode: "stretch" }}
+            source={{ uri: patient.profilePicture }}
+            style={{ width: 300, height: 300, resizeMode: "stretch" }}
           />
         </View>
       </SafeAreaView>
       <View
         className="flex-1 bg-white px-8 pt-8"
         style={{ borderTopLeftRadius: 50, borderTopRightRadius: 50 }}
+      >
+        <ScrollView>
+          <Text
+            className="text-gray-900 ml-4"
+            style={{ fontSize: 40, fontWeight: "bold" }}
+          >
+            {patient.name}
+          </Text>
 
-        >
-                <ScrollView>
+          <Text> </Text>
 
-        <Text
-          className="text-gray-900 ml-4"
-          style={{ fontSize: 40, fontWeight: "bold" }}
-        >
-          {patient.name}
-        </Text>
+          <Text className="text-gray-700 ml-4">Rating: {patient.ratings}</Text>
 
-        <Text> </Text>
+          <Text> </Text>
 
-        <Text className="text-gray-700 ml-4">Rating: {patient.ratings}</Text>
+          <Text className="text-gray-700 ml-4">Price: {patient.price}</Text>
 
-        <Text> </Text>
+          <Text> </Text>
+          
+          <Text className="text-gray-700 ml-4">{patient.description}</Text>
 
+          <StripeProvider publishableKey="pk_test_51QuLVCPlUnLIZAQCnwrRbSpCJhgJZsH1PLPQEh9Jt9YUlJauxShMIQbxNKdKYmRkSP83OSsJeZQdsDwrK5IYwjvi00d0lp5KXm">
+            <PaymentScreen amount={patient.price} />
+          </StripeProvider>
 
-        <Text className="text-gray-700 ml-4">
-          {patient.description}
-        </Text>
+          <Text> </Text>
 
-              <StripeProvider
-              publishableKey="pk_test_51QuLVCPlUnLIZAQCnwrRbSpCJhgJZsH1PLPQEh9Jt9YUlJauxShMIQbxNKdKYmRkSP83OSsJeZQdsDwrK5IYwjvi00d0lp5KXm"
-        
-              >
-                <PaymentScreen amount={patient.price} />
-              </StripeProvider>
-
-
-        <Text> </Text>
-
-        <Text> </Text>
-
+          <Text> </Text>
         </ScrollView>
-
       </View>
     </View>
   );

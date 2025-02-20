@@ -1,12 +1,12 @@
-import React from 'react';
-import { View, Text, Button,   Platform, Alert } from 'react-native';
-import { useStripe } from '@stripe/stripe-react-native';
+import React from "react";
+import { View, Text, Button, Platform, Alert, StyleSheet, Pressable } from "react-native";
+import { useStripe } from "@stripe/stripe-react-native";
 
 function PaymentScreen(props) {
-      const baseURL =
-        Platform.OS === "android"
-          ? "http://10.0.2.2:5001/"
-          : "http://localhost:5001/";
+  const baseURL =
+    Platform.OS === "android"
+      ? "http://10.0.2.2:5001/"
+      : "http://localhost:5001/";
 
   const { initPaymentSheet, presentPaymentSheet } = useStripe();
 
@@ -14,9 +14,9 @@ function PaymentScreen(props) {
     try {
       // Step 1: Fetch client secret from your backend
       const response = await fetch(`${baseURL}create-payment-intent`, {
-        method: 'POST',
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
         body: JSON.stringify({ amount: props.amount }), // Amount in cents
       });
@@ -28,7 +28,7 @@ function PaymentScreen(props) {
       });
 
       if (error) {
-        Alert.alert('Error', error.message);
+        Alert.alert("Error", error.message);
         return;
       }
 
@@ -36,20 +36,39 @@ function PaymentScreen(props) {
       const { error: paymentError } = await presentPaymentSheet();
 
       if (paymentError) {
-        Alert.alert('Error', paymentError.message);
+        Alert.alert("Error", paymentError.message);
       } else {
-        Alert.alert('Success', 'Payment successful!');
+        Alert.alert("Success", "Payment successful!");
       }
     } catch (error) {
-      Alert.alert('Error', error.message);
+      Alert.alert("Error", error.message);
     }
   };
 
   return (
-    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-      <Button title="Pay" onPress={handlePayment} />
+    <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
+      <Pressable onPress={handlePayment} style={styles.button}>
+        <Text style={styles.text}>Pay ${props.amount}</Text>
+      </Pressable>
+
+      {/* <Button title="Pay" onPress={handlePayment} /> */}
     </View>
   );
-};
+}
 
+const styles = StyleSheet.create({
+  button: {
+    backgroundColor: "#213638",
+    padding: 10,
+    borderRadius: 5,
+    alignItems: "center",
+  },
+  buttonPressed: {
+    backgroundColor: "#3700b3",
+  },
+  text: {
+    color: "white",
+    fontSize: 16,
+  },
+});
 export default PaymentScreen;
