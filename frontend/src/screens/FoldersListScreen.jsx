@@ -30,12 +30,13 @@ import {
   PlusIcon,
   PencilSquareIcon,
   MagnifyingGlassIcon,
+  StarIcon
 } from "react-native-heroicons/solid";
 import { withDecay } from "react-native-reanimated";
 import { storeColors } from "../theme";
 
 const FoldersListScreen = ({ route, navigation }) => {
-  const [patients, setPatients] = useState([]);
+  const [tours, setTours] = useState([]);
   const [error, setError] = useState("");
   const [listCritical, setListCritical] = useState(false);
   const [search, setSearch] = useState("");
@@ -45,25 +46,18 @@ const FoldersListScreen = ({ route, navigation }) => {
   const categories = ["All", "Sightseeing", "Adventure", "Cultural"];
   const [activeCategory, setActiveCategory] = useState("All");
 
-  const { token } = route.params;
-
 
   const backendURL =
     Platform.OS === "android"
       ? "http://10.0.2.2:5001/"
       : "http://localhost:5001/";
 
-  const fetchPatients = async () => {
+  const fetchTours = async () => {
     try {
-      if (activeCategory === "All") {
-        const response = await axios.get(`${backendURL}api/tours`);
-        setPatients(response.data);
-      } else {
-        const response = await axios.get(`${backendURL}api/tours`);
-
-//        const response = await axios.get(`${backendURL}api/critical`);
-        setPatients(response.data);
-      }
+      //if (activeCategory === "All") {
+        const response = await axios.get(`${backendURL}folders`);
+        setTours(response.data);
+      //}
     } catch (error) {
       setError(error.response?.data?.message || "An error occurred");
     }
@@ -74,12 +68,18 @@ const FoldersListScreen = ({ route, navigation }) => {
   };
 
   useEffect(() => {
-    fetchPatients();
+    fetchTours();
   }, [activeCategory, isFocused]);
 
-  const viewProfile = (patient) => {
-    navigation.navigate("ViewDestination", { patient });
+  const viewFolder = (id) => {
+    navigation.navigate("ViewFolder", { id });
   };
+
+
+  const addFolder = (id) => {
+    navigation.navigate("AddFolder", { id });
+  };
+
 
 
   return (
@@ -90,7 +90,11 @@ const FoldersListScreen = ({ route, navigation }) => {
       <View className="container">
         <View className="flex-row justify-between items-center px-4">
           <Bars3CenterLeftIcon color={storeColors.text} size="30" />
-          <BellIcon color={storeColors.text} size="30" />
+
+          <TouchableOpacity onPress={addFolder}>
+
+            <PlusIcon color={storeColors.text} size="30" />
+          </TouchableOpacity>
         </View>
       </View>
       <View className="mt-3">
@@ -98,7 +102,7 @@ const FoldersListScreen = ({ route, navigation }) => {
           style={{ color: storeColors.text }}
           className="ml-4 text-3xl font-bold"
         >
-          Browse Destinations
+          My Favorites Folders
         </Text>
       </View>
 
@@ -141,47 +145,31 @@ const FoldersListScreen = ({ route, navigation }) => {
       <Text> </Text>
       {error ? <Text style={styles.errorText}>{error}</Text> : null}
       <ScrollView style={{ height: 550 }} showsVerticalScrollIndicator={false}>
-        {patients.map((patient, index) => {
-          let bg =
-            patient.condition == "Critical"
-              ? "rgba(192, 132, 252,0.4)"
-              : "rgba(255,255,255,0.4)";
-          if (patient.name.startsWith(search)) {
+        {tours.map((tour, index) => {
+          let bg = "rgba(255,255,255,0.4)";
+            // tour.condition == "Critical"
+            //   ? "rgba(192, 132, 252,0.4)"
+              
+          if (tour.name.startsWith(search)) {
             return (
               <TouchableOpacity
                 style={{ backgroundColor: bg }}
                 className="mx-4 p-2 mb-2 flex-row rounded-3xl"
                 key={index}
               >
-                <Image
-                  source={{ uri: patient.profilePicture }}
-                  style={{ width: 80, height: 80 }}
-                  className="rounded-2xl"
-                />
+
                 <View className="flex-1 flex justify-center pl-3 space-y-3">
                   <Text
                     style={{ color: storeColors.text }}
                     className="font-semibold"
                   >
-                    {patient.name}
+                    {tour.name}
                   </Text>
-                  <View className="flex-row space-x-3">
-                    <View className="flex-row space-x-1">
-                      <InformationCircleIcon
-                        size="15"
-                        className="text-blue-500"
-                      />
-
-                      <Text className="text-xs text-gray-700">
-                        Rating: {patient.ratings}
-                      </Text>
-                    </View>
-                  </View>
                 </View>
                 <View className="flex justify-center items-center">
                   <TouchableOpacity
                     onPress={() => {
-                      viewProfile(patient);
+                      viewFolder(tour._id);
                     }}
                     className="bg-blue-400 p-2 px-4 rounded-full mr-2"
                   >
@@ -226,13 +214,13 @@ const styles = StyleSheet.create({
   errorText: {
     color: "red",
   },
-  patientText: {
+  tourText: {
     fontSize: 24,
   },
-  normalPatientContainer: {
+  normalTourContainer: {
     marginVertical: 10,
   },
-  criticalPatientContainer: {
+  criticalTourContainer: {
     marginVertical: 10,
   },
   button: {

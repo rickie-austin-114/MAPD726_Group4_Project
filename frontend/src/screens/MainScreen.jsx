@@ -36,7 +36,7 @@ import { withDecay } from "react-native-reanimated";
 import { storeColors } from "../theme";
 
 const MainScreen = ({ route, navigation }) => {
-  const [patients, setPatients] = useState([]);
+  const [tours, setTours] = useState([]);
   const [error, setError] = useState("");
   const [listCritical, setListCritical] = useState(false);
   const [search, setSearch] = useState("");
@@ -54,17 +54,12 @@ const MainScreen = ({ route, navigation }) => {
       ? "http://10.0.2.2:5001/"
       : "http://localhost:5001/";
 
-  const fetchPatients = async () => {
+  const fetchTours = async () => {
     try {
-      if (activeCategory === "All") {
+      //if (activeCategory === "All") {
         const response = await axios.get(`${backendURL}api/tours`);
-        setPatients(response.data);
-      } else {
-        const response = await axios.get(`${backendURL}api/tours`);
-
-//        const response = await axios.get(`${backendURL}api/critical`);
-        setPatients(response.data);
-      }
+        setTours(response.data);
+      //}
     } catch (error) {
       setError(error.response?.data?.message || "An error occurred");
     }
@@ -75,11 +70,15 @@ const MainScreen = ({ route, navigation }) => {
   };
 
   useEffect(() => {
-    fetchPatients();
+    fetchTours();
   }, [activeCategory, isFocused]);
 
-  const viewProfile = (patient) => {
-    navigation.navigate("ViewDestination", { patient });
+  const viewProfile = (tour) => {
+    navigation.navigate("ViewDestination", { tour });
+  };
+
+  const navigateToFavorites = () => {
+    navigation.navigate("FoldersList");
   };
 
 
@@ -91,8 +90,12 @@ const MainScreen = ({ route, navigation }) => {
       <View className="container">
         <View className="flex-row justify-between items-center px-4">
           <Bars3CenterLeftIcon color={storeColors.text} size="30" />
-          
-          <StarIcon color={storeColors.text} size="30" />
+
+          <TouchableOpacity onPress={navigateToFavorites}>
+
+            <StarIcon color={storeColors.text} size="30" />
+          </TouchableOpacity>
+
           <BellIcon color={storeColors.text} size="30" />
         </View>
       </View>
@@ -144,12 +147,12 @@ const MainScreen = ({ route, navigation }) => {
       <Text> </Text>
       {error ? <Text style={styles.errorText}>{error}</Text> : null}
       <ScrollView style={{ height: 550 }} showsVerticalScrollIndicator={false}>
-        {patients.map((patient, index) => {
-          let bg =
-            patient.condition == "Critical"
-              ? "rgba(192, 132, 252,0.4)"
-              : "rgba(255,255,255,0.4)";
-          if (patient.name.startsWith(search)) {
+        {tours.map((tour, index) => {
+          let bg = "rgba(255,255,255,0.4)";
+            // tour.condition == "Critical"
+            //   ? "rgba(192, 132, 252,0.4)"
+              
+          if (tour.name.startsWith(search)) {
             return (
               <TouchableOpacity
                 style={{ backgroundColor: bg }}
@@ -157,7 +160,7 @@ const MainScreen = ({ route, navigation }) => {
                 key={index}
               >
                 <Image
-                  source={{ uri: patient.profilePicture }}
+                  source={{ uri: tour.profilePicture }}
                   style={{ width: 80, height: 80 }}
                   className="rounded-2xl"
                 />
@@ -166,7 +169,7 @@ const MainScreen = ({ route, navigation }) => {
                     style={{ color: storeColors.text }}
                     className="font-semibold"
                   >
-                    {patient.name}
+                    {tour.name}
                   </Text>
                   <View className="flex-row space-x-3">
                     <View className="flex-row space-x-1">
@@ -176,7 +179,7 @@ const MainScreen = ({ route, navigation }) => {
                       />
 
                       <Text className="text-xs text-gray-700">
-                        Rating: {patient.ratings}
+                        Rating: {tour.ratings}
                       </Text>
                     </View>
                   </View>
@@ -184,7 +187,7 @@ const MainScreen = ({ route, navigation }) => {
                 <View className="flex justify-center items-center">
                   <TouchableOpacity
                     onPress={() => {
-                      viewProfile(patient);
+                      viewProfile(tour);
                     }}
                     className="bg-blue-400 p-2 px-4 rounded-full mr-2"
                   >
@@ -229,13 +232,13 @@ const styles = StyleSheet.create({
   errorText: {
     color: "red",
   },
-  patientText: {
+  tourText: {
     fontSize: 24,
   },
-  normalPatientContainer: {
+  normalTourContainer: {
     marginVertical: 10,
   },
-  criticalPatientContainer: {
+  criticalTourContainer: {
     marginVertical: 10,
   },
   button: {

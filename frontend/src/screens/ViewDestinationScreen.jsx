@@ -20,7 +20,7 @@ import { storeColors } from "../theme";
 import PaymentScreen from "./PaymentScreen";
 
 const ViewDestinationScreen = ({ route, navigation }) => {
-  const { patient } = route.params;
+  const { tour } = route.params;
 
   const baseURL =
     Platform.OS === "android"
@@ -43,7 +43,7 @@ const ViewDestinationScreen = ({ route, navigation }) => {
       <SafeAreaView className="flex">
         <View className="flex-row justify-center">
           <Image
-            source={{ uri: patient.profilePicture }}
+            source={{ uri: tour.profilePicture }}
             style={{ width: 300, height: 300, resizeMode: "stretch" }}
           />
         </View>
@@ -57,26 +57,26 @@ const ViewDestinationScreen = ({ route, navigation }) => {
             className="text-gray-900 ml-4"
             style={{ fontSize: 40, fontWeight: "bold" }}
           >
-            {patient.name}
+            {tour.name}
           </Text>
 
           <Text> </Text>
 
-          <Text className="text-gray-700 ml-4">Rating: {patient.ratings}</Text>
+          <Text className="text-gray-700 ml-4">Rating: {tour.ratings}</Text>
 
           <Text> </Text>
 
-          <Text className="text-gray-700 ml-4">Price: {patient.price}</Text>
+          <Text className="text-gray-700 ml-4">Price: {tour.price}</Text>
 
           <Text> </Text>
 
-          <Text className="text-gray-700 ml-4">{patient.description}</Text>
+          <Text className="text-gray-700 ml-4">{tour.description}</Text>
           <Text> </Text>
 
 
 
           <StripeProvider publishableKey="pk_test_51QuLVCPlUnLIZAQCnwrRbSpCJhgJZsH1PLPQEh9Jt9YUlJauxShMIQbxNKdKYmRkSP83OSsJeZQdsDwrK5IYwjvi00d0lp5KXm">
-            <PaymentScreen amount={patient.price} />
+            <PaymentScreen amount={tour.price} />
           </StripeProvider>
 
           <Text> </Text>

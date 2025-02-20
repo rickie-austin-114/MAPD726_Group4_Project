@@ -86,7 +86,13 @@ const LoginScreen = ({ navigation }) => {
       // Step 2: Get Google ID token and access token
       const idToken = userInfo.data.idToken;
 
-      console.log(idToken);
+      //console.log(idToken);
+
+      console.log(userInfo);
+
+      console.log(userInfo.data.user);
+      //console.log(userInfo.data.user.name);
+
 
       if (idToken !== null) {
         console.log("User signed in successfully with Google!");

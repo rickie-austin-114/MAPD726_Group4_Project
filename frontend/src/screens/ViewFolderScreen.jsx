@@ -30,12 +30,13 @@ import {
   PlusIcon,
   PencilSquareIcon,
   MagnifyingGlassIcon,
+  StarIcon,
 } from "react-native-heroicons/solid";
 import { withDecay } from "react-native-reanimated";
 import { storeColors } from "../theme";
 
 const ViewFolderScreen = ({ route, navigation }) => {
-  const [patients, setPatients] = useState([]);
+  const [tours, setTours] = useState([]);
   const [error, setError] = useState("");
   const [listCritical, setListCritical] = useState(false);
   const [search, setSearch] = useState("");
@@ -45,25 +46,20 @@ const ViewFolderScreen = ({ route, navigation }) => {
   const categories = ["All", "Sightseeing", "Adventure", "Cultural"];
   const [activeCategory, setActiveCategory] = useState("All");
 
-  const { token } = route.params;
-
+  const { id } = route.params;
 
   const backendURL =
     Platform.OS === "android"
       ? "http://10.0.2.2:5001/"
       : "http://localhost:5001/";
 
-  const fetchPatients = async () => {
+      ///folders
+  const fetchTours = async () => {
     try {
-      if (activeCategory === "All") {
-        const response = await axios.get(`${backendURL}api/tours`);
-        setPatients(response.data);
-      } else {
-        const response = await axios.get(`${backendURL}api/tours`);
-
-//        const response = await axios.get(`${backendURL}api/critical`);
-        setPatients(response.data);
-      }
+      //if (activeCategory === "All") {
+      const response = await axios.get(`${backendURL}folders/${id}/tours`);
+      setTours(response.data);
+      //}
     } catch (error) {
       setError(error.response?.data?.message || "An error occurred");
     }
@@ -73,14 +69,10 @@ const ViewFolderScreen = ({ route, navigation }) => {
     setListCritical(!listCritical);
   };
 
+
   useEffect(() => {
-    fetchPatients();
+    fetchTours();
   }, [activeCategory, isFocused]);
-
-  const viewProfile = (patient) => {
-    navigation.navigate("ViewDestination", { patient });
-  };
-
 
   return (
     <LinearGradient
@@ -90,6 +82,7 @@ const ViewFolderScreen = ({ route, navigation }) => {
       <View className="container">
         <View className="flex-row justify-between items-center px-4">
           <Bars3CenterLeftIcon color={storeColors.text} size="30" />
+
           <BellIcon color={storeColors.text} size="30" />
         </View>
       </View>
@@ -98,7 +91,7 @@ const ViewFolderScreen = ({ route, navigation }) => {
           style={{ color: storeColors.text }}
           className="ml-4 text-3xl font-bold"
         >
-          Browse Destinations
+          View Folder
         </Text>
       </View>
 
@@ -135,66 +128,69 @@ const ViewFolderScreen = ({ route, navigation }) => {
               );
             }
           })}
-
         </ScrollView>
       </View>
       <Text> </Text>
+
+      <Text>id: {id}</Text>
+
       {error ? <Text style={styles.errorText}>{error}</Text> : null}
       <ScrollView style={{ height: 550 }} showsVerticalScrollIndicator={false}>
-        {patients.map((patient, index) => {
-          let bg =
-            patient.condition == "Critical"
-              ? "rgba(192, 132, 252,0.4)"
-              : "rgba(255,255,255,0.4)";
-          if (patient.name.startsWith(search)) {
-            return (
-              <TouchableOpacity
-                style={{ backgroundColor: bg }}
-                className="mx-4 p-2 mb-2 flex-row rounded-3xl"
-                key={index}
-              >
-                <Image
-                  source={{ uri: patient.profilePicture }}
-                  style={{ width: 80, height: 80 }}
-                  className="rounded-2xl"
-                />
-                <View className="flex-1 flex justify-center pl-3 space-y-3">
-                  <Text
-                    style={{ color: storeColors.text }}
-                    className="font-semibold"
-                  >
-                    {patient.name}
-                  </Text>
-                  <View className="flex-row space-x-3">
-                    <View className="flex-row space-x-1">
-                      <InformationCircleIcon
-                        size="15"
-                        className="text-blue-500"
-                      />
+        {tours.map((tour, index) => {
+          let bg = "rgba(255,255,255,0.4)";
+          // tour.condition == "Critical"
+          //   ? "rgba(192, 132, 252,0.4)"
 
-                      <Text className="text-xs text-gray-700">
-                        Rating: {patient.ratings}
-                      </Text>
-                    </View>
-                  </View>
-                </View>
-                <View className="flex justify-center items-center">
-                  <TouchableOpacity
-                    onPress={() => {
-                      viewProfile(patient);
-                    }}
-                    className="bg-blue-400 p-2 px-4 rounded-full mr-2"
-                  >
-                    <MagnifyingGlassIcon color={storeColors.text} size="20" />
-                  </TouchableOpacity>
+          if (tour.name.startsWith(search)) {
+                      return (
+                        <TouchableOpacity
+                          style={{ backgroundColor: bg }}
+                          className="mx-4 p-2 mb-2 flex-row rounded-3xl"
+                          key={index}
+                        >
+                          <Image
+                            source={{ uri: tour.profilePicture }}
+                            style={{ width: 80, height: 80 }}
+                            className="rounded-2xl"
+                          />
+                          <View className="flex-1 flex justify-center pl-3 space-y-3">
+                            <Text
+                              style={{ color: storeColors.text }}
+                              className="font-semibold"
+                            >
+                              {tour.name}
+                            </Text>
+                            <View className="flex-row space-x-3">
+                              <View className="flex-row space-x-1">
+                                <InformationCircleIcon
+                                  size="15"
+                                  className="text-blue-500"
+                                />
+          
+                                <Text className="text-xs text-gray-700">
+                                  Rating: {tour.ratings}
+                                </Text>
+                              </View>
+                            </View>
+                          </View>
+                          <View className="flex justify-center items-center">
+                            <TouchableOpacity
+                              onPress={() => {
+                                viewProfile(tour);
+                              }}
+                              className="bg-blue-400 p-2 px-4 rounded-full mr-2"
+                            >
+                              <MagnifyingGlassIcon color={storeColors.text} size="20" />
+                            </TouchableOpacity>
+          
+                          </View>
+          
+                        </TouchableOpacity>
+                      );
+                    } else {
+                      return <></>;
+                    }
 
-                </View>
-
-              </TouchableOpacity>
-            );
-          } else {
-            return <></>;
-          }
         })}
       </ScrollView>
       <Text> </Text>
@@ -226,13 +222,13 @@ const styles = StyleSheet.create({
   errorText: {
     color: "red",
   },
-  patientText: {
+  tourText: {
     fontSize: 24,
   },
-  normalPatientContainer: {
+  normalTourContainer: {
     marginVertical: 10,
   },
-  criticalPatientContainer: {
+  criticalTourContainer: {
     marginVertical: 10,
   },
   button: {
