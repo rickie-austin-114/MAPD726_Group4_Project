@@ -30,6 +30,7 @@ import {
   PlusIcon,
   PencilSquareIcon,
   MagnifyingGlassIcon,
+  StarIcon
 } from "react-native-heroicons/solid";
 import { withDecay } from "react-native-reanimated";
 import { storeColors } from "../theme";
@@ -90,6 +91,8 @@ const MainScreen = ({ route, navigation }) => {
       <View className="container">
         <View className="flex-row justify-between items-center px-4">
           <Bars3CenterLeftIcon color={storeColors.text} size="30" />
+          
+          <StarIcon color={storeColors.text} size="30" />
           <BellIcon color={storeColors.text} size="30" />
         </View>
       </View>
