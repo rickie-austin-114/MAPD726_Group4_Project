@@ -27,15 +27,13 @@ import {
 
 import { app, auth } from "../../firebaseConfig";
 
+import { backendURL } from '../config';
 
 
 const LoginScreen = ({ navigation }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const baseURL =
-    Platform.OS === "android"
-      ? "http://10.0.2.2:5001/"
-      : "http://localhost:5001/";
+
 
   useEffect(() => {
     // Configure Google Sign-In
@@ -90,7 +88,7 @@ const LoginScreen = ({ navigation }) => {
       const profilePicture = user["photo"]
 
 
-      const res = await axios.post(`${baseURL}api/users`, {
+      const res = await axios.post(`${backendURL}api/users`, {
         name,
         email,
         profilePicture

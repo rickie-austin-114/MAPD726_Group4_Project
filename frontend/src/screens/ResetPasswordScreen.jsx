@@ -14,6 +14,8 @@ import axios from "axios";
 import "../../global.css";
 import { storeColors } from "../theme";
 import { SafeAreaView } from "react-native-safe-area-context";
+import { backendURL } from '../config';
+
 
 const ResetPasswordScreen = ({ route, navigation}) => {
 
@@ -26,17 +28,14 @@ const ResetPasswordScreen = ({ route, navigation}) => {
 //     setEmail(userEmail);
 // }, [])
 
-  const baseURL =
-    Platform.OS === "android"
-      ? "http://10.0.2.2:5001/"
-      : "http://localhost:5001/";
+
 
   const handleRegister = async () => {
     try {
 
       
 
-      await axios.put(`${baseURL}api/forgetPassword`, {
+      await axios.put(`${backendURL}api/forgetPassword`, {
         email,
         password,
       });

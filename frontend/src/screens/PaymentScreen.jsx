@@ -2,18 +2,17 @@ import React from "react";
 import { View, Text, Button, Platform, Alert, StyleSheet, Pressable } from "react-native";
 import { useStripe } from "@stripe/stripe-react-native";
 
+import { backendURL } from '../config';
+
+
 function PaymentScreen(props) {
-  const baseURL =
-    Platform.OS === "android"
-      ? "http://10.0.2.2:5001/"
-      : "http://localhost:5001/";
 
   const { initPaymentSheet, presentPaymentSheet } = useStripe();
 
   const handlePayment = async () => {
     try {
       // Step 1: Fetch client secret from your backend
-      const response = await fetch(`${baseURL}create-payment-intent`, {
+      const response = await fetch(`${backendURL}create-payment-intent`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

@@ -36,6 +36,9 @@ import { withDecay } from "react-native-reanimated";
 import { storeColors } from "../theme";
 import StarRating from "./StarRating";
 
+import { backendURL } from '../config';
+
+
 
 
 const MainScreen = ({ route, navigation }) => {
@@ -50,12 +53,6 @@ const MainScreen = ({ route, navigation }) => {
   const [activeCategory, setActiveCategory] = useState("All");
 
   const { token } = route.params;
-
-
-  const backendURL =
-    Platform.OS === "android"
-      ? "http://10.0.2.2:5001/"
-      : "http://localhost:5001/";
 
   const fetchTours = async () => {
     try {

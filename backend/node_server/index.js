@@ -26,6 +26,14 @@ app.use(bodyParser.json());
 
 const stripe = new Stripe('sk_test_51QuLVCPlUnLIZAQCClpe9GrFfw1Ui8wJwxtRXx9RaLR0SrVpTKaygWEMIpXAsfTjROJDIO9xP8dn1BpQdaaTXGg700G1iaVNNx'); // Replace with your secret key
 
+
+// just to test whether the api is hosted on cloud
+app.get('/test-deployment', async (req, res) => {
+
+  res.status_code(200).json({"message": "successfully deployed on google cloud"})
+})
+
+
 // Endpoint to create a payment intent
 app.post('/create-payment-intent', async (req, res) => {
   const { amount } = req.body;

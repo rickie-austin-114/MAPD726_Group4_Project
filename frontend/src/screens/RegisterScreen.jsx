@@ -21,6 +21,8 @@ import {
 } from "@react-native-firebase/auth";
 
 import { app, auth } from "../../firebaseConfig";
+import { backendURL } from '../config';
+
 
 const RegisterScreen = ({ navigation }) => {
   const [name, setName] = useState("");
@@ -28,15 +30,12 @@ const RegisterScreen = ({ navigation }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const baseURL =
-    Platform.OS === "android"
-      ? "http://10.0.2.2:5001/"
-      : "http://localhost:5001/";
+
 
   const handleRegister = async () => {
     try {
 
-      const res = await axios.post(`${baseURL}api/register`, {
+      const res = await axios.post(`${backendURL}api/register`, {
         name,
         phone,
         email,

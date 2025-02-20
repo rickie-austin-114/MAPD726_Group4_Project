@@ -19,6 +19,7 @@ import {
   createUserWithEmailAndPassword,
   sendEmailVerification
 } from "@react-native-firebase/auth";
+import { backendURL } from '../config';
 
 import { app, auth } from "../../firebaseConfig";
 
@@ -29,14 +30,11 @@ const ViewProfileScreen = ({ navigation, route }) => {
   const { id } = route.params;
   const [userInfo, setUserInfo] = useState({});
 
-  const baseURL =
-    Platform.OS === "android"
-      ? "http://10.0.2.2:5001/"
-      : "http://localhost:5001/";
+
 
   const fetchUserInformation = async () => {
     try {
-      const user = await axios.get(`${baseURL}api/users/${id}`); //67b73ee28885fbfe362254a1
+      const user = await axios.get(`${backendURL}api/users/${id}`); //67b73ee28885fbfe362254a1
 
       console.log(user);
       console.log(user.data)

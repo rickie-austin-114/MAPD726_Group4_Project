@@ -34,6 +34,8 @@ import {
 } from "react-native-heroicons/solid";
 import { withDecay } from "react-native-reanimated";
 import { storeColors } from "../theme";
+import { backendURL } from '../config';
+
 
 const ViewFolderScreen = ({ route, navigation }) => {
   const [tours, setTours] = useState([]);
@@ -48,10 +50,6 @@ const ViewFolderScreen = ({ route, navigation }) => {
 
   const { id, name } = route.params;
 
-  const backendURL =
-    Platform.OS === "android"
-      ? "http://10.0.2.2:5001/"
-      : "http://localhost:5001/";
 
   ///folders
   const fetchTours = async () => {

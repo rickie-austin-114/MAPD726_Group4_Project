@@ -14,6 +14,8 @@ import axios from "axios";
 import "../../global.css";
 import { storeColors } from "../theme";
 import { SafeAreaView } from "react-native-safe-area-context";
+import { backendURL } from '../config';
+
 
 import {
   createUserWithEmailAndPassword,
@@ -26,10 +28,6 @@ import { app, auth } from "../../firebaseConfig";
 const ForgetPasswordScreen = ({ navigation }) => {
   const [email, setEmail] = useState("");
 
-  const baseURL =
-    Platform.OS === "android"
-      ? "http://10.0.2.2:5001/"
-      : "http://localhost:5001/";
 
   const handleRegister = async () => {
     try {

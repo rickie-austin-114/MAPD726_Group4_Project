@@ -21,6 +21,8 @@ import {
 } from "@react-native-firebase/auth";
 
 import { app, auth } from "../../firebaseConfig";
+import { backendURL } from '../config';
+
 
 const EditProfileScreen = ({ navigation, route }) => {
   const [name, setName] = useState("");
@@ -34,15 +36,11 @@ const EditProfileScreen = ({ navigation, route }) => {
 
   const { id } = route.params;
 
-  const baseURL =
-    Platform.OS === "android"
-      ? "http://10.0.2.2:5001/"
-      : "http://localhost:5001/";
 
   const fetchUserInformation = async () => {
     try {
 
-      const user = await axios.get(`${baseURL}api/users/${id}`); //67b73ee28885fbfe362254a1
+      const user = await axios.get(`${backendURL}api/users/${id}`); //67b73ee28885fbfe362254a1
 
 
       setName(user.data.name)
