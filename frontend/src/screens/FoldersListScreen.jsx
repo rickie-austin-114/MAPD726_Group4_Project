@@ -71,8 +71,8 @@ const FoldersListScreen = ({ route, navigation }) => {
     fetchTours();
   }, [activeCategory, isFocused]);
 
-  const viewFolder = (id) => {
-    navigation.navigate("ViewFolder", { id });
+  const viewFolder = (id, name) => {
+    navigation.navigate("ViewFolder", { id, name });
   };
 
 
@@ -169,7 +169,7 @@ const FoldersListScreen = ({ route, navigation }) => {
                 <View className="flex justify-center items-center">
                   <TouchableOpacity
                     onPress={() => {
-                      viewFolder(tour._id);
+                      viewFolder(tour._id, tour.name);
                     }}
                     className="bg-blue-400 p-2 px-4 rounded-full mr-2"
                   >

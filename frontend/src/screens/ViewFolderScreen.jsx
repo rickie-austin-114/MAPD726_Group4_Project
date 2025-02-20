@@ -46,14 +46,14 @@ const ViewFolderScreen = ({ route, navigation }) => {
   const categories = ["All", "Sightseeing", "Adventure", "Cultural"];
   const [activeCategory, setActiveCategory] = useState("All");
 
-  const { id } = route.params;
+  const { id, name } = route.params;
 
   const backendURL =
     Platform.OS === "android"
       ? "http://10.0.2.2:5001/"
       : "http://localhost:5001/";
 
-      ///folders
+  ///folders
   const fetchTours = async () => {
     try {
       //if (activeCategory === "All") {
@@ -68,7 +68,6 @@ const ViewFolderScreen = ({ route, navigation }) => {
   const toggleSwitch = () => {
     setListCritical(!listCritical);
   };
-
 
   useEffect(() => {
     fetchTours();
@@ -132,7 +131,12 @@ const ViewFolderScreen = ({ route, navigation }) => {
       </View>
       <Text> </Text>
 
-      <Text>id: {id}</Text>
+      <Text
+                          style={{ color: storeColors.text }}
+                    className="font-semibold"
+      >Folder Name: {name}</Text>
+            <Text> </Text>
+
 
       {error ? <Text style={styles.errorText}>{error}</Text> : null}
       <ScrollView style={{ height: 550 }} showsVerticalScrollIndicator={false}>
@@ -142,55 +146,52 @@ const ViewFolderScreen = ({ route, navigation }) => {
           //   ? "rgba(192, 132, 252,0.4)"
 
           if (tour.name.startsWith(search)) {
-                      return (
-                        <TouchableOpacity
-                          style={{ backgroundColor: bg }}
-                          className="mx-4 p-2 mb-2 flex-row rounded-3xl"
-                          key={index}
-                        >
-                          <Image
-                            source={{ uri: tour.profilePicture }}
-                            style={{ width: 80, height: 80 }}
-                            className="rounded-2xl"
-                          />
-                          <View className="flex-1 flex justify-center pl-3 space-y-3">
-                            <Text
-                              style={{ color: storeColors.text }}
-                              className="font-semibold"
-                            >
-                              {tour.name}
-                            </Text>
-                            <View className="flex-row space-x-3">
-                              <View className="flex-row space-x-1">
-                                <InformationCircleIcon
-                                  size="15"
-                                  className="text-blue-500"
-                                />
-          
-                                <Text className="text-xs text-gray-700">
-                                  Rating: {tour.ratings}
-                                </Text>
-                              </View>
-                            </View>
-                          </View>
-                          <View className="flex justify-center items-center">
-                            <TouchableOpacity
-                              onPress={() => {
-                                viewProfile(tour);
-                              }}
-                              className="bg-blue-400 p-2 px-4 rounded-full mr-2"
-                            >
-                              <MagnifyingGlassIcon color={storeColors.text} size="20" />
-                            </TouchableOpacity>
-          
-                          </View>
-          
-                        </TouchableOpacity>
-                      );
-                    } else {
-                      return <></>;
-                    }
+            return (
+              <TouchableOpacity
+                style={{ backgroundColor: bg }}
+                className="mx-4 p-2 mb-2 flex-row rounded-3xl"
+                key={index}
+              >
+                <Image
+                  source={{ uri: tour.profilePicture }}
+                  style={{ width: 80, height: 80 }}
+                  className="rounded-2xl"
+                />
+                <View className="flex-1 flex justify-center pl-3 space-y-3">
+                  <Text
+                    style={{ color: storeColors.text }}
+                    className="font-semibold"
+                  >
+                    {tour.name}
+                  </Text>
+                  <View className="flex-row space-x-3">
+                    <View className="flex-row space-x-1">
+                      <InformationCircleIcon
+                        size="15"
+                        className="text-blue-500"
+                      />
 
+                      <Text className="text-xs text-gray-700">
+                        Rating: {tour.ratings}
+                      </Text>
+                    </View>
+                  </View>
+                </View>
+                <View className="flex justify-center items-center">
+                  <TouchableOpacity
+                    onPress={() => {
+                      viewProfile(tour);
+                    }}
+                    className="bg-blue-400 p-2 px-4 rounded-full mr-2"
+                  >
+                    <MagnifyingGlassIcon color={storeColors.text} size="20" />
+                  </TouchableOpacity>
+                </View>
+              </TouchableOpacity>
+            );
+          } else {
+            return <></>;
+          }
         })}
       </ScrollView>
       <Text> </Text>
