@@ -14,6 +14,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "252067972937-deanof34pngbk3t11l6moonrg34rtpek.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.galaxies.firebase",
+            "certificate_hash": "5e1a561cf3cdf330c8ee303871ab45ecaa54cdc2"
+          }
+        },
+        {
           "client_id": "252067972937-0ta4jn0rtj24qlq6f1ak06taf88qekob.apps.googleusercontent.com",
           "client_type": 3
         }

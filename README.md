@@ -40,6 +40,26 @@ cd ..
 npx expo run:ios
 ```
 
+## Generate APK file for android (fast)
+```
+cd frontend
+npm install
+npx expo prebuild --clean
+cd android
+echo "sdk.dir=/Users/rickie/Library/Android/sdk" >> local.properties
+```
+replace /Users/rickie/Library/Android/sdk with your android sdk
+```
+./gradlew signingReport
+
+```
+copy the SHA1 signing and generate a new google-services.json file, download it and move it to ./frontend file
+
+```
+npx expo prebuild #do not add --clean tag
+npx expo run:android
+```
+
 
 ## Start frontend (Android)
 ```

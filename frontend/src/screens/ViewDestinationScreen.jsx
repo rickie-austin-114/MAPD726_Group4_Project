@@ -18,17 +18,15 @@ import "../../global.css";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { storeColors } from "../theme";
 import PaymentScreen from "./PaymentScreen";
+import { backendURL } from '../config';
+
 
 const ViewDestinationScreen = ({ route, navigation }) => {
 
   const [folder, setFolder] = useState([]);
   const { tour } = route.params;
 
-  const baseURL =
-    Platform.OS === "android"
-      ? "http://10.0.2.2:5001/"
-      : "http://localhost:5001/";
-
+  
 
       const fetchFolders = async () => {
         try {
