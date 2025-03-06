@@ -57,7 +57,9 @@ copy the SHA1 signing and generate a new google-services.json file, download it 
 
 ```
 npx expo prebuild #do not add --clean tag
-npx expo run:android
+
+
+
 ```
 
 
