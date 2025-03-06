@@ -4,7 +4,7 @@
     "slug": "frontend",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/tourvia.png",
+    "icon": "./assets/tourvia.jpg",
     "userInterfaceStyle": "light",
     "newArchEnabled": true,
     "splash": {
