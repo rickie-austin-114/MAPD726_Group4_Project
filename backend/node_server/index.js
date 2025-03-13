@@ -44,6 +44,9 @@ app.post('/create-payment-intent', async (req, res) => {
     const paymentIntent = await stripe.paymentIntents.create({
       amount: payment_amount, 
       currency: 'cad',
+      metadata: {
+        merchant_display_name: 'TourVia - MAPD726 Group 4', 
+    },
     });
 
     res.send({

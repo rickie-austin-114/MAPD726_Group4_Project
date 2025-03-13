@@ -9,16 +9,16 @@ import {
   signInWithCredential,
 } from "@react-native-firebase/auth";
 
-const firebaseConfig = {
-  apiKey: "AIzaSyA-VbIj-dbuEzOhynEXHS4lh_RfYqJpi10",
-  authDomain: "mapd726-group4-project.firebaseapp.com",
-  projectId: "mapd726-group4-project",
-  storageBucket: "mapd726-group4-project.firebasestorage.app",
-  messagingSenderId: "252067972937",
-  appId: "1:252067972937:web:98f836018471338a04bc98",
-  measurementId: "G-ENN7S2K535"
-};
 
+const firebaseConfig = {
+  apiKey: "AIzaSyD6YwgGgxoZIqTLLLARRvzPJ2EX7muNVgo",
+  authDomain: "authentication1-1f950.firebaseapp.com",
+  projectId: "authentication1-1f950",
+  storageBucket: "authentication1-1f950.firebasestorage.app",
+  messagingSenderId: "518815540074",
+  appId: "1:518815540074:web:52b0ab4804b97f009d7b13",
+  measurementId: "G-JX7SBC3G33"
+};
 
 const app = initializeApp(firebaseConfig);
 

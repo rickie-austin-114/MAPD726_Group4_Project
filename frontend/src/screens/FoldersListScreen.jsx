@@ -14,6 +14,7 @@ import {
   TouchableOpacity,
   Image,
   TextInput,
+  Dimensions,
 } from "react-native";
 import axios from "axios";
 import { useIsFocused } from "@react-navigation/native";
@@ -38,6 +39,10 @@ import { backendURL } from '../config';
 
 
 const FoldersListScreen = ({ route, navigation }) => {
+
+  const screenHeight = Dimensions.get('window').height;
+
+
   const [tours, setTours] = useState([]);
   const [error, setError] = useState("");
   const [listCritical, setListCritical] = useState(false);
@@ -143,7 +148,7 @@ const FoldersListScreen = ({ route, navigation }) => {
       </View>
       <Text> </Text>
       {error ? <Text style={styles.errorText}>{error}</Text> : null}
-      <ScrollView style={{ height: 550 }} showsVerticalScrollIndicator={false}>
+      <ScrollView style={{ height: screenHeight * 0.75 }} showsVerticalScrollIndicator={false}>
         {tours.map((tour, index) => {
           let bg = "rgba(255,255,255,0.4)";
             // tour.condition == "Critical"

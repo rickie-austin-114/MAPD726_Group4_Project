@@ -24,6 +24,7 @@ function PaymentScreen(props) {
       // Step 2: Initialize the payment sheet
       const { error } = await initPaymentSheet({
         paymentIntentClientSecret: clientSecret,
+        merchantDisplayName: "TourVia - MAPD726 Gruop 4",
       });
 
       if (error) {

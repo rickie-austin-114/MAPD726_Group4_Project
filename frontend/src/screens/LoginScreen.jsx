@@ -72,6 +72,9 @@ const LoginScreen = ({ navigation }) => {
       await GoogleSignin.hasPlayServices(); // Ensure that Google Play services are available
       const userInfo = await GoogleSignin.signIn(); // Perform Google Sign-In
 
+      Alert.alert("wait 1");
+
+
       // Step 2: Get Google ID token and access token
       const idToken = userInfo.data.idToken;
 
@@ -87,12 +90,18 @@ const LoginScreen = ({ navigation }) => {
       const name = user["name"];
       const profilePicture = user["photo"]
 
+      Alert.alert(email, name, profilePicture, idToken);
+
+
 
       const res = await axios.post(`${backendURL}api/users`, {
         name,
         email,
         profilePicture
       });
+
+      Alert.alert("Backend Successful!");
+
 
 
       if (idToken !== null) {
@@ -105,6 +114,8 @@ const LoginScreen = ({ navigation }) => {
       }
     } catch (error) {
       console.error("Error during Google sign-in:", error);
+
+      Alert.alert("Error during Google sign-in:", error);
     }
   };
 

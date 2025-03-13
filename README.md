@@ -82,15 +82,32 @@ copy the SHA1 signing and generate a new google-services.json file
 npx expo run:android
 ```
 
+## Common Issues
+```
+npx expo doctor # check whether the versions of packages are compatible, change the package version if needed
+
+```
+
+open the ios directory, open .xcodeproject in xcode and 
+
+File -> Workspace Settings -> Default Location
+
+to
+
+File -> Workspace Settings -> Workspace-relative Location
+
+
+https://stackoverflow.com/questions/79118572/xcode-16-and-ios-18-project-not-compiling
+
 ## Links
 Datasets: https://www.kaggle.com/datasets/rkiattisak/traveler-trip-data?resource=download
 
 ## Development Environment:
-Node.js v22.9.0
+Node.js: v23.7.0
 Expo: 6.3.12
 
 # Emulator
-iOS: 18.2
+iOS: 18.3
 
 # Hardware info
 MacOS: 15.3.1

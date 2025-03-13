@@ -14,6 +14,7 @@ import {
   TouchableOpacity,
   Image,
   TextInput,
+  Dimensions,
 } from "react-native";
 import axios from "axios";
 import { useIsFocused } from "@react-navigation/native";
@@ -30,18 +31,18 @@ import {
   PlusIcon,
   PencilSquareIcon,
   MagnifyingGlassIcon,
-  StarIcon
+  StarIcon,
 } from "react-native-heroicons/solid";
-import { withDecay } from "react-native-reanimated";
 import { storeColors } from "../theme";
 import StarRating from "./StarRating";
 
-import { backendURL } from '../config';
+import { backendURL } from "../config";
 
-
+const { height } = Dimensions.get('window'); // Get the screen height
 
 
 const MainScreen = ({ route, navigation }) => {
+
   const [tours, setTours] = useState([]);
   const [error, setError] = useState("");
   const [listCritical, setListCritical] = useState(false);
@@ -57,8 +58,8 @@ const MainScreen = ({ route, navigation }) => {
   const fetchTours = async () => {
     try {
       //if (activeCategory === "All") {
-        const response = await axios.get(`${backendURL}api/tours`);
-        setTours(response.data);
+      const response = await axios.get(`${backendURL}api/tours`);
+      setTours(response.data);
       //}
     } catch (error) {
       setError(error.response?.data?.message || "An error occurred");
@@ -82,9 +83,8 @@ const MainScreen = ({ route, navigation }) => {
   };
 
   const navigateToProfile = () => {
-    navigation.navigate("ViewProfile", {id: "67b73ee28885fbfe362254a1"});
+    navigation.navigate("ViewProfile", { id: "67b73ee28885fbfe362254a1" });
   };
-
 
   return (
     <LinearGradient
@@ -95,17 +95,13 @@ const MainScreen = ({ route, navigation }) => {
         <View className="flex-row justify-between items-center px-4">
           <Bars3CenterLeftIcon color={storeColors.text} size="30" />
 
-
           <TouchableOpacity onPress={navigateToProfile}>
             <UserCircleIcon color={storeColors.text} size="30" />
-</TouchableOpacity>
-
-          <TouchableOpacity onPress={navigateToFavorites}>
-
-            <StarIcon color={storeColors.text} size="30" />
           </TouchableOpacity>
 
-      
+          <TouchableOpacity onPress={navigateToFavorites}>
+            <StarIcon color={storeColors.text} size="30" />
+          </TouchableOpacity>
 
           <BellIcon color={storeColors.text} size="30" />
         </View>
@@ -152,17 +148,19 @@ const MainScreen = ({ route, navigation }) => {
               );
             }
           })}
-
         </ScrollView>
       </View>
       <Text> </Text>
       {error ? <Text style={styles.errorText}>{error}</Text> : null}
-      <ScrollView style={{ height: 550 }} showsVerticalScrollIndicator={false}>
+      <ScrollView
+        // style={{ height: 1000 }}
+        showsVerticalScrollIndicator={true}
+      >
         {tours.map((tour, index) => {
           let bg = "rgba(255,255,255,0.4)";
-            // tour.condition == "Critical"
-            //   ? "rgba(192, 132, 252,0.4)"
-              
+          // tour.condition == "Critical"
+          //   ? "rgba(192, 132, 252,0.4)"
+
           if (tour.name.startsWith(search)) {
             return (
               <TouchableOpacity
@@ -189,14 +187,9 @@ const MainScreen = ({ route, navigation }) => {
                         className="text-blue-500"
                       />
 
+                      <Text className="text-xs text-gray-700">Rating:</Text>
 
-
-                      <Text className="text-xs text-gray-700">
-                        Rating:
-                      </Text>
-
-
-                        <StarRating numberOfStars={tour.ratings} />
+                      <StarRating numberOfStars={tour.ratings} />
                       {}
                     </View>
                   </View>
@@ -210,9 +203,7 @@ const MainScreen = ({ route, navigation }) => {
                   >
                     <MagnifyingGlassIcon color={storeColors.text} size="20" />
                   </TouchableOpacity>
-
                 </View>
-
               </TouchableOpacity>
             );
           } else {
@@ -285,7 +276,7 @@ const styles = StyleSheet.create({
     alignItems: "center", // Centers buttons vertically
   },
   starContainer: {
-    flexDirection: 'row',
+    flexDirection: "row",
   },
 });
 
