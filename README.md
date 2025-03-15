@@ -45,6 +45,7 @@ Create an account on Expo Application Service https://expo.dev/eas
 ```
 cd frontend
 npm install
+eas init
 eas build 
 ```
 You will need to login to you account for the first time, and when select platform pick Android
