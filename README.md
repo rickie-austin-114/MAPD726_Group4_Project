@@ -41,13 +41,14 @@ npx expo run:ios
 ```
 
 ## Generate APK file for android (fast)
+Create an account on Expo Application Service https://expo.dev/eas
 ```
 cd frontend
 npm install
-npx expo prebuild --clean
-cd android
-echo "sdk.dir=/Users/rickie/Library/Android/sdk" >> local.properties
+eas build 
 ```
+You will need to login to you account for the first time, and when select platform pick Android
+
 replace /Users/rickie/Library/Android/sdk with your android sdk
 ```
 ./gradlew signingReport
