@@ -53,7 +53,7 @@ const MainScreen = ({ route, navigation }) => {
   const categories = ["All", "Sightseeing", "Adventure", "Cultural"];
   const [activeCategory, setActiveCategory] = useState("All");
 
-  const { token } = route.params;
+  //const { token } = route.params;
 
   const fetchTours = async () => {
     try {
