@@ -1,10 +1,11 @@
-import React from 'react';
-import { StyleSheet, View } from 'react-native';
-import MapView, { Marker } from 'react-native-maps';
+import React from "react";
+import { StyleSheet, View } from "react-native";
+import MapView, { Marker } from "react-native-maps";
 
 const MapScreen = ({ route, navigation }) => {
   // Coordinates of the Eiffel Tower
-  const eiffelTowerCoordinates = {
+
+  const attractionCoordinates = {
     latitude: 48.8584,
     longitude: 2.2945,
   };
@@ -14,14 +15,14 @@ const MapScreen = ({ route, navigation }) => {
       <MapView
         style={styles.map}
         initialRegion={{
-          latitude: eiffelTowerCoordinates.latitude,
-          longitude: eiffelTowerCoordinates.longitude,
+          latitude: attractionCoordinates.latitude,
+          longitude: attractionCoordinates.longitude,
           latitudeDelta: 0.0922,
           longitudeDelta: 0.0421,
         }}
       >
         <Marker
-          coordinate={eiffelTowerCoordinates}
+          coordinate={attractionCoordinates}
           title="Eiffel Tower"
           description="Iconic landmark in Paris"
         />

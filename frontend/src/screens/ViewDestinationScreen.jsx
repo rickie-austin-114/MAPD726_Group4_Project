@@ -12,6 +12,7 @@ import {
   Text,
   Pressable,
   ScrollView,
+  FlatList,
   TouchableOpacity,
 } from "react-native";
 import axios from "axios";
@@ -19,35 +20,64 @@ import "../../global.css";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { storeColors } from "../theme";
 import PaymentScreen from "./PaymentScreen";
-import { backendURL } from '../config';
-import { MapIcon } from "react-native-heroicons/solid";
-
+import { backendURL } from "../config";
+import { MapIcon, InformationCircleIcon } from "react-native-heroicons/solid";
 
 const ViewDestinationScreen = ({ route, navigation }) => {
-
   const [folder, setFolder] = useState([]);
+  const [comments, setComments] = useState([]);
+
+  const [userComment, setUserComment] = useState("");
+
   const { tour } = route.params;
 
-  
+  const fetchComments = async () => {
+    try {
+      const url = `${backendURL}api/comments/${tour._id}`;
+      console.log(url);
+      const response = await axios.get(url);
+      console.log(response.data);
+      setComments(response.data);
+    } catch (error) {
+      setError(error.response?.data?.message || "An error occurred");
+    }
+  };
+
+  const addComments = async () => {
+    try {
+      const url = `${backendURL}api/comments`;
+      const data = {
+        content: userComment,
+        author: "Rickie",
+        tour: tour._id,
+        // Add more key-value pairs as needed
+      };
+      const response = await axios.post(url, data);
+
+      await fetchComments();
+    } catch (error) {
+      setError(error.response?.data?.message || "An error occurred");
+    }
+  };
+
   const viewMap = (tour) => {
     navigation.navigate("Map", { tour });
   };
 
+  const fetchFolders = async () => {
+    try {
+      //if (activeCategory === "All") {
+      const response = await axios.get(`${backendURL}folders`);
+      setFolder(response.data);
+      //}
+    } catch (error) {
+      setError(error.response?.data?.message || "An error occurred");
+    }
+  };
 
-      const fetchFolders = async () => {
-        try {
-          //if (activeCategory === "All") {
-            const response = await axios.get(`${backendURL}folders`);
-            setFolder(response.data);
-          //}
-        } catch (error) {
-          setError(error.response?.data?.message || "An error occurred");
-        }
-      };
-
-      useEffect(() => {
-        fetchFolders()
-      }, [])
+  useEffect(() => {
+    fetchComments();
+  }, []);
   return (
     // <View style={styles.container}>
     //   <TextInput placeholder="Email" value={email} onChangeText={setEmail} />
@@ -83,11 +113,9 @@ const ViewDestinationScreen = ({ route, navigation }) => {
 
           <Text> </Text>
 
-
-                    <TouchableOpacity onPress={viewMap}>
-                      <MapIcon color={storeColors.text} size="30" />
-                    </TouchableOpacity>
-          
+          <TouchableOpacity onPress={viewMap}>
+            <MapIcon color={storeColors.text} size="30" />
+          </TouchableOpacity>
 
           <Text> </Text>
 
@@ -100,8 +128,41 @@ const ViewDestinationScreen = ({ route, navigation }) => {
           <Text> </Text>
 
           <Text className="text-gray-700 ml-4">{tour.description}</Text>
+
           <Text> </Text>
 
+          <View style={styles.container}>
+            <FlatList
+              data={comments}
+              keyExtractor={(item) => item._id}
+              renderItem={({ item }) => (
+                <View style={styles.commentContainer}>
+                  <Text style={styles.author}>{item.author}</Text>
+                  <Text style={styles.content}>{item.content}</Text>
+                </View>
+              )}
+            />
+          </View>
+          <Text> </Text>
+
+
+          <TextInput
+            className="p-4 bg-gray-100 text-gray-700 rounded-2xl mb-3"
+            placeholder="comments"
+            value={userComment}
+            onChangeText={setUserComment}
+          />
+          <Text> </Text>
+
+          <View
+            style={{ flex: 1, justifyContent: "center", alignItems: "center" }}
+          >
+            <Pressable onPress={addComments} style={styles.pressable}>
+              <Text style={styles.text}>Comment</Text>
+            </Pressable>
+          </View>
+
+          <Text> </Text>
 
 
           <StripeProvider publishableKey="pk_test_51QuLVCPlUnLIZAQCnwrRbSpCJhgJZsH1PLPQEh9Jt9YUlJauxShMIQbxNKdKYmRkSP83OSsJeZQdsDwrK5IYwjvi00d0lp5KXm">
@@ -135,6 +196,33 @@ const styles = StyleSheet.create({
   text: {
     color: "white",
     fontSize: 16,
+  },
+  buttonPressed: {
+    opacity: 0.7, // Change opacity when pressed
+  },
+  buttonText: {
+    color: "#000000",
+    fontSize: 16,
+  },
+  pressable: {
+    backgroundColor: "#6200ee",
+    padding: 15,
+    borderRadius: 5,
+    alignItems: "center",
+  },
+  commentContainer: {
+    marginBottom: 15,
+    padding: 10,
+    backgroundColor: "#f9f9f9",
+    borderRadius: 5,
+    borderColor: "#ddd",
+    borderWidth: 1,
+  },
+  author: {
+    fontWeight: "bold",
+  },
+  content: {
+    marginTop: 5,
   },
 });
 
