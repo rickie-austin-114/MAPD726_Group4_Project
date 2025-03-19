@@ -29,6 +29,7 @@ const usersRoutes = require('./routes/usersRoutes');
 const paymentRoutes = require('./routes/paymentRoutes');
 const authRoutes = require('./routes/authRoutes');
 const toursRoutes = require('./routes/toursRoutes');
+const commentsRoutes = require('./routes/commentsRoutes');
 const foldersRoutes = require('./routes/foldersRoutes');
 
 // just to test whether the api is hosted on cloud
@@ -51,6 +52,7 @@ app.use("/api/users", usersRoutes)
 app.use("/api/payment", paymentRoutes)
 app.use("/api/auth", authRoutes)
 app.use("/api/tours", toursRoutes)
+app.use("/api/comments", commentsRoutes)
 app.use("/folders", foldersRoutes)
 
 

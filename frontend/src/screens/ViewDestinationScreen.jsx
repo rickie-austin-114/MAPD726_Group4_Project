@@ -12,6 +12,7 @@ import {
   Text,
   Pressable,
   ScrollView,
+  TouchableOpacity,
 } from "react-native";
 import axios from "axios";
 import "../../global.css";
@@ -19,6 +20,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { storeColors } from "../theme";
 import PaymentScreen from "./PaymentScreen";
 import { backendURL } from '../config';
+import { MapIcon } from "react-native-heroicons/solid";
 
 
 const ViewDestinationScreen = ({ route, navigation }) => {
@@ -27,6 +29,10 @@ const ViewDestinationScreen = ({ route, navigation }) => {
   const { tour } = route.params;
 
   
+  const viewMap = (tour) => {
+    navigation.navigate("Map", { tour });
+  };
+
 
       const fetchFolders = async () => {
         try {
@@ -74,6 +80,14 @@ const ViewDestinationScreen = ({ route, navigation }) => {
           >
             {tour.name}
           </Text>
+
+          <Text> </Text>
+
+
+                    <TouchableOpacity onPress={viewMap}>
+                      <MapIcon color={storeColors.text} size="30" />
+                    </TouchableOpacity>
+          
 
           <Text> </Text>
 

@@ -1,5 +1,17 @@
 # MAPD726 Group 1
 
+
+## Generate APK file for android (fast)
+Create an account on Expo Application Service https://expo.dev/eas
+```
+cd frontend
+npm install
+eas init
+eas build 
+```
+You will need to login to you account for the first time, and when select platform pick Android
+
+
 ## Start Node.js backend (without docker)
 ```
 cd backend/node_server
@@ -46,17 +58,7 @@ cd ..
 npx expo run:ios
 ```
 
-## Generate APK file for android (fast)
-Create an account on Expo Application Service https://expo.dev/eas
-```
-cd frontend
-npm install
-eas init
-eas build 
-```
-You will need to login to you account for the first time, and when select platform pick Android
 
-replace /Users/rickie/Library/Android/sdk with your android sdk
 ```
 ./gradlew signingReport
 

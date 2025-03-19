@@ -2,7 +2,7 @@ import React from 'react';
 import { StyleSheet, View } from 'react-native';
 import MapView, { Marker } from 'react-native-maps';
 
-const MapScreen = () => {
+const MapScreen = ({ route, navigation }) => {
   // Coordinates of the Eiffel Tower
   const eiffelTowerCoordinates = {
     latitude: 48.8584,

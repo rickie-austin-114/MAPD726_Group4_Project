@@ -14,6 +14,7 @@ import FoldersListScreen from "./src/screens/FoldersListScreen";
 import ViewProfileScreen from "./src/screens/ViewProfileScreen";
 import BottomBar from "./src/bottom_bar/BottomBar";
 import MapScreen from "./src/screens/MapScreen";
+import ChatBotScreen from "./src/screens/ChatBotScreen";
 
 const Stack = createNativeStackNavigator();
 
