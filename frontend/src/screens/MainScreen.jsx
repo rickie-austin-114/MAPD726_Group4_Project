@@ -40,7 +40,6 @@ import { backendURL } from "../config";
 
 const { height } = Dimensions.get('window'); // Get the screen height
 
-
 const MainScreen = ({ route, navigation }) => {
 
   const [tours, setTours] = useState([]);
@@ -57,10 +56,16 @@ const MainScreen = ({ route, navigation }) => {
 
   const fetchTours = async () => {
     try {
-      //if (activeCategory === "All") {
-      const response = await axios.get(`${backendURL}api/tours`);
+      if (activeCategory === "All") {
+        const url = `${backendURL}api/tours`
+      const response = await axios.get(url);
       setTours(response.data);
-      //}
+      } else {
+        const url = `${backendURL}api/tours/category?category=${activeCategory}`
+        console.log(url)
+        const response = await axios.get(url);
+        setTours(response.data);
+      }
     } catch (error) {
       setError(error.response?.data?.message || "An error occurred");
     }

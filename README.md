@@ -14,6 +14,12 @@ docker build -t node_api .
 docker run -p 5001:5001 node_api
 ```
 
+## Publish Node.js backend to google cloud
+```
+cd backend/node_server
+gcloud app deploy
+```
+
 ## Start Python backend
 ```
 cd backend/python_server

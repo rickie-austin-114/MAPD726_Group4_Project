@@ -12,7 +12,7 @@ function PaymentScreen(props) {
   const handlePayment = async () => {
     try {
       // Step 1: Fetch client secret from your backend
-      const response = await fetch(`${backendURL}create-payment-intent`, {
+      const response = await fetch(`${backendURL}api/payment/create-payment-intent`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -24,7 +24,7 @@ function PaymentScreen(props) {
       // Step 2: Initialize the payment sheet
       const { error } = await initPaymentSheet({
         paymentIntentClientSecret: clientSecret,
-        merchantDisplayName: "TourVia - MAPD726 Gruop 4",
+        merchantDisplayName: "TourVia - MAPD726 Group 4",
       });
 
       if (error) {

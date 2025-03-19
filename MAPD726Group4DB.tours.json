@@ -1,0 +1,96 @@
+[{
+  "_id": {
+    "$oid": "67b694432757a3f4c7e54cd5"
+  },
+  "name": "Paris",
+  "ratings": 4,
+  "price": 3799,
+  "duration": "6 days",
+  "description": "Paris, the City of Light, captivates with its iconic landmarks, rich history, and artistic charm. Visitors can marvel at the Eiffel Tower, stroll along the Seine, and explore world-class museums like the Louvre. With charming cafés, exquisite cuisine, and vibrant neighborhoods, Paris offers an unforgettable romantic escape for travelers.",
+  "itinerary": null,
+  "inclusions": null,
+  "exclusions": null,
+  "profilePicture": "https://149990825.v2.pressablecdn.com/wp-content/uploads/2023/09/Paris1.jpg",
+  "condition": "Normal",
+  "updatedAt": {
+    "$date": "2025-02-20T02:32:35.778Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "67b694ac2757a3f4c7e54cd7"
+  },
+  "name": "Tokyo",
+  "ratings": 5,
+  "price": 2999,
+  "duration": "5 days",
+  "description": "Tokyo, Japan's vibrant capital, blends tradition and modernity. Visitors can explore historic temples, bustling markets, and futuristic skyscrapers. Renowned for its cuisine, shopping, and culture, Tokyo offers unique experiences like cherry blossom viewing and sumo wrestling. Its efficient transport system makes navigating this dynamic metropolis both easy and enjoyable.",
+  "itinerary": null,
+  "inclusions": null,
+  "exclusions": null,
+  "profilePicture": "https://t3.ftcdn.net/jpg/02/65/23/70/360_F_265237090_Muthvb72m2POYFjyx7F5UCQLh9JdBtKN.jpg",
+  "condition": "Normal",
+  "updatedAt": {
+    "$date": "2025-02-20T02:34:20.611Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "67b694d32757a3f4c7e54cd9"
+  },
+  "name": "Seoul",
+  "ratings": 5,
+  "price": 2299,
+  "duration": "4 days",
+  "description": "Seoul, a vibrant blend of tradition and modernity, offers bustling markets, historic palaces, and cutting-edge technology. Explore Gyeongbokgung Palace, shop in Myeongdong, and savor delicious street food. The city’s dynamic nightlife, rich culture, and beautiful parks make it a captivating destination for travelers seeking adventure and history.",
+  "itinerary": null,
+  "inclusions": null,
+  "exclusions": null,
+  "profilePicture": "https://cdn.britannica.com/57/75757-050-122EC2ED/Changgyong-Palace-background-Seoul.jpg",
+  "condition": "Normal",
+  "updatedAt": {
+    "$date": "2025-02-20T02:34:59.216Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "67b6951e2757a3f4c7e54cdb"
+  },
+  "name": "Bali",
+  "ratings": 5,
+  "price": 5399,
+  "duration": "11 days",
+  "description": "Bali, Indonesia's enchanting island, is renowned for its lush landscapes, vibrant culture, and stunning beaches. Visitors can explore ancient temples, indulge in world-class cuisine, and relax in luxurious resorts. With opportunities for surfing, yoga retreats, and cultural experiences, Bali offers a perfect blend of adventure and tranquility for every traveler.",
+  "itinerary": null,
+  "inclusions": null,
+  "exclusions": null,
+  "profilePicture": "https://media.digitalnomads.world/wp-content/uploads/2021/01/20120709/bali-for-digital-nomads-1024x683.jpg",
+  "condition": "Normal",
+  "updatedAt": {
+    "$date": "2025-02-20T02:36:14.831Z"
+  },
+  "__v": 0,
+  "category": "Adventure"
+},
+{
+  "_id": {
+    "$oid": "67b6954c2757a3f4c7e54cdd"
+  },
+  "name": "Bangkok",
+  "ratings": 4,
+  "price": 1399,
+  "duration": "3 days",
+  "description": "Bangkok, Thailand's bustling capital, is a vibrant mix of tradition and modernity. Visitors can explore ornate temples like Wat Arun, shop in lively markets, and savor flavorful street food. The city's dynamic nightlife, rich cultural heritage, and friendly locals create an unforgettable experience, making Bangkok a top destination for travelers.",
+  "itinerary": null,
+  "inclusions": null,
+  "exclusions": null,
+  "profilePicture": "https://static.independent.co.uk/2025/01/03/14/newFile-12.jpg",
+  "condition": "Normal",
+  "updatedAt": {
+    "$date": "2025-02-20T02:37:00.242Z"
+  },
+  "__v": 0
+}]

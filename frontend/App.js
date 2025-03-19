@@ -12,19 +12,24 @@ import ViewDestinationScreen from './src/screens/ViewDestinationScreen';
 import ViewFolderScreen from "./src/screens/ViewFolderScreen";
 import FoldersListScreen from "./src/screens/FoldersListScreen";
 import ViewProfileScreen from "./src/screens/ViewProfileScreen";
+import BottomBar from "./src/bottom_bar/BottomBar";
+import MapScreen from "./src/screens/MapScreen";
 
 const Stack = createNativeStackNavigator();
 
 const App = () => {
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="Main">
+      <Stack.Navigator initialRouteName="BottomBar">
         <Stack.Screen name="Login" component={LoginScreen} />
         <Stack.Screen name="Register" component={RegisterScreen} />
         <Stack.Screen name="ForgetPassword" component={ForgetPasswordScreen} />
         <Stack.Screen name="ResetPassword" component={ResetPasswordScreen} />
 
-        <Stack.Screen name="Main" component={MainScreen} />
+        <Stack.Screen name="BottomBar" component={BottomBar} />
+        <Stack.Screen name="Map" component={MapScreen} />
+
+
         <Stack.Screen name="ViewDestination" component={ViewDestinationScreen} />
 
         <Stack.Screen name="ViewFolder" component={ViewFolderScreen} />

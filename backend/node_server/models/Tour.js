@@ -11,7 +11,9 @@ const tourSchema = new mongoose.Schema({
   inclusions: { type: String, default: null },
   exclusions: { type: String, default: null },
   profilePicture: { type: String, default: null },
-  condition: { type: String, default: "Normal" },
+  category: { type: String, default: null },
+  latitude: { type: Number, default: null },
+  longitude: { type: Number, default: null },
   updatedAt: { type: Date, default: Date.now }
 });
 
