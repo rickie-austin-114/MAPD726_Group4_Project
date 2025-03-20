@@ -15,9 +15,57 @@ import ViewProfileScreen from "./src/screens/ViewProfileScreen";
 import BottomBar from "./src/bottom_bar/BottomBar";
 import MapScreen from "./src/screens/MapScreen";
 
+import React, { useEffect } from 'react';
+import { Alert } from 'react-native';
+import messaging from '@react-native-firebase/messaging';
+
+// Subscribe to a topic
+function subscribeToTopic() {
+    messaging()
+        .subscribeToTopic('allDevices')
+        .then(() => console.log('Subscribed to topic: allDevices'))
+        .catch((err) => console.log('Failed to subscribe to topic:', err));
+}
+
+async function createNotificationChannel() {
+  if (Platform.OS === 'android') {
+      await notifee.createChannel({
+          id: 'default',
+          name: 'Default Channel',
+          importance: AndroidImportance.HIGH,
+          sound: 'default',
+      });
+      console.log('Notification channel created');
+  }
+}
+
+// Handle foreground notifications
+function handleForegroundNotification() {
+    return messaging().onMessage(async (remoteMessage) => {
+        Alert.alert('New Notification', remoteMessage.notification?.body);
+    });
+}
+
+// Handle background/quit notifications
+function handleBackgroundNotification() {
+    messaging().setBackgroundMessageHandler(async (remoteMessage) => {
+        console.log('Message handled in the background!', remoteMessage);
+    });
+}
+
 const Stack = createNativeStackNavigator();
 
 const App = () => {
+
+  useEffect(() => {
+    createNotificationChannel();
+    subscribeToTopic(); // Subscribe to the topic
+    const unsubscribeForeground = handleForegroundNotification();
+    handleBackgroundNotification();
+
+    return unsubscribeForeground; // Cleanup on unmount
+}, []);
+
   return (
     <NavigationContainer>
       <Stack.Navigator initialRouteName="BottomBar">
