@@ -14,13 +14,12 @@ import ViewProfileScreen from "./src/screens/ViewProfileScreen";
 import BottomBar from "./src/bottom_bar/BottomBar";
 import MapScreen from "./src/screens/MapScreen";
 
-import React, { useEffect } from 'react';
 import { Alert, Platform } from 'react-native';
 import messaging from '@react-native-firebase/messaging';
 
 
 import React, { useState } from 'react';
-import { View, TextInput, Button, Alert, Platform } from 'react-native';
+import { View, TextInput, Button} from 'react-native';
 import notifee, { AndroidImportance } from '@notifee/react-native';
 
 
