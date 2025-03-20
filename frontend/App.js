@@ -1,6 +1,5 @@
 // App.tsx
 import "./global.css"
-import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import MainScreen from './src/screens/MainScreen';
@@ -16,16 +15,20 @@ import BottomBar from "./src/bottom_bar/BottomBar";
 import MapScreen from "./src/screens/MapScreen";
 
 import React, { useEffect } from 'react';
-import { Alert } from 'react-native';
+import { Alert, Platform } from 'react-native';
 import messaging from '@react-native-firebase/messaging';
 
-// Subscribe to a topic
-function subscribeToTopic() {
-    messaging()
-        .subscribeToTopic('allDevices')
-        .then(() => console.log('Subscribed to topic: allDevices'))
-        .catch((err) => console.log('Failed to subscribe to topic:', err));
-}
+
+import React, { useState } from 'react';
+import { View, TextInput, Button, Alert, Platform } from 'react-native';
+import notifee, { AndroidImportance } from '@notifee/react-native';
+
+
+
+
+
+
+
 
 async function createNotificationChannel() {
   if (Platform.OS === 'android') {
@@ -57,13 +60,66 @@ const Stack = createNativeStackNavigator();
 
 const App = () => {
 
-  useEffect(() => {
-    createNotificationChannel();
-    subscribeToTopic(); // Subscribe to the topic
-    const unsubscribeForeground = handleForegroundNotification();
-    handleBackgroundNotification();
+      // Create a notification channel (Android only)
+      const createNotificationChannel = async () => {
+        if (Platform.OS === 'android') {
+            await notifee.createChannel({
+                id: 'default',
+                name: 'Default Channel',
+                importance: AndroidImportance.HIGH,
+                sound: 'default',
+            });
+            console.log('Notification channel created');
+        }
+    };
 
-    return unsubscribeForeground; // Cleanup on unmount
+    // Request notification permissions (iOS only)
+    const requestNotificationPermission = async () => {
+        if (Platform.OS === 'ios') {
+            const settings = await notifee.requestPermission();
+            if (settings.authorizationStatus >= 1) {
+                console.log('Notification permission granted');
+            } else {
+                console.log('Notification permission denied');
+            }
+        }
+    };
+
+    // Display a notification with the user's input text
+    const showNotification = async () => {
+        if (inputText.trim() === '') {
+            Alert.alert('Error', 'Please enter some text');
+            return;
+        }
+
+        // Create the notification channel (Android only)
+        await createNotificationChannel();
+
+        // Request notification permissions (iOS only)
+        await requestNotificationPermission();
+
+        // Display the notification
+        await notifee.displayNotification({
+            title: 'TourVia',
+            body: "Welcome to TourVia",
+            android: {
+                channelId: 'default',
+                importance: AndroidImportance.HIGH,
+            },
+            ios: {
+                sound: 'default',
+            },
+        });
+
+        console.log('Notification displayed');
+    };
+
+
+
+  useEffect(() => {
+
+    showNotification()
+
 }, []);
 
   return (
