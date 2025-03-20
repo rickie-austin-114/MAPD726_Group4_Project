@@ -39,8 +39,16 @@ import StarRating from "./StarRating";
 import { backendURL } from "../config";
 
 const { height } = Dimensions.get('window'); // Get the screen height
+import notifee, { AndroidImportance } from "@notifee/react-native";
 
 const MainScreen = ({ route, navigation }) => {
+
+
+    
+
+
+
+      
 
   const [tours, setTours] = useState([]);
   const [error, setError] = useState("");

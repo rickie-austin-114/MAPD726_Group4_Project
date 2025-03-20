@@ -10,7 +10,10 @@ import ChatBotScreen from "../screens/ChatBotScreen";
 
 const Tab = createBottomTabNavigator();
 
+
 function BottomBar({ route, navigation }) {
+
+
   return (
       <Tab.Navigator>
         <Tab.Screen name="Main" component={MainScreen} />
