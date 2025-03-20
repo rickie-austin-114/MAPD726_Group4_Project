@@ -15,9 +15,9 @@
     "ios": {
       "supportsTablet": true,
       "googleServicesFile": "./GoogleService-Info.plist",
-      "bundleIdentifier": "com.galaxies.firebase",      
+      "bundleIdentifier": "com.galaxies.firebase",
       "config": {
-        "googleMapsApiKey":  "process.env.AIzaSyBLuYogNvll8keLZ46ReXFcv9HKNHai714"
+        "googleMapsApiKey": "process.env.AIzaSyBLuYogNvll8keLZ46ReXFcv9HKNHai714"
       }
     },
     "android": {
@@ -43,12 +43,31 @@
             "useFrameworks": "static"
           }
         }
+      ],
+      [      
+        "react-native-share",
+        {
+          "ios": [
+            "fb",
+            "instagram",
+            "twitter",
+            "tiktoksharesdk"
+          ],
+          "android": [
+            "com.facebook.katana",
+            "com.instagram.android",
+            "com.twitter.android",
+            "com.zhiliaoapp.musically"
+          ],
+          "enableBase64ShareAndroid": true
+        }
       ]
     ],
     "extra": {
       "eas": {
         "projectId": "69e671a0-711f-48c7-91c8-5b5af504e773"
       }
-    }
+    },
+    "owner": "capstone3423"
   }
 }

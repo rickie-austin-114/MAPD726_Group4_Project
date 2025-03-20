@@ -22,6 +22,7 @@ import { storeColors } from "../theme";
 import PaymentScreen from "./PaymentScreen";
 import { backendURL } from "../config";
 import { MapIcon, InformationCircleIcon } from "react-native-heroicons/solid";
+import ShareButton from "./ShareButton";
 
 const ViewDestinationScreen = ({ route, navigation }) => {
   const [folder, setFolder] = useState([]);
@@ -118,6 +119,8 @@ const ViewDestinationScreen = ({ route, navigation }) => {
           </TouchableOpacity>
 
           <Text> </Text>
+
+          <ShareButton />
 
           <Text className="text-gray-700 ml-4">Rating: {tour.ratings}</Text>
 
