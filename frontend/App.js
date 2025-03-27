@@ -78,7 +78,6 @@ const App = () => {
   // Display a notification with the user's input text
   const showNotification = async () => {
 
-
     // Create the notification channel (Android only)
     await createNotificationChannel();
 
