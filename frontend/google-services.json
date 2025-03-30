@@ -22,6 +22,22 @@
           }
         },
         {
+          "client_id": "518815540074-72fu299ufs2iu2fo8s871qigh96mb9mi.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.rickieaustin114.mapd726",
+            "certificate_hash": "f21bad476e91a693cb37a86608994f654d154473"
+          }
+        },
+        {
+          "client_id": "518815540074-vq90bk34e9ujh0jj6uitb4u4fbslr7vl.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.rickieaustin114.mapd726",
+            "certificate_hash": "0db7de317de216a2dd44822b1be1ef9571b24f70"
+          }
+        },
+        {
           "client_id": "518815540074-n01vhhjpeacntd87utfrnuquaei4pmpq.apps.googleusercontent.com",
           "client_type": 3
         }
@@ -39,10 +55,10 @@
               "client_type": 3
             },
             {
-              "client_id": "518815540074-9vhlqv8dd6mnnh8da9ktmrqo0lpcpvm0.apps.googleusercontent.com",
+              "client_id": "518815540074-7th8q4uh5uflpf146cmicmcqba4bjg8t.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
-                "bundle_id": "com.galaxies.firebase"
+                "bundle_id": "com.rickieaustin114.mapd726"
               }
             }
           ]

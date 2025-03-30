@@ -11,6 +11,7 @@ const userSchema = new mongoose.Schema({
   profilePicture: { type: String, default: null },
   minimumBudget: { type: Number, default: 0},
   maximumBudget: { type: Number, default: 100000},
+  isAdmin: { type: Boolean, default: false },
 });
 
 module.exports = mongoose.model('User', userSchema);

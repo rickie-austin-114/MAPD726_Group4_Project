@@ -90,10 +90,6 @@ app.post('/validate-id-token', async (req, res) => {
   }
 });
 
-// Start the server
-app.listen(PORT, () => {
-  console.log(`Server is running on http://localhost:${PORT}`);
-});
 
 
 // Start the server
