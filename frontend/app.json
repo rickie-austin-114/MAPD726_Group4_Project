@@ -8,7 +8,7 @@
     "userInterfaceStyle": "light",
     "newArchEnabled": true,
     "splash": {
-      "image": "./assets/icon.png",
+      "image": "./assets/tourvia.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
@@ -22,14 +22,14 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
+        "foregroundImage": "./assets/tourvia.png",
         "backgroundColor": "#ffffff"
       },
       "googleServicesFile": "./google-services.json",
       "package": "com.rickieaustin114.mapd726"
     },
     "web": {
-      "favicon": "./assets/favicon.png"
+      "favicon": "./assets/tourvia.png"
     },
     "plugins": [
       "expo-build-properties",
