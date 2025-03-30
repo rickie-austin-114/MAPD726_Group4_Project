@@ -24,8 +24,6 @@ import { backendURL } from '../config';
 import { app, auth } from "../../firebaseConfig";
 
 const ViewProfileScreen = ({ navigation, route }) => {
-  
-
 
   const { id } = route.params;
   const [userInfo, setUserInfo] = useState({});

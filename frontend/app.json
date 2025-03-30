@@ -4,7 +4,7 @@
     "slug": "frontend",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./assets/tourvia.png",
     "userInterfaceStyle": "light",
     "newArchEnabled": true,
     "splash": {
@@ -15,7 +15,7 @@
     "ios": {
       "supportsTablet": true,
       "googleServicesFile": "./GoogleService-Info.plist",
-      "bundleIdentifier": "com.galaxies.firebase",
+      "bundleIdentifier": "com.rickieaustin114.mapd726",
       "config": {
         "googleMapsApiKey": "process.env.AIzaSyBLuYogNvll8keLZ46ReXFcv9HKNHai714"
       }
@@ -26,7 +26,7 @@
         "backgroundColor": "#ffffff"
       },
       "googleServicesFile": "./google-services.json",
-      "package": "com.galaxies.firebase"
+      "package": "com.rickieaustin114.mapd726"
     },
     "web": {
       "favicon": "./assets/favicon.png"

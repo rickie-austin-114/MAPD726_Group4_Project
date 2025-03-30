@@ -11,8 +11,9 @@ import ViewDestinationScreen from "./src/screens/ViewDestinationScreen";
 import ViewFolderScreen from "./src/screens/ViewFolderScreen";
 import FoldersListScreen from "./src/screens/FoldersListScreen";
 import ViewProfileScreen from "./src/screens/ViewProfileScreen";
-import BottomBar from "./src/bottom_bar/BottomBar";
+import BottomBar from "./src/components/BottomBar";
 import MapScreen from "./src/screens/MapScreen";
+import TransportOptionsScreen from "./src/screens/TransportOptionsScreen";
 
 import { Alert, Platform } from "react-native";
 import messaging from "@react-native-firebase/messaging";
@@ -20,6 +21,7 @@ import messaging from "@react-native-firebase/messaging";
 import React, { useEffect } from "react";
 import { View, TextInput, Button } from "react-native";
 import notifee, { AndroidImportance } from "@notifee/react-native";
+import UsersListScreen from "./src/screens/UsersListScreen";
 
 async function createNotificationChannel() {
   if (Platform.OS === "android") {
@@ -106,7 +108,7 @@ const App = () => {
 
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="BottomBar">
+      <Stack.Navigator initialRouteName="Login">
         <Stack.Screen name="Login" component={LoginScreen} />
         <Stack.Screen name="Register" component={RegisterScreen} />
         <Stack.Screen name="ForgetPassword" component={ForgetPasswordScreen} />
@@ -114,6 +116,7 @@ const App = () => {
 
         <Stack.Screen name="BottomBar" component={BottomBar} />
         <Stack.Screen name="Map" component={MapScreen} />
+        <Stack.Screen name="TransportOptions" component={TransportOptionsScreen} />
 
         <Stack.Screen
           name="ViewDestination"
@@ -122,6 +125,7 @@ const App = () => {
 
         <Stack.Screen name="ViewFolder" component={ViewFolderScreen} />
         <Stack.Screen name="FoldersList" component={FoldersListScreen} />
+
 
         {/* <Stack.Screen name="ViewProfile" component={ViewProfileScreen} /> */}
 

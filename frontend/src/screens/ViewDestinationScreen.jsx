@@ -65,6 +65,11 @@ const ViewDestinationScreen = ({ route, navigation }) => {
     navigation.navigate("Map", { tour });
   };
 
+  const viewTransportOption = (tour) => {
+    navigation.navigate("TransportOption", { tour });
+  };
+
+
   const fetchFolders = async () => {
     try {
       //if (activeCategory === "All") {

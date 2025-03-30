@@ -34,12 +34,11 @@ const LoginScreen = ({ navigation }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-
   useEffect(() => {
     // Configure Google Sign-In
     GoogleSignin.configure({
       webClientId:
-        "252067972937-0ta4jn0rtj24qlq6f1ak06taf88qekob.apps.googleusercontent.com", // From Firebase Console
+        "518815540074-n01vhhjpeacntd87utfrnuquaei4pmpq.apps.googleusercontent.com", // From Firebase Console
       offlineAccess: true,
     });
   }, []);
@@ -66,13 +65,9 @@ const LoginScreen = ({ navigation }) => {
 
   const handleGoogleLogin = async () => {
     try {
-
-
       // Step 1: Start the Google sign-in flow
       await GoogleSignin.hasPlayServices(); // Ensure that Google Play services are available
       const userInfo = await GoogleSignin.signIn(); // Perform Google Sign-In
-
-      Alert.alert("wait 1");
 
 
       // Step 2: Get Google ID token and access token
@@ -90,8 +85,6 @@ const LoginScreen = ({ navigation }) => {
       const name = user["name"];
       const profilePicture = user["photo"]
 
-      Alert.alert(email, name, profilePicture, idToken);
-
 
 
       const res = await axios.post(`${backendURL}api/users`, {
@@ -100,15 +93,13 @@ const LoginScreen = ({ navigation }) => {
         profilePicture
       });
 
-      Alert.alert("Backend Successful!");
-
 
 
       if (idToken !== null) {
         console.log("User signed in successfully with Google!");
         Alert.alert("Login Successful!");
         const token = "google"// response.data.token;
-        navigation.navigate("Main", { token });
+        navigation.navigate("BottomBar", { token });
       } else {
         Alert.alert("Login Failed", error.response.data.message);
       }

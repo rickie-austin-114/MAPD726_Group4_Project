@@ -38,18 +38,14 @@ import StarRating from "./StarRating";
 
 import { backendURL } from "../config";
 
-const { height } = Dimensions.get('window'); // Get the screen height
+import Spacer from "../components/Spacer.jsx";
+
+const { height } = Dimensions.get("window"); // Get the screen height
 import notifee, { AndroidImportance } from "@notifee/react-native";
 
+
+
 const MainScreen = ({ route, navigation }) => {
-
-
-    
-
-
-
-      
-
   const [tours, setTours] = useState([]);
   const [error, setError] = useState("");
   const [listCritical, setListCritical] = useState(false);
@@ -65,12 +61,12 @@ const MainScreen = ({ route, navigation }) => {
   const fetchTours = async () => {
     try {
       if (activeCategory === "All") {
-        const url = `${backendURL}api/tours`
-      const response = await axios.get(url);
-      setTours(response.data);
+        const url = `${backendURL}api/tours`;
+        const response = await axios.get(url);
+        setTours(response.data);
       } else {
-        const url = `${backendURL}api/tours/category?category=${activeCategory}`
-        console.log(url)
+        const url = `${backendURL}api/tours/category?category=${activeCategory}`;
+        console.log(url);
         const response = await axios.get(url);
         setTours(response.data);
       }
@@ -224,22 +220,10 @@ const MainScreen = ({ route, navigation }) => {
           }
         })}
       </ScrollView>
-      <Text> </Text>
-      <Text> </Text>
-      <Text> </Text>
-      <Text> </Text>
-      <Text> </Text>
-      <Text> </Text>
-      <Text> </Text>
-      <Text> </Text>
-      <Text> </Text>
-      <Text> </Text>
-      <Text> </Text>
-      <Text> </Text>
-      <Text> </Text>
-      <Text> </Text>
-      <Text> </Text>
-      <Text> </Text>
+
+      <Spacer />
+
+
     </LinearGradient>
   );
 };
