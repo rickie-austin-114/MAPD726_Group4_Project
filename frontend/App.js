@@ -22,6 +22,7 @@ import React, { useEffect } from "react";
 import { View, TextInput, Button } from "react-native";
 import notifee, { AndroidImportance } from "@notifee/react-native";
 import UsersListScreen from "./src/screens/UsersListScreen";
+import VirtualTourScreen from "./src/screens/VirtualTourScreen";
 
 async function createNotificationChannel() {
   if (Platform.OS === "android") {
@@ -114,9 +115,10 @@ const App = () => {
         <Stack.Screen name="ForgetPassword" component={ForgetPasswordScreen} />
         <Stack.Screen name="ResetPassword" component={ResetPasswordScreen} />
 
-        <Stack.Screen name="BottomBar" component={BottomBar} />
+        <Stack.Screen name="BottomBar" component={BottomBar} options={{ title: '' }} />
         <Stack.Screen name="Map" component={MapScreen} />
         <Stack.Screen name="TransportOptions" component={TransportOptionsScreen} />
+        <Stack.Screen name="VirtualTour" component={VirtualTourScreen} />
 
         <Stack.Screen
           name="ViewDestination"

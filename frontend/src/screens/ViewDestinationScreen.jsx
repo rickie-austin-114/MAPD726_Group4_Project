@@ -21,7 +21,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { storeColors } from "../theme";
 import PaymentScreen from "./PaymentScreen";
 import { backendURL } from "../config";
-import { MapIcon, InformationCircleIcon } from "react-native-heroicons/solid";
+import { MapIcon, InformationCircleIcon, MagnifyingGlassIcon, TruckIcon } from "react-native-heroicons/solid";
 import ShareButton from "./ShareButton";
 
 const ViewDestinationScreen = ({ route, navigation }) => {
@@ -66,7 +66,11 @@ const ViewDestinationScreen = ({ route, navigation }) => {
   };
 
   const viewTransportOption = (tour) => {
-    navigation.navigate("TransportOption", { tour });
+    navigation.navigate("TransportOptions", { tour });
+  };
+
+  const viewVirtualTour = (tour) => {
+    navigation.navigate("VirtualTour", { tour });
   };
 
 
@@ -121,6 +125,14 @@ const ViewDestinationScreen = ({ route, navigation }) => {
 
           <TouchableOpacity onPress={viewMap}>
             <MapIcon color={storeColors.text} size="30" />
+          </TouchableOpacity>
+
+          <TouchableOpacity onPress={viewVirtualTour}>
+            <MagnifyingGlassIcon color={storeColors.text} size="30" />
+          </TouchableOpacity>
+
+          <TouchableOpacity onPress={viewTransportOption}>
+            <TruckIcon color={storeColors.text} size="30" />
           </TouchableOpacity>
 
           <Text> </Text>

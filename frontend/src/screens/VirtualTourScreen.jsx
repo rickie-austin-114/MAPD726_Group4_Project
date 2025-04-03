@@ -1,29 +1,22 @@
 import React, {useState, useEffect} from 'react';
 import { StyleSheet, View, Text } from 'react-native';
 import { WebView } from 'react-native-webview';
-import Spacer from "../components/Spacer";
 
 const url = "http://ip-api.com/json"
 
-const TransportOptionsScreen = () => {
+const VirtualTourScreen = () => {
 
     const [city, setCity] = useState("");
 
     useEffect(() => {
-        fetch(url)
-            .then((response) => response.json())
-            .then((data) => {
-                setCity(data.city);
-            });
+        setCity("paris");
     })
 
     return (
         <View style={styles.container}>
-            <Spacer size={20} />
 
-            <Text>Your location is: {city}</Text>
             <WebView
-                source={{ uri: 'https://www.rome2rio.com/map/Toronto/Paris' }} // Replace with your URL
+                source={{ uri: `https://rickie-austin-114.github.io/models/${city}.html` }} // Replace with your URL
                 style={styles.webview}
             />
         </View>
@@ -39,4 +32,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default TransportOptionsScreen;
+export default VirtualTourScreen;

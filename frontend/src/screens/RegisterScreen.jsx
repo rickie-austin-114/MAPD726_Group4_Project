@@ -53,10 +53,8 @@ const RegisterScreen = ({ navigation }) => {
         email,
         password
       );
-
       // Send verification email
       await userCredential.user.sendEmailVerification();
-      
 
       Alert.alert("Registration Successful!");
       navigation.navigate("Login");
