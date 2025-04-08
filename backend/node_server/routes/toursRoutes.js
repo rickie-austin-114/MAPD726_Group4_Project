@@ -54,7 +54,9 @@ router.get("/:id", async (req, res) => {
 
 // POST a new tour
 router.post("/", async (req, res) => {
-  const { name, ratings, price, duration, description, itinerary, inclusions, exclusions, profilePicture, category, latitude, longitude  } = req.body;
+  const { name, ratings, price, duration, description, 
+    itinerary, inclusions, exclusions, profilePicture,
+     category, latitude, longitude,  } = req.body;
 
   const tour = new Tour({
     name, ratings, price, duration, description, itinerary, inclusions, exclusions, profilePicture, category, latitude, longitude
@@ -76,11 +78,13 @@ router.post("/", async (req, res) => {
 // PUT update a tour by name
 router.put("/:id", async (req, res) => {
   try {
-    const { name, ratings, price, duration, description, itinerary, inclusions, exclusions, profilePicture  } = req.body;
+    const { name, ratings, price, duration, description, 
+      itinerary, inclusions, exclusions, profilePicture,
+       category, latitude, longitude,  } = req.body;
 
     const updateData = {
       updatedAt: Date.now(),
-      name, ratings, price, duration, description, itinerary, inclusions, exclusions, profilePicture
+      name, ratings, price, duration, description, itinerary, inclusions, exclusions, profilePicture, category, latitude, longitude
     };
 
     const updatedTour = await Tour.findOneAndUpdate(
