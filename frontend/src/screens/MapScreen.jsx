@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect} from "react";
 import { StyleSheet, View } from "react-native";
 import MapView, { Marker } from "react-native-maps";
 
@@ -7,11 +7,22 @@ const MapScreen = ({ route, navigation }) => {
 
   const { tour } = route.params;
 
+  useEffect(() => {
+
+    console.log("Tour data:", tour);
+  }, []);
+
 
   const attractionCoordinates = {
     latitude: tour.latitude,
     longitude: tour.longitude,
   };
+
+
+  useEffect(() => {
+
+    console.log("Tour data:", tour);
+  }, []);
 
   return (
     <View style={styles.container}>

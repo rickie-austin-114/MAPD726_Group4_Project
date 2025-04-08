@@ -33,6 +33,10 @@ const authRoutes = require('./routes/authRoutes');
 const toursRoutes = require('./routes/toursRoutes');
 const commentsRoutes = require('./routes/commentsRoutes');
 const foldersRoutes = require('./routes/foldersRoutes');
+const attractionsRoutes = require('./routes/attractionsRoutes');
+const hotelsRoutes = require('./routes/hotelsRoutes');
+const restaurantsRoutes = require('./routes/restaurantsRoutes');
+
 
 // just to test whether the api is hosted on cloud
 app.get('/', async (req, res) => {
@@ -55,7 +59,11 @@ app.use("/api/payment", paymentRoutes)
 app.use("/api/auth", authRoutes)
 app.use("/api/tours", toursRoutes)
 app.use("/api/comments", commentsRoutes)
+app.use("/api/restaurants", restaurantsRoutes)
+app.use("/api/attractions", attractionsRoutes)
+app.use("/api/hotels", hotelsRoutes)
 app.use("/folders", foldersRoutes)
+
 
 
 // server.js

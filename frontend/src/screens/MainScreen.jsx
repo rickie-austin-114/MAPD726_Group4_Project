@@ -41,7 +41,6 @@ import { backendURL } from "../config";
 import Spacer from "../components/Spacer.jsx";
 
 const { height } = Dimensions.get("window"); // Get the screen height
-import notifee, { AndroidImportance } from "@notifee/react-native";
 
 
 
@@ -53,7 +52,7 @@ const MainScreen = ({ route, navigation }) => {
 
   const isFocused = useIsFocused();
 
-  const categories = ["All", "Sightseeing", "Adventure", "Cultural"];
+  const categories = ["All", "Europe", "America", "Asia"];
   const [activeCategory, setActiveCategory] = useState("All");
 
   //const { token } = route.params;
@@ -82,6 +81,7 @@ const MainScreen = ({ route, navigation }) => {
   useEffect(() => {
     fetchTours();
   }, [activeCategory, isFocused]);
+
 
   const viewProfile = (tour) => {
     navigation.navigate("ViewDestination", { tour });

@@ -21,7 +21,12 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { storeColors } from "../theme";
 import PaymentScreen from "./PaymentScreen";
 import { backendURL } from "../config";
-import { MapIcon, InformationCircleIcon, MagnifyingGlassIcon, TruckIcon } from "react-native-heroicons/solid";
+import {
+  MapIcon,
+  InformationCircleIcon,
+  MagnifyingGlassIcon,
+  TruckIcon,
+} from "react-native-heroicons/solid";
 import ShareButton from "./ShareButton";
 
 const ViewDestinationScreen = ({ route, navigation }) => {
@@ -61,18 +66,20 @@ const ViewDestinationScreen = ({ route, navigation }) => {
     }
   };
 
-  const viewMap = (tour) => {
+  const viewMap = () => {
+    console.log("Tour data before:", tour);
+
     navigation.navigate("Map", { tour });
   };
 
-  const viewTransportOption = (tour) => {
+  const viewTransportOption = () => {
     navigation.navigate("TransportOptions", { tour });
   };
 
-  const viewVirtualTour = (tour) => {
+  const viewVirtualTour = () => {
+    console.log("Tour data before:", tour);
     navigation.navigate("VirtualTour", { tour });
   };
-
 
   const fetchFolders = async () => {
     try {
@@ -123,6 +130,49 @@ const ViewDestinationScreen = ({ route, navigation }) => {
 
           <Text> </Text>
 
+      <View className="pl-4">
+        <ScrollView horizontal showsHorizontalScrollIndicator={false}>
+                      <TouchableOpacity
+              onPress={() => {}}
+              className="bg-green-200 p-3 px-4 rounded-full mr-2"
+            >
+              <Text>Tourist Attractions</Text>
+            </TouchableOpacity>
+
+            <TouchableOpacity
+              onPress={() => {}}
+              className="bg-green-200 p-3 px-4 rounded-full mr-2"
+            >
+              <Text>Group Tours</Text>
+            </TouchableOpacity>
+
+            <TouchableOpacity
+              onPress={() => {}}
+              className="bg-green-200 p-3 px-4 rounded-full mr-2"
+            >
+              <Text>Restaurants</Text>
+            </TouchableOpacity>
+
+            <TouchableOpacity
+              onPress={() => {
+                viewTransportOption;
+              }}
+              className="bg-green-200 p-3 px-4 rounded-full mr-2"
+            >
+              <Text>Transport</Text>
+            </TouchableOpacity>
+
+            <TouchableOpacity
+              onPress={() => {}}
+              className="bg-green-200 p-3 px-4 rounded-full mr-2"
+            >
+              <Text>Hotel</Text>
+            </TouchableOpacity>
+</ScrollView>
+          </View>
+
+          <View className="flex-row">
+
           <TouchableOpacity onPress={viewMap}>
             <MapIcon color={storeColors.text} size="30" />
           </TouchableOpacity>
@@ -130,11 +180,7 @@ const ViewDestinationScreen = ({ route, navigation }) => {
           <TouchableOpacity onPress={viewVirtualTour}>
             <MagnifyingGlassIcon color={storeColors.text} size="30" />
           </TouchableOpacity>
-
-          <TouchableOpacity onPress={viewTransportOption}>
-            <TruckIcon color={storeColors.text} size="30" />
-          </TouchableOpacity>
-
+</View>
           <Text> </Text>
 
           <ShareButton />
@@ -165,7 +211,6 @@ const ViewDestinationScreen = ({ route, navigation }) => {
           </View>
           <Text> </Text>
 
-
           <TextInput
             className="p-4 bg-gray-100 text-gray-700 rounded-2xl mb-3"
             placeholder="comments"
@@ -183,7 +228,6 @@ const ViewDestinationScreen = ({ route, navigation }) => {
           </View>
 
           <Text> </Text>
-
 
           <StripeProvider publishableKey="pk_test_51QuLVCPlUnLIZAQCnwrRbSpCJhgJZsH1PLPQEh9Jt9YUlJauxShMIQbxNKdKYmRkSP83OSsJeZQdsDwrK5IYwjvi00d0lp5KXm">
             <PaymentScreen amount={tour.price} />
