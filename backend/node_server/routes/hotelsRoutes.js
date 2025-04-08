@@ -23,7 +23,7 @@ router.get("/:location", async (req, res) => {
   try {
     let tour = await Hotel.find({ location: req.params.location });
     if (!tour) return res.status(404).json({ message: "Tour not found" });
-    tour = tour.toObject();
+    //tour = tour.toObject();
     // const crit = await isCritical(req.params.id);
     // destination.condition = crit;
 
