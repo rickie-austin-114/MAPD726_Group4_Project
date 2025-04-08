@@ -6,11 +6,6 @@ const cors = require("cors");
 const { OAuth2Client } = require('google-auth-library');
 
 
-const User = require("./models/User"); // User model
-const Tour = require("./models/Tour"); // Tour model
-const Folder = require('./models/Folder'); // The Folder model we just created
-
-
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 

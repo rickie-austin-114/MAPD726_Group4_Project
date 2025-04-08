@@ -2,8 +2,6 @@ const express = require("express")
 const Attraction = require("../models/Attraction"); // User model
 const router = express.Router();
 
-
-
 // GET all tours
 router.get("/", async (req, res) => {
   try {
@@ -24,7 +22,6 @@ router.get("/:location", async (req, res) => {
   try {
     let tour = await Attraction.find({ location: req.params.location });
     if (!tour) return res.status(404).json({ message: "Tour not found" });
-    tour = tour.toObject();
     // const crit = await isCritical(req.params.id);
     // destination.condition = crit;
 
