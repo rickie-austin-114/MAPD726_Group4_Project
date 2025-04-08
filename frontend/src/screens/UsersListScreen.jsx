@@ -40,15 +40,9 @@ import { backendURL } from "../config";
 
 const { height } = Dimensions.get('window'); // Get the screen height
 import notifee, { AndroidImportance } from "@notifee/react-native";
+import Spacer from "../components/Spacer";
 
 const UsersListScreen = ({ route, navigation }) => {
-
-
-    
-
-
-
-      
 
   const [tours, setTours] = useState([]);
   const [error, setError] = useState("");
@@ -64,16 +58,18 @@ const UsersListScreen = ({ route, navigation }) => {
 
   const fetchTours = async () => {
     try {
-      if (activeCategory === "All") {
-        const url = `${backendURL}api/tours`
+      //if (activeCategory === "All") {
+      const url = `${backendURL}api/users`
       const response = await axios.get(url);
+
+      console.log(response.data);
       setTours(response.data);
-      } else {
-        const url = `${backendURL}api/tours/category?category=${activeCategory}`
-        console.log(url)
-        const response = await axios.get(url);
-        setTours(response.data);
-      }
+      // } else {
+      //   const url = `${backendURL}api/tours/category?category=${activeCategory}`
+      //   console.log(url)
+      //   const response = await axios.get(url);
+      //   setTours(response.data);
+      // }
     } catch (error) {
       setError(error.response?.data?.message || "An error occurred");
     }
@@ -88,7 +84,7 @@ const UsersListScreen = ({ route, navigation }) => {
   }, [activeCategory, isFocused]);
 
   const viewProfile = (tour) => {
-    navigation.navigate("ViewDestination", { tour });
+    navigation.navigate("ViewUser", { tour });
   };
 
   const navigateToFavorites = () => {
@@ -124,7 +120,7 @@ const UsersListScreen = ({ route, navigation }) => {
           style={{ color: storeColors.text }}
           className="ml-4 text-3xl font-bold"
         >
-          Browse Destinations
+          Browse Users
         </Text>
       </View>
 
@@ -134,7 +130,7 @@ const UsersListScreen = ({ route, navigation }) => {
         value={search}
         onChangeText={setSearch}
       />
-
+{/* 
       <View className="pl-4">
         <ScrollView horizontal showsHorizontalScrollIndicator={false}>
           {categories.map((cat) => {
@@ -162,7 +158,8 @@ const UsersListScreen = ({ route, navigation }) => {
             }
           })}
         </ScrollView>
-      </View>
+      </View> */}
+      
       <Text> </Text>
       {error ? <Text style={styles.errorText}>{error}</Text> : null}
       <ScrollView
@@ -200,9 +197,9 @@ const UsersListScreen = ({ route, navigation }) => {
                         className="text-blue-500"
                       />
 
-                      <Text className="text-xs text-gray-700">Rating:</Text>
+                      <Text className="text-xs text-gray-700">Email: {tour.email}</Text>
 
-                      <StarRating numberOfStars={tour.ratings} />
+                      {/* <StarRating numberOfStars={tour.email} /> */}
                       {}
                     </View>
                   </View>
@@ -224,22 +221,7 @@ const UsersListScreen = ({ route, navigation }) => {
           }
         })}
       </ScrollView>
-      <Text> </Text>
-      <Text> </Text>
-      <Text> </Text>
-      <Text> </Text>
-      <Text> </Text>
-      <Text> </Text>
-      <Text> </Text>
-      <Text> </Text>
-      <Text> </Text>
-      <Text> </Text>
-      <Text> </Text>
-      <Text> </Text>
-      <Text> </Text>
-      <Text> </Text>
-      <Text> </Text>
-      <Text> </Text>
+      <Spacer />
     </LinearGradient>
   );
 };

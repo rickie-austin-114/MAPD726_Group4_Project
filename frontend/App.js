@@ -23,6 +23,7 @@ import { View, TextInput, Button } from "react-native";
 import notifee, { AndroidImportance } from "@notifee/react-native";
 import UsersListScreen from "./src/screens/UsersListScreen";
 import VirtualTourScreen from "./src/screens/VirtualTourScreen";
+import ViewUserScreen from "./src/screens/ViewUserScreen";
 
 async function createNotificationChannel() {
   if (Platform.OS === "android") {
@@ -123,6 +124,10 @@ const App = () => {
         <Stack.Screen
           name="ViewDestination"
           component={ViewDestinationScreen}
+        />
+        <Stack.Screen
+          name="ViewUser"
+          component={ViewUserScreen}
         />
 
         <Stack.Screen name="ViewFolder" component={ViewFolderScreen} />

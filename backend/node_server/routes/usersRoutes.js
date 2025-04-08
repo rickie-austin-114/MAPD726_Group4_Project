@@ -33,11 +33,11 @@ router.post("/", async (req, res) => {
 });
 
 // Read all users
-router.get("/:id", async (req, res) => {
+router.get("/", async (req, res) => {
   try {
     const users = await User.find();
-    if (!user) return res.status(404).json({ message: "User not found" });
-    res.json(user);
+    if (!users) return res.status(404).json({ message: "User not found" });
+    res.json(users);
   } catch (error) {
     res.status(400).json({ error: error.message });
   }
