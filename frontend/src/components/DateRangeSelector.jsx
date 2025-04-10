@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, TouchableOpacity, StyleSheet, Platform } from 'react-native';
+import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import DatePicker from 'react-native-date-picker';
 import moment from 'moment';
 
@@ -8,14 +8,21 @@ const DateRangeSelector = () => {
   const [endDate, setEndDate] = useState(new Date());
   const [openStartPicker, setOpenStartPicker] = useState(false);
   const [openEndPicker, setOpenEndPicker] = useState(false);
+  const [daysBetween, setDaysBetween] = useState(0);
+
+  const calculateDaysBetween = (start, end) => {
+    const days = moment(end).diff(moment(start), 'days');
+    setDaysBetween(days);
+    console.log(`Number of days between: ${days}`);
+    console.log(moment(start).format('YYYY-MM-DD'));
+    console.log(moment(end).format('YYYY-MM-DD'));
+    return days;
+  };
 
   const handleConfirmStartDate = (date) => {
     setStartDate(date);
     setOpenStartPicker(false);
-    // Ensure end date is not before start date
-    if (moment(date).isAfter(endDate)) {
-      setEndDate(date);
-    }
+    calculateDaysBetween(date, endDate);
   };
 
   const handleConfirmEndDate = (date) => {
@@ -25,6 +32,7 @@ const DateRangeSelector = () => {
     }
     setEndDate(date);
     setOpenEndPicker(false);
+    calculateDaysBetween(startDate, date);
   };
 
   return (
@@ -35,7 +43,7 @@ const DateRangeSelector = () => {
         onPress={() => setOpenStartPicker(true)}
       >
         <Text style={styles.dateText}>
-          Start Date: {moment(startDate).format('YYYY-MM-DD')}
+          Start Date: {moment(startDate).format('MMMM D, YYYY')}
         </Text>
       </TouchableOpacity>
       <DatePicker
@@ -45,8 +53,8 @@ const DateRangeSelector = () => {
         mode="date"
         onConfirm={handleConfirmStartDate}
         onCancel={() => setOpenStartPicker(false)}
-        minimumDate={new Date(2000, 0, 1)} // Optional: Set min/max dates
-        maximumDate={new Date(2030, 11, 31)}
+        minimumDate={new Date(2000, 0, 1)}
+        maximumDate={endDate}
       />
 
       {/* End Date Picker */}
@@ -55,7 +63,7 @@ const DateRangeSelector = () => {
         onPress={() => setOpenEndPicker(true)}
       >
         <Text style={styles.dateText}>
-          End Date: {moment(endDate).format('YYYY-MM-DD')}
+          End Date: {moment(endDate).format('MMMM D, YYYY')}
         </Text>
       </TouchableOpacity>
       <DatePicker
@@ -65,13 +73,13 @@ const DateRangeSelector = () => {
         mode="date"
         onConfirm={handleConfirmEndDate}
         onCancel={() => setOpenEndPicker(false)}
-        minimumDate={startDate} // Ensure end date >= start date
+        minimumDate={startDate}
         maximumDate={new Date(2030, 11, 31)}
       />
 
-      {/* Display Selected Range */}
-      <Text style={styles.summaryText}>
-        Selected: {moment(startDate).format('MMM D')} to {moment(endDate).format('MMM D, YYYY')}
+      {/* Results Display */}
+      <Text style={styles.resultText}>
+        Days between dates: {daysBetween}
       </Text>
     </View>
   );
@@ -82,23 +90,28 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     padding: 20,
+    backgroundColor: '#fff',
   },
   dateButton: {
     padding: 15,
-    backgroundColor: '#f0f0f0',
+    backgroundColor: '#e3f2fd',
     borderRadius: 8,
     marginBottom: 15,
     alignItems: 'center',
+    borderWidth: 1,
+    borderColor: '#bbdefb',
   },
   dateText: {
     fontSize: 16,
     fontWeight: '500',
+    color: '#1976d2',
   },
-  summaryText: {
-    marginTop: 20,
+  resultText: {
+    marginTop: 25,
     fontSize: 18,
     textAlign: 'center',
-    color: '#333',
+    color: '#2e7d32',
+    fontWeight: 'bold',
   },
 });
 

@@ -17,7 +17,8 @@ locations = [
     "Venice",
     "Copenhagen",
     "London",
-    "Paris"
+    "Paris",
+    "Miami"
 ]
 
 for location in locations:

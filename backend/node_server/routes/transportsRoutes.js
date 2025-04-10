@@ -8,7 +8,10 @@ const router = express.Router();
 // GET all tours
 router.get("/", async (req, res) => {
   try {
-    const land = req.query.land == "true" ? true : false;
+
+    const _land = req.query.land ?? "true";
+    const land = _land === "true" ? true : false;
+
 
     if (land) {
         const transport = await Transport.find();

@@ -1,11 +1,17 @@
 import React from "react";
 import { View, Text, Button, Platform, Alert, StyleSheet, Pressable } from "react-native";
 import { useStripe } from "@stripe/stripe-react-native";
+import axios from "axios";
 
 import { backendURL } from '../config';
 
 
 function PaymentScreen(props) {
+
+  const name = props.name || "payment";
+  const description = props.description || "thank you";
+  const image = props.image || "https://rickie-austin-114.github.io/assets/air_canada.png";
+  const amount = props.amount || 1000; // Default amount in cents
 
   const { initPaymentSheet, presentPaymentSheet } = useStripe();
 
@@ -39,6 +45,12 @@ function PaymentScreen(props) {
         Alert.alert("Error", paymentError.message);
       } else {
         Alert.alert("Success", "Payment successful!");
+        axios.post(`${backendURL}api/orders`, {
+          name: name,
+          description: description, 
+          image: image,
+          price: amount,
+        })
       }
     } catch (error) {
       Alert.alert("Error", error.message);
@@ -48,7 +60,7 @@ function PaymentScreen(props) {
   return (
     <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
       <Pressable onPress={handlePayment} style={styles.button}>
-        <Text style={styles.text}>Pay ${props.amount}</Text>
+        <Text style={styles.text}>Pay ${amount}</Text>
       </Pressable>
     </View>
   );

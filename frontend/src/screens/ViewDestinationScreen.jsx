@@ -79,7 +79,7 @@ const ViewDestinationScreen = ({ route, navigation }) => {
   };
 
   const viewTransportOption = () => {
-    navigation.navigate("TransportOptions", { tour });
+    navigation.navigate("TransportOptions", { latitude: tour.latitude, longitude: tour.longitude, category: tour.category  });
   };
 
   const viewMap = () => {
@@ -241,7 +241,7 @@ const ViewDestinationScreen = ({ route, navigation }) => {
           <Text> </Text>
 
           <StripeProvider publishableKey="pk_test_51QuLVCPlUnLIZAQCnwrRbSpCJhgJZsH1PLPQEh9Jt9YUlJauxShMIQbxNKdKYmRkSP83OSsJeZQdsDwrK5IYwjvi00d0lp5KXm">
-            <PaymentScreen amount={tour.price} />
+            <PaymentScreen amount={tour.price} image={tour.profilePicture} name={`Group Tour to ${tour.name}`} description={`Group Tour to ${tour.name}`} />
           </StripeProvider>
 
           <Text> </Text>

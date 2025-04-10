@@ -44,6 +44,17 @@ router.get("/", async (req, res) => {
 });
 
 // Read a user by ID
+router.get("/email/:email", async (req, res) => {
+  try {
+    const user = await User.findOne({ email: req.params.email });
+    if (!user) return res.status(404).json({ message: "User not found" });
+    res.json(user);
+  } catch (error) {
+    res.status(400).json({ error: error.message });
+  }
+});
+
+// Read a user by ID
 router.get("/:id", async (req, res) => {
   try {
     const user = await User.findById(req.params.id);

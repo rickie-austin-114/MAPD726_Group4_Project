@@ -1,5 +1,5 @@
 // src/screens/ListPatientsScreen.tsx
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import {
   View,
   Text,
@@ -36,9 +36,11 @@ import {
 import { storeColors } from "../theme";
 import StarRating from "../components/StarRating";
 
+
 import { backendURL } from "../config";
 
 import Spacer from "../components/Spacer.jsx";
+import { GlobalContext } from "../../GlobalContext.jsx";
 
 const { height } = Dimensions.get("window"); // Get the screen height
 
@@ -54,6 +56,8 @@ const MainScreen = ({ route, navigation }) => {
 
   const categories = ["All", "Europe", "America", "Asia"];
   const [activeCategory, setActiveCategory] = useState("All");
+
+  const { username, setUsername, profileImage, setProfileImage } = useContext(GlobalContext);
 
   //const { token } = route.params;
 
@@ -116,12 +120,24 @@ const MainScreen = ({ route, navigation }) => {
         </View>
       </View>
       <View className="mt-3">
+      {/* <Image
+                  source={{ uri: profileImage }}
+                  style={{ width: 80, height: 80 }}
+                  className="rounded-2xl"
+                /> */}
+      <Text
+          style={{ color: storeColors.text }}
+          className="ml-4 text-3xl font-bold"
+        >
+          Hello {username}!
+        </Text>
         <Text
           style={{ color: storeColors.text }}
           className="ml-4 text-3xl font-bold"
         >
           Browse Destinations
         </Text>
+      
       </View>
 
       <TextInput

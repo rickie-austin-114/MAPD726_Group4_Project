@@ -37,7 +37,7 @@ const ResetPasswordScreen = ({ route, navigation}) => {
 
       
 
-      await axios.put(`${backendURL}api/forgetPassword`, {
+      await axios.put(`${backendURL}api/auth/forgetPassword`, {
         email,
         password,
       });

@@ -34,15 +34,13 @@ import {
   StarIcon,
 } from "react-native-heroicons/solid";
 import { storeColors } from "../theme/index.js";
-import StarRating from "./StarRating.jsx";
+import StarRating from "../components/StarRating";
 
 import { backendURL } from "../config.js";
 
 import Spacer from "../components/Spacer.jsx";
 
 const { height } = Dimensions.get("window"); // Get the screen height
-
-
 
 const ListRestaurantsScreen = ({ route, navigation }) => {
   const [tours, setTours] = useState([]);
@@ -120,7 +118,7 @@ const ListRestaurantsScreen = ({ route, navigation }) => {
           style={{ color: storeColors.text }}
           className="ml-4 text-3xl font-bold"
         >
-          Browse Destinations
+          Browse Restaurants
         </Text>
       </View>
 

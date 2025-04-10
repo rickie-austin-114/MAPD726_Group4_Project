@@ -120,7 +120,7 @@ const ListAttractionsScreen = ({ route, navigation }) => {
           style={{ color: storeColors.text }}
           className="ml-4 text-3xl font-bold"
         >
-          Browse Destinations
+          Attractions
         </Text>
       </View>
 

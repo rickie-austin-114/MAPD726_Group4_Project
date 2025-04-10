@@ -36,7 +36,7 @@ const RegisterScreen = ({ navigation }) => {
   const handleRegister = async () => {
     try {
 
-      const res = await axios.post(`${backendURL}api/register`, {
+      const res = await axios.post(`${backendURL}api/auth/register`, {
         name,
         phone,
         email,
@@ -55,11 +55,12 @@ const RegisterScreen = ({ navigation }) => {
         password
       );
       // Send verification email
-      await userCredential.user.sendEmailVerification();
+      await userCr,edential.user.sendEmailVerification();
 
       Alert.alert("Registration Successful!");
       navigation.navigate("Login");
     } catch (error) {
+      console.log(error);
       Alert.alert("Registration Failed", error.response.data.message);
     }
   };

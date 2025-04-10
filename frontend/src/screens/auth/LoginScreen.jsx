@@ -1,5 +1,5 @@
 // screens/LoginScreen.js
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import {
   View,
   TextInput,
@@ -14,6 +14,7 @@ import {
 } from "react-native";
 import axios from "axios";
 import { SafeAreaView } from "react-native-safe-area-context";
+import { GlobalContext } from "../../../GlobalContext";
 
 import { GoogleSignin } from "@react-native-google-signin/google-signin";
 
@@ -31,6 +32,9 @@ import { backendURL } from '../../config';
 const LoginScreen = ({ navigation }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
+  const { isAdmin, setIsAdmin, username, setUsername, profileImage, setProfileImage } = useContext(GlobalContext);
+
 
   useEffect(() => {
     // Configure Google Sign-In
@@ -83,6 +87,10 @@ const LoginScreen = ({ navigation }) => {
       const name = user["name"];
       const profilePicture = user["photo"]
 
+      setUsername(name);
+      setProfileImage(profilePicture);
+
+
 
 
       const res = await axios.post(`${backendURL}api/users`, {
@@ -95,6 +103,13 @@ const LoginScreen = ({ navigation }) => {
 
       if (idToken !== null) {
         console.log("User signed in successfully with Google!");
+
+        const res2 = await axios.get(`${backendURL}api/users/email/${email}`);
+
+        console.log(res2.data.isAdmin);
+
+        setIsAdmin(res2.data.isAdmin);
+  
         Alert.alert("Login Successful!");
         const token = "google"// response.data.token;
         navigation.navigate("BottomBar", { token });
@@ -196,7 +211,7 @@ const LoginScreen = ({ navigation }) => {
 
         <TouchableOpacity onPress={handleGoogleLogin}>
           <Image
-            source={require("../assets/google-signin-button-1024x260.png")} // Replace with your image URL
+            source={require("../../assets/google-signin-button-1024x260.png")} // Replace with your image URL
             style={styles.image}
           />
         </TouchableOpacity>

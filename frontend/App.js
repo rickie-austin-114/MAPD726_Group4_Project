@@ -31,6 +31,7 @@ import ViewHotelScreen from "./src/screens/ViewHotelScreen";
 import ViewRestaurantScreen from "./src/screens/ViewRestaurantScreen";
 import ListRestaurantsScreen from "./src/screens/ListRestaurantsScreen";
 import { GlobalProvider } from "./GlobalContext";
+import ViewTransportScreen from "./src/screens/ViewTransportScreen";
 
 async function createNotificationChannel() {
   if (Platform.OS === "android") {
@@ -132,11 +133,14 @@ const App = () => {
             options={{ title: "" }}
           />
           <Stack.Screen name="Map" component={MapScreen} />
+          <Stack.Screen name="VirtualTour" component={VirtualTourScreen} />
+
+
           <Stack.Screen
             name="TransportOptions"
             component={TransportOptionsScreen}
           />
-          <Stack.Screen name="VirtualTour" component={VirtualTourScreen} />
+          <Stack.Screen name="ViewTransport" component={ViewTransportScreen} />
 
           <Stack.Screen
             name="ViewDestination"
@@ -154,6 +158,8 @@ const App = () => {
           <Stack.Screen name="ListHotels" component={ListHotelsScreen} />
 
           <Stack.Screen name="ViewHotel" component={ViewHotelScreen} />
+
+
 
           <Stack.Screen
             name="ListRestaurants"

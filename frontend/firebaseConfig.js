@@ -9,7 +9,6 @@ import {
   signInWithCredential,
 } from "@react-native-firebase/auth";
 
-
 const firebaseConfig = {
   apiKey: "AIzaSyD6YwgGgxoZIqTLLLARRvzPJ2EX7muNVgo",
   authDomain: "authentication1-1f950.firebaseapp.com",

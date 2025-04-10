@@ -32,6 +32,7 @@ import {
   PencilSquareIcon,
   MagnifyingGlassIcon,
   StarIcon,
+  TrashIcon,
 } from "react-native-heroicons/solid";
 import { storeColors } from "../theme";
 
@@ -50,12 +51,11 @@ const UsersListScreen = ({ route, navigation }) => {
 
   const isFocused = useIsFocused();
 
-  const categories = ["All", "Sightseeing", "Adventure", "Cultural"];
   const [activeCategory, setActiveCategory] = useState("All");
 
   //const { token } = route.params;
 
-  const fetchTours = async () => {
+  const fetchUsers = async () => {
     try {
       //if (activeCategory === "All") {
       const url = `${backendURL}api/users`
@@ -74,12 +74,31 @@ const UsersListScreen = ({ route, navigation }) => {
     }
   };
 
+  const deleteUser = async (userId) => {
+    try {
+      //if (activeCategory === "All") {
+      const url = `${backendURL}api/users/${userId}`
+      const response = await axios.delete(url);
+
+      fetchUsers();
+      // } else {
+      //   const url = `${backendURL}api/tours/category?category=${activeCategory}`
+      //   console.log(url)
+      //   const response = await axios.get(url);
+      //   setTours(response.data);
+      // }
+    } catch (error) {
+      setError(error.response?.data?.message || "An error occurred");
+    }
+  };
+
+
   const toggleSwitch = () => {
     setListCritical(!listCritical);
   };
 
   useEffect(() => {
-    fetchTours();
+    fetchUsers();
   }, [activeCategory, isFocused]);
 
   const viewProfile = (tour) => {
@@ -213,7 +232,18 @@ const UsersListScreen = ({ route, navigation }) => {
                     <MagnifyingGlassIcon color={storeColors.text} size="20" />
                   </TouchableOpacity>
                 </View>
+                <View className="flex justify-center items-center">
+                  <TouchableOpacity
+                    onPress={() => {
+                      deleteUser(tour._id);
+                    }}
+                    className="bg-red-300 p-2 px-4 rounded-full mr-2"
+                  >
+                    <TrashIcon color={storeColors.text} size="20" />
+                  </TouchableOpacity>
+                </View>
               </TouchableOpacity>
+              
             );
           } else {
             return <></>;

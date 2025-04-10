@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 // Patient schema
 const tourSchema = new mongoose.Schema({
   name: { type: String, required: true },
-  ratings: { type: Number, default: null },
+  ratings: { type: Number, default: 4.5 },
   price: { type: Number, default: null },
   duration: { type: String, default: null },
   description: { type: String, default: null },
