@@ -11,10 +11,13 @@ import {
   Pressable,
 } from "react-native";
 import axios from "axios";
-import "../../global.css";
-import { storeColors } from "../theme";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { backendURL } from '../config.js';
+import { storeColors } from "../../theme";
+import "../../../global.css";
+import { app, auth } from "../../../firebaseConfig";
+import { backendURL } from '../../config';
+
+
 
 const ResetPasswordScreen = ({ route, navigation}) => {
 

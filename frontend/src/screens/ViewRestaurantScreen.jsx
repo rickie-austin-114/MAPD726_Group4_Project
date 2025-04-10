@@ -27,7 +27,7 @@ import {
   MagnifyingGlassIcon,
   TruckIcon,
 } from "react-native-heroicons/solid";
-import ShareButton from "./ShareButton";
+import ShareButton from "../components/ShareButton";
 
 const ViewRestaurantScreen = ({ route, navigation }) => {
   const [folder, setFolder] = useState([]);

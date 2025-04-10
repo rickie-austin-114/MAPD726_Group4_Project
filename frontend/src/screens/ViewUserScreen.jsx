@@ -22,7 +22,7 @@ import { storeColors } from "../theme";
 import PaymentScreen from "./PaymentScreen";
 import { backendURL } from "../config";
 import { MapIcon, InformationCircleIcon, MagnifyingGlassIcon, TruckIcon } from "react-native-heroicons/solid";
-import ShareButton from "./ShareButton";
+import ShareButton from "../components/ShareButton";
 
 const ViewUserScreen = ({ route, navigation }) => {
   const [folder, setFolder] = useState([]);

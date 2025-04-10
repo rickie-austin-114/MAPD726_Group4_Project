@@ -12,16 +12,17 @@ import {
   Pressable,
 } from "react-native";
 import axios from "axios";
-import "../../global.css";
-import { storeColors } from "../theme";
 import { SafeAreaView } from "react-native-safe-area-context";
 import {
   createUserWithEmailAndPassword,
   sendEmailVerification
 } from "@react-native-firebase/auth";
 
-import { app, auth } from "../../firebaseConfig";
-import { backendURL } from '../config';
+import { storeColors } from "../../theme";
+import "../../../global.css";
+import { app, auth } from "../../../firebaseConfig";
+import { backendURL } from '../../config';
+
 
 
 const RegisterScreen = ({ navigation }) => {

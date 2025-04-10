@@ -34,7 +34,7 @@ import {
   StarIcon,
 } from "react-native-heroicons/solid";
 import { storeColors } from "../theme/index.js";
-import StarRating from "./StarRating.jsx";
+import StarRating from "../components/StarRating";
 
 import { backendURL } from "../config.js";
 

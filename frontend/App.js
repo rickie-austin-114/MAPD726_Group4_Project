@@ -3,10 +3,10 @@ import "./global.css";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import MainScreen from "./src/screens/MainScreen";
-import LoginScreen from "./src/screens/LoginScreen";
-import RegisterScreen from "./src/screens/RegisterScreen";
+import LoginScreen from "./src/screens/auth/LoginScreen";
+import RegisterScreen from "./src/screens/auth/RegisterScreen";
 import ForgetPasswordScreen from "./src/screens/ForgetPasswordScreen";
-import ResetPasswordScreen from "./src/screens/ResetPasswordScreen";
+import ResetPasswordScreen from "./src/screens/auth/ResetPasswordScreen";
 import ViewDestinationScreen from "./src/screens/ViewDestinationScreen";
 import ViewFolderScreen from "./src/screens/ViewFolderScreen";
 import FoldersListScreen from "./src/screens/FoldersListScreen";
@@ -30,6 +30,7 @@ import ListHotelsScreen from "./src/screens/ListHotelsScreen";
 import ViewHotelScreen from "./src/screens/ViewHotelScreen";
 import ViewRestaurantScreen from "./src/screens/ViewRestaurantScreen";
 import ListRestaurantsScreen from "./src/screens/ListRestaurantsScreen";
+import { GlobalProvider } from "./GlobalContext";
 
 async function createNotificationChannel() {
   if (Platform.OS === "android") {
@@ -114,55 +115,66 @@ const App = () => {
   }, []);
 
   return (
-    <NavigationContainer>
-      <Stack.Navigator initialRouteName="Login">
-        <Stack.Screen name="Login" component={LoginScreen} />
-        <Stack.Screen name="Register" component={RegisterScreen} />
-        <Stack.Screen name="ForgetPassword" component={ForgetPasswordScreen} />
-        <Stack.Screen name="ResetPassword" component={ResetPasswordScreen} />
+    <GlobalProvider>
+      <NavigationContainer>
+        <Stack.Navigator initialRouteName="Login">
+          <Stack.Screen name="Login" component={LoginScreen} />
+          <Stack.Screen name="Register" component={RegisterScreen} />
+          <Stack.Screen
+            name="ForgetPassword"
+            component={ForgetPasswordScreen}
+          />
+          <Stack.Screen name="ResetPassword" component={ResetPasswordScreen} />
 
-        <Stack.Screen
-          name="BottomBar"
-          component={BottomBar}
-          options={{ title: "" }}
-        />
-        <Stack.Screen name="Map" component={MapScreen} />
-        <Stack.Screen
-          name="TransportOptions"
-          component={TransportOptionsScreen}
-        />
-        <Stack.Screen name="VirtualTour" component={VirtualTourScreen} />
+          <Stack.Screen
+            name="BottomBar"
+            component={BottomBar}
+            options={{ title: "" }}
+          />
+          <Stack.Screen name="Map" component={MapScreen} />
+          <Stack.Screen
+            name="TransportOptions"
+            component={TransportOptionsScreen}
+          />
+          <Stack.Screen name="VirtualTour" component={VirtualTourScreen} />
 
-        <Stack.Screen
-          name="ViewDestination"
-          component={ViewDestinationScreen}
-        />
-        <Stack.Screen
-          name="ListAttractions"
-          component={ListAttractionsScreen}
-        />
-        <Stack.Screen name="ViewAttraction" component={ViewAttractionScreen} />
+          <Stack.Screen
+            name="ViewDestination"
+            component={ViewDestinationScreen}
+          />
+          <Stack.Screen
+            name="ListAttractions"
+            component={ListAttractionsScreen}
+          />
+          <Stack.Screen
+            name="ViewAttraction"
+            component={ViewAttractionScreen}
+          />
 
-        <Stack.Screen name="ListHotels" component={ListHotelsScreen} />
+          <Stack.Screen name="ListHotels" component={ListHotelsScreen} />
 
-        <Stack.Screen name="ViewHotel" component={ViewHotelScreen} />
+          <Stack.Screen name="ViewHotel" component={ViewHotelScreen} />
 
-        <Stack.Screen
-          name="ListRestaurants"
-          component={ListRestaurantsScreen}
-        />
-        <Stack.Screen name="ViewRestaurants" component={ViewRestaurantScreen} />
+          <Stack.Screen
+            name="ListRestaurants"
+            component={ListRestaurantsScreen}
+          />
+          <Stack.Screen
+            name="ViewRestaurants"
+            component={ViewRestaurantScreen}
+          />
 
-        <Stack.Screen name="ViewUser" component={ViewUserScreen} />
+          <Stack.Screen name="ViewUser" component={ViewUserScreen} />
 
-        <Stack.Screen name="ViewFolder" component={ViewFolderScreen} />
-        <Stack.Screen name="FoldersList" component={FoldersListScreen} />
+          <Stack.Screen name="ViewFolder" component={ViewFolderScreen} />
+          <Stack.Screen name="FoldersList" component={FoldersListScreen} />
 
-        {/* <Stack.Screen name="ViewProfile" component={ViewProfileScreen} /> */}
+          {/* <Stack.Screen name="ViewProfile" component={ViewProfileScreen} /> */}
 
-        {/* <Stack.Screen name="ViewRecord" component={ViewRecordScreen} /> */}
-      </Stack.Navigator>
-    </NavigationContainer>
+          {/* <Stack.Screen name="ViewRecord" component={ViewRecordScreen} /> */}
+        </Stack.Navigator>
+      </NavigationContainer>
+    </GlobalProvider>
   );
 };
 
