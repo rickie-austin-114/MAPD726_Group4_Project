@@ -1,0 +1,40 @@
+import requests
+import json
+import random
+
+# Define the URL
+url = 'https://ninth-rhino-450106-u8.df.r.appspot.com/api/hotels'
+
+locations = [
+    "Tokyo",
+    "Bangkok",
+    "Bali",
+    "Seoul",
+    "Cancun",
+    "Rio de Janeiro",
+    "New York City",
+    "Montreal",
+    "Venice",
+    "Copenhagen",
+    "London",
+    "Paris"
+]
+
+for location in locations:
+
+    # Create the payload as a dictionary
+    payload = {
+        "name": f"Day Inns Hotel {location}",
+        "location": location,
+        "description":"Day Inn Hotels offer affordable comfort and convenience for travelers seeking a pleasant stay. With cozy accommodations, essential amenities, and a welcoming atmosphere, guests can enjoy restful nights and easy access to local attractions. Ideal for families and business travelers alike, Day Inn ensures a budget-friendly and enjoyable experience.",
+        "price": 100 + random.randint(1, 100),
+        "image": "https://rickie-austin-114.github.io/assets/wyndham.jpg" }
+
+    # Send the POST request
+    response = requests.post(url, json=payload)
+
+    # Check the response
+    if response.status_code == 201:
+        print('Success:', response.json())
+    else:
+        print('Error:', response.status_code, response.text)

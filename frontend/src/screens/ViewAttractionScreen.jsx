@@ -29,53 +29,16 @@ import {
 } from "react-native-heroicons/solid";
 import ShareButton from "./ShareButton";
 
-const ViewDestinationScreen = ({ route, navigation }) => {
+const ViewAttractionScreen = ({ route, navigation }) => {
   const [folder, setFolder] = useState([]);
-  const [comments, setComments] = useState([]);
 
-  const [userComment, setUserComment] = useState("");
 
   const { tour } = route.params;
 
-  const fetchComments = async () => {
-    try {
-      const url = `${backendURL}api/comments/${tour._id}`;
-      console.log(url);
-      const response = await axios.get(url);
-      console.log(response.data);
-      setComments(response.data);
-    } catch (error) {
-      setError(error.response?.data?.message || "An error occurred");
-    }
-  };
 
-  const addComments = async () => {
-    try {
-      const url = `${backendURL}api/comments`;
-      const data = {
-        content: userComment,
-        author: "Rickie",
-        tour: tour._id,
-        // Add more key-value pairs as needed
-      };
-      const response = await axios.post(url, data);
-
-      await fetchComments();
-    } catch (error) {
-      setError(error.response?.data?.message || "An error occurred");
-    }
-  };
 
   const viewAttractions = () => {
-    navigation.navigate("ListAttractions", { name: tour.name });
-  };
-
-  const viewRestaurants = () => {
-    navigation.navigate("ListRestaurants", { name: tour.name });
-  };
-
-  const viewHotels = () => {
-    navigation.navigate("ListHotels", { name: tour.name });
+    navigation.navigate("ViewAttractions", { name: tour.name });
   };
 
   const viewTransportOption = () => {
@@ -104,9 +67,6 @@ const ViewDestinationScreen = ({ route, navigation }) => {
     }
   };
 
-  useEffect(() => {
-    fetchComments();
-  }, []);
   return (
     // <View style={styles.container}>
     //   <TextInput placeholder="Email" value={email} onChangeText={setEmail} />
@@ -123,7 +83,7 @@ const ViewDestinationScreen = ({ route, navigation }) => {
       <SafeAreaView className="flex">
         <View className="flex-row justify-center">
           <Image
-            source={{ uri: tour.profilePicture }}
+            source={{ uri: tour.image }}
             style={{ width: 300, height: 300, resizeMode: "stretch" }}
           />
         </View>
@@ -142,57 +102,6 @@ const ViewDestinationScreen = ({ route, navigation }) => {
 
           <Text> </Text>
 
-          <View className="pl-4">
-            <ScrollView horizontal showsHorizontalScrollIndicator={false}>
-              <TouchableOpacity
-                onPress={viewAttractions}
-                className="bg-green-200 p-3 px-4 rounded-full mr-2"
-              >
-                <Text>Tourist Attractions</Text>
-              </TouchableOpacity>
-
-              {/* <TouchableOpacity
-                onPress={() => {}}
-                className="bg-green-200 p-3 px-4 rounded-full mr-2"
-              >
-                <Text>Group Tours</Text>
-              </TouchableOpacity> */}
-
-              <TouchableOpacity
-                onPress={viewRestaurants}
-                className="bg-green-200 p-3 px-4 rounded-full mr-2"
-              >
-                <Text>Restaurants</Text>
-              </TouchableOpacity>
-
-              <TouchableOpacity
-                onPress={
-                  viewTransportOption
-                }
-                className="bg-green-200 p-3 px-4 rounded-full mr-2"
-              >
-                <Text>Transport</Text>
-              </TouchableOpacity>
-
-              <TouchableOpacity
-                onPress={viewHotels}
-                className="bg-green-200 p-3 px-4 rounded-full mr-2"
-              >
-                <Text>Hotel</Text>
-              </TouchableOpacity>
-            </ScrollView>
-          </View>
-
-          <View className="flex-row">
-            <TouchableOpacity onPress={viewMap}>
-              <MapIcon color={storeColors.text} size="30" />
-            </TouchableOpacity>
-
-            <TouchableOpacity onPress={viewVirtualTour}>
-              <MagnifyingGlassIcon color={storeColors.text} size="30" />
-            </TouchableOpacity>
-          </View>
-          <Text> </Text>
 
           <ShareButton />
 
@@ -208,35 +117,6 @@ const ViewDestinationScreen = ({ route, navigation }) => {
 
           <Text> </Text>
 
-          <View style={styles.container}>
-            <FlatList
-              data={comments}
-              keyExtractor={(item) => item._id}
-              renderItem={({ item }) => (
-                <View style={styles.commentContainer}>
-                  <Text style={styles.author}>{item.author}</Text>
-                  <Text style={styles.content}>{item.content}</Text>
-                </View>
-              )}
-            />
-          </View>
-          <Text> </Text>
-
-          <TextInput
-            className="p-4 bg-gray-100 text-gray-700 rounded-2xl mb-3"
-            placeholder="comments"
-            value={userComment}
-            onChangeText={setUserComment}
-          />
-          <Text> </Text>
-
-          <View
-            style={{ flex: 1, justifyContent: "center", alignItems: "center" }}
-          >
-            <Pressable onPress={addComments} style={styles.pressable}>
-              <Text style={styles.text}>Comment</Text>
-            </Pressable>
-          </View>
 
           <Text> </Text>
 
@@ -301,4 +181,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default ViewDestinationScreen;
+export default ViewAttractionScreen;

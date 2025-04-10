@@ -24,6 +24,12 @@ import notifee, { AndroidImportance } from "@notifee/react-native";
 import UsersListScreen from "./src/screens/UsersListScreen";
 import VirtualTourScreen from "./src/screens/VirtualTourScreen";
 import ViewUserScreen from "./src/screens/ViewUserScreen";
+import ListAttractionsScreen from "./src/screens/ListAttractionsScreen";
+import ViewAttractionScreen from "./src/screens/ViewAttractionScreen";
+import ListHotelsScreen from "./src/screens/ListHotelsScreen";
+import ViewHotelScreen from "./src/screens/ViewHotelScreen";
+import ViewRestaurantScreen from "./src/screens/ViewRestaurantScreen";
+import ListRestaurantsScreen from "./src/screens/ListRestaurantsScreen";
 
 async function createNotificationChannel() {
   if (Platform.OS === "android") {
@@ -81,7 +87,6 @@ const App = () => {
 
   // Display a notification with the user's input text
   const showNotification = async () => {
-
     // Create the notification channel (Android only)
     await createNotificationChannel();
 
@@ -116,9 +121,16 @@ const App = () => {
         <Stack.Screen name="ForgetPassword" component={ForgetPasswordScreen} />
         <Stack.Screen name="ResetPassword" component={ResetPasswordScreen} />
 
-        <Stack.Screen name="BottomBar" component={BottomBar} options={{ title: '' }} />
+        <Stack.Screen
+          name="BottomBar"
+          component={BottomBar}
+          options={{ title: "" }}
+        />
         <Stack.Screen name="Map" component={MapScreen} />
-        <Stack.Screen name="TransportOptions" component={TransportOptionsScreen} />
+        <Stack.Screen
+          name="TransportOptions"
+          component={TransportOptionsScreen}
+        />
         <Stack.Screen name="VirtualTour" component={VirtualTourScreen} />
 
         <Stack.Screen
@@ -126,13 +138,25 @@ const App = () => {
           component={ViewDestinationScreen}
         />
         <Stack.Screen
-          name="ViewUser"
-          component={ViewUserScreen}
+          name="ListAttractions"
+          component={ListAttractionsScreen}
         />
+        <Stack.Screen name="ViewAttraction" component={ViewAttractionScreen} />
+
+        <Stack.Screen name="ListHotels" component={ListHotelsScreen} />
+
+        <Stack.Screen name="ViewHotel" component={ViewHotelScreen} />
+
+        <Stack.Screen
+          name="ListRestaurants"
+          component={ListRestaurantsScreen}
+        />
+        <Stack.Screen name="ViewRestaurants" component={ViewRestaurantScreen} />
+
+        <Stack.Screen name="ViewUser" component={ViewUserScreen} />
 
         <Stack.Screen name="ViewFolder" component={ViewFolderScreen} />
         <Stack.Screen name="FoldersList" component={FoldersListScreen} />
-
 
         {/* <Stack.Screen name="ViewProfile" component={ViewProfileScreen} /> */}
 
