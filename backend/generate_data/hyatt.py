@@ -27,7 +27,7 @@ for location in locations:
         "name": f"Hyatt Hotel {location}",
         "location": location,
         "description": "Hyatt Hotels provide a luxurious and comfortable experience for travelers worldwide. Known for their exceptional service and modern accommodations, Hyatt offers diverse dining options and state-of-the-art amenities. Whether for business or leisure, guests enjoy a welcoming atmosphere and convenient locations, making every stay memorable and enjoyable across various destinations.",
-            "price": 100 + random.uniform(1.0, 100.0),
+            "price": 100 + random.randint(1, 100),
         "image": "https://rickie-austin-114.github.io/assets/hyatt.jpg" }
 
     # Send the POST request
@@ -38,3 +38,4 @@ for location in locations:
         print('Success:', response.json())
     else:
         print('Error:', response.status_code, response.text)
+
