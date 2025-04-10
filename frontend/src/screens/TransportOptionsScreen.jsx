@@ -64,7 +64,7 @@ const TransportOptionsScreen = ({ route, navigation }) => {
   const [currentLatitude, setCurrentLatitude] = useState(43.64227871336288);
   const [currentLongitude, setCurrentLongitude] = useState(-79.38824781692587);
 
-  const { latitude, longitude, category } = route.params;
+  const { latitude, longitude, category, destination } = route.params;
 
   useEffect(() => {
     fetchTours();
@@ -159,7 +159,7 @@ const TransportOptionsScreen = ({ route, navigation }) => {
           style={{ color: storeColors.text }}
           className="ml-4 text-3xl font-bold"
         >
-          Transportation Options from {city}, {country}
+          Transportation Options from {city}, {country} to {destination}
         </Text>
       </View>
 

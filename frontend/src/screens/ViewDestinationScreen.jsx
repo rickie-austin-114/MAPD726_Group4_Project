@@ -79,7 +79,7 @@ const ViewDestinationScreen = ({ route, navigation }) => {
   };
 
   const viewTransportOption = () => {
-    navigation.navigate("TransportOptions", { latitude: tour.latitude, longitude: tour.longitude, category: tour.category  });
+    navigation.navigate("TransportOptions", { latitude: tour.latitude, longitude: tour.longitude, category: tour.category, destination: tour.name  });
   };
 
   const viewMap = () => {

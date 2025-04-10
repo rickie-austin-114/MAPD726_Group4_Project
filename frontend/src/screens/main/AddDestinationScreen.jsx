@@ -119,7 +119,7 @@ const AddDestinationScreen = ({ navigation }) => {
             style={{ backgroundColor: storeColors.placeHolders }}
           />
 
-          <Text className="text-gray-700 ml-4">Category</Text>
+          <Text className="text-gray-700 ml-4">Continent</Text>
           <TextInput
             className="p-4 bg-gray-100 text-gray-700 rounded-2xl mb-3"
             placeholder="Category"
