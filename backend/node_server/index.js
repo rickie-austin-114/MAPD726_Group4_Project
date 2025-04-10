@@ -31,6 +31,8 @@ const foldersRoutes = require('./routes/foldersRoutes');
 const attractionsRoutes = require('./routes/attractionsRoutes');
 const hotelsRoutes = require('./routes/hotelsRoutes');
 const restaurantsRoutes = require('./routes/restaurantsRoutes');
+const ordersRotues = require('./routes/ordersRoutes');
+const transportRoutes = require('./routes/transportsRoutes');
 
 
 // just to test whether the api is hosted on cloud
@@ -57,6 +59,9 @@ app.use("/api/comments", commentsRoutes)
 app.use("/api/restaurants", restaurantsRoutes)
 app.use("/api/attractions", attractionsRoutes)
 app.use("/api/hotels", hotelsRoutes)
+app.use("/api/orders", ordersRotues)
+app.use("/api/transports", transportRoutes)
+
 app.use("/folders", foldersRoutes)
 
 
