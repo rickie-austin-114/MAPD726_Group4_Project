@@ -190,7 +190,10 @@ const FoldersListScreen = ({ route, navigation }) => {
                   </TouchableOpacity>
 
 
-                  <TouchableOpacity
+                </View>
+                <View className="flex justify-center items-center">
+
+                <TouchableOpacity
                     onPress={() => {
                       deleteFolder(tour._id);
                     }}
@@ -199,7 +202,8 @@ const FoldersListScreen = ({ route, navigation }) => {
                     <TrashIcon color={storeColors.text} size="20" />
                   </TouchableOpacity>
 
-                </View>
+                  </View>
+
 
               </TouchableOpacity>
             );

@@ -34,6 +34,8 @@ function BottomBar({ route, navigation }) {
           ),
         }}
       />
+
+{/*       
       <Tab.Screen
         name="Favorite"
         component={FoldersListScreen}
@@ -42,7 +44,7 @@ function BottomBar({ route, navigation }) {
             <Icon name="star-outline" color={color} size={size} />
           ),
         }}
-      />
+      /> */}
       <Tab.Screen
         name="ChatBot"
         component={ChatBotScreen}
@@ -63,7 +65,7 @@ function BottomBar({ route, navigation }) {
         }}
       />
 
-<Tab.Screen
+{/* <Tab.Screen
         name="Profile"
         component={ViewProfileScreen}
         options={{
@@ -71,7 +73,7 @@ function BottomBar({ route, navigation }) {
             <Icon name="person-outline" color={color} size={size} />
           ),
         }}
-      />
+      /> */}
 
       {isAdminGlobal && (
         <>
