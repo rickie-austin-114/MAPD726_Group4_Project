@@ -7,8 +7,6 @@ import { GlobalContext } from '../../GlobalContext';
 
 const DropdownCheckboxList = (props) => {
 
-
-
   const { idGlobal } = useContext(GlobalContext);
 
   const tourId = props.id || "67dad40d0d62a9587e30e67a"; // Example tour ID
@@ -61,8 +59,8 @@ const DropdownCheckboxList = (props) => {
       <TouchableOpacity onPress={toggleDropdown} style={styles.dropdownHeader}>
         <Text style={styles.headerText}>
           {selectedCount > 0 
-            ? `${selectedCount} selected` 
-            : 'Select options'}
+            ? `In ${selectedCount} Folders` 
+            : 'Add To Folders'}
         </Text>
         <Text>{isOpen ? '▲' : '▼'}</Text>
       </TouchableOpacity>

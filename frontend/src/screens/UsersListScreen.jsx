@@ -53,22 +53,15 @@ const UsersListScreen = ({ route, navigation }) => {
 
   const [activeCategory, setActiveCategory] = useState("All");
 
-  //const { token } = route.params;
 
   const fetchUsers = async () => {
     try {
-      //if (activeCategory === "All") {
       const url = `${backendURL}api/users`
       const response = await axios.get(url);
 
       console.log(response.data);
       setTours(response.data);
-      // } else {
-      //   const url = `${backendURL}api/tours/category?category=${activeCategory}`
-      //   console.log(url)
-      //   const response = await axios.get(url);
-      //   setTours(response.data);
-      // }
+
     } catch (error) {
       setError(error.response?.data?.message || "An error occurred");
     }
@@ -76,17 +69,11 @@ const UsersListScreen = ({ route, navigation }) => {
 
   const deleteUser = async (userId) => {
     try {
-      //if (activeCategory === "All") {
       const url = `${backendURL}api/users/${userId}`
       const response = await axios.delete(url);
 
       fetchUsers();
-      // } else {
-      //   const url = `${backendURL}api/tours/category?category=${activeCategory}`
-      //   console.log(url)
-      //   const response = await axios.get(url);
-      //   setTours(response.data);
-      // }
+
     } catch (error) {
       setError(error.response?.data?.message || "An error occurred");
     }
@@ -148,35 +135,7 @@ const UsersListScreen = ({ route, navigation }) => {
         value={search}
         onChangeText={setSearch}
       />
-{/* 
-      <View className="pl-4">
-        <ScrollView horizontal showsHorizontalScrollIndicator={false}>
-          {categories.map((cat) => {
-            if (cat == activeCategory) {
-              return (
-                // <GradientButton key={cat} containerClass="mr-2" value={cat} />
-                <TouchableOpacity
-                  onPress={() => setActiveCategory(cat)}
-                  key={cat}
-                  className="bg-blue-400 p-3 px-4 rounded-full mr-2"
-                >
-                  <Text>{cat}</Text>
-                </TouchableOpacity>
-              );
-            } else {
-              return (
-                <TouchableOpacity
-                  onPress={() => setActiveCategory(cat)}
-                  key={cat}
-                  className="bg-blue-200 p-3 px-4 rounded-full mr-2"
-                >
-                  <Text>{cat}</Text>
-                </TouchableOpacity>
-              );
-            }
-          })}
-        </ScrollView>
-      </View> */}
+
       
       <Text> </Text>
       {error ? <Text style={styles.errorText}>{error}</Text> : null}
@@ -186,8 +145,7 @@ const UsersListScreen = ({ route, navigation }) => {
       >
         {tours.map((tour, index) => {
           let bg = "rgba(255,255,255,0.4)";
-          // tour.condition == "Critical"
-          //   ? "rgba(192, 132, 252,0.4)"
+  
 
           if (tour.name.startsWith(search)) {
             return (
@@ -217,7 +175,6 @@ const UsersListScreen = ({ route, navigation }) => {
 
                       <Text className="text-xs text-gray-700">Email: {tour.email}</Text>
 
-                      {/* <StarRating numberOfStars={tour.email} /> */}
                       {}
                     </View>
                   </View>

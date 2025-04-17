@@ -66,12 +66,6 @@ const LoginScreen = ({ navigation }) => {
       console.log("Logging in user...");
       await signInWithEmailAndPassword(auth, email, password);
 
-
-      /*
-      const response = await axios.post(`${baseURL}api/login`, {
-        email,
-        password,
-      });*/
       Alert.alert("Login Successful!");
 
 
@@ -105,7 +99,6 @@ const LoginScreen = ({ navigation }) => {
       // Step 2: Get Google ID token and access token
       const idToken = userInfo.data.idToken;
 
-      //console.log(idToken);
 
       console.log(userInfo);
 
@@ -146,7 +139,7 @@ const LoginScreen = ({ navigation }) => {
 
   
         Alert.alert("Login Successful!");
-        const token = "google"// response.data.token;
+        const token = "google"
         navigation.navigate("BottomBar", { token });
       } else {
         Alert.alert("Login Failed", error.response.data.message);
@@ -178,26 +171,12 @@ const LoginScreen = ({ navigation }) => {
   };
 
   return (
-    // <View style={styles.container}>
-    //   <TextInput placeholder="Email" value={email} onChangeText={setEmail} />
-    //   <TextInput placeholder="Password" value={password} onChangeText={setPassword} secureTextEntry />
-    //   <Button title="Login" onPress={handleLogin} />
-    //   <Button title="Register" onPress={handleRegister} />
-
-    // </View>
 
     <View
       className="flex-1 bg-white"
       style={{ backgroundColor: storeColors.bg }}
     >
-      {/* <SafeAreaView className="flex">
-        <View className="flex-row justify-center">
-          <Image
-            source={require("../assets/tourvia.png")}
-            style={{ width: 300, height: 300, resizeMode: "stretch" }}
-          />
-        </View>
-      </SafeAreaView> */}
+
       <View
         className="flex-1 bg-white px-8 pt-8"
         style={{ backgroundColor: storeColors.bg }}

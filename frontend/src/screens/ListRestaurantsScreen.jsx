@@ -138,8 +138,7 @@ const ListRestaurantsScreen = ({ route, navigation }) => {
       >
         {tours.map((tour, index) => {
           let bg = "rgba(255,255,255,0.4)";
-          // tour.condition == "Critical"
-          //   ? "rgba(192, 132, 252,0.4)"
+
 
           if (tour.name.startsWith(search)) {
             return (

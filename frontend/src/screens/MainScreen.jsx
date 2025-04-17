@@ -36,6 +36,7 @@ import {
 import { storeColors } from "../theme";
 import StarRating from "../components/StarRating";
 
+import notifee, { AndroidImportance } from "@notifee/react-native";
 
 import { backendURL } from "../config";
 
@@ -44,22 +45,70 @@ import { GlobalContext } from "../../GlobalContext.jsx";
 
 const { height } = Dimensions.get("window"); // Get the screen height
 
-
-
 const MainScreen = ({ route, navigation }) => {
   const [tours, setTours] = useState([]);
   const [error, setError] = useState("");
   const [listCritical, setListCritical] = useState(false);
   const [search, setSearch] = useState("");
 
+  const [notificationEnabled, setNotificationEnabled] = useState(false);
+
   const isFocused = useIsFocused();
 
   const categories = ["All", "Europe", "America", "Asia"];
   const [activeCategory, setActiveCategory] = useState("All");
 
-  const { usernameGlobal, setUsernameGlobal, profilePictureGlobal } = useContext(GlobalContext);
+  const { usernameGlobal, setUsernameGlobal, profilePictureGlobal } =
+    useContext(GlobalContext);
 
-  //const { token } = route.params;
+  // Create a notification channel (Android only)
+  const createNotificationChannel = async () => {
+    if (Platform.OS === "android") {
+      await notifee.createChannel({
+        id: "default",
+        name: "Default Channel",
+        importance: AndroidImportance.HIGH,
+        sound: "default",
+      });
+      console.log("Notification channel created");
+    }
+  };
+
+  // Request notification permissions (iOS only)
+  const requestNotificationPermission = async () => {
+    if (Platform.OS === "ios") {
+      const settings = await notifee.requestPermission();
+      if (settings.authorizationStatus >= 1) {
+        console.log("Notification permission granted");
+      } else {
+        console.log("Notification permission denied");
+      }
+    }
+  };
+
+  // Display a notification with the user's input text
+  const showNotification = async () => {
+    // Create the notification channel (Android only)
+    await createNotificationChannel();
+
+    // Request notification permissions (iOS only)
+    await requestNotificationPermission();
+
+    // Display the notification
+    await notifee.displayNotification({
+      title: "Notification Enabled",
+      body: "Receive regular notifications from TourVia",
+      android: {
+        channelId: "default",
+        importance: AndroidImportance.HIGH,
+      },
+      ios: {
+        sound: "default",
+      },
+    });
+
+    console.log("Notification displayed");
+  };
 
   const fetchTours = async () => {
     try {
@@ -86,7 +135,6 @@ const MainScreen = ({ route, navigation }) => {
     fetchTours();
   }, [activeCategory, isFocused]);
 
-
   const viewProfile = (tour) => {
     navigation.navigate("ViewDestination", { tour });
   };
@@ -97,6 +145,15 @@ const MainScreen = ({ route, navigation }) => {
 
   const navigateToProfile = () => {
     navigation.navigate("ViewProfile", { id: "67b73ee28885fbfe362254a1" });
+  };
+
+  const onBellPress = () => {
+    if (notificationEnabled) {
+      Alert.alert("Notifications Disabled");
+    } else {
+      showNotification();
+    }
+    setNotificationEnabled(!notificationEnabled);
   };
 
   return (
@@ -116,16 +173,13 @@ const MainScreen = ({ route, navigation }) => {
             <StarIcon color={storeColors.text} size="30" />
           </TouchableOpacity>
 
-          <BellIcon color={storeColors.text} size="30" />
+          <TouchableOpacity onPress={onBellPress}>
+            <BellIcon color={storeColors.text} size="30" />
+          </TouchableOpacity>
         </View>
       </View>
       <View className="mt-3">
-      {/* <Image
-                  source={{ uri: profileImage }}
-                  style={{ width: 80, height: 80 }}
-                  className="rounded-2xl"
-                /> */}
-      <Text
+        <Text
           style={{ color: storeColors.text }}
           className="ml-4 text-3xl font-bold"
         >
@@ -137,7 +191,6 @@ const MainScreen = ({ route, navigation }) => {
         >
           Browse Destinations
         </Text>
-      
       </View>
 
       <TextInput
@@ -238,8 +291,6 @@ const MainScreen = ({ route, navigation }) => {
       </ScrollView>
 
       <Spacer />
-
-
     </LinearGradient>
   );
 };

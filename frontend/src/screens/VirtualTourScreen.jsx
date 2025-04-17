@@ -7,7 +7,8 @@ const url = "http://ip-api.com/json";
 const VirtualTourScreen = ({ route, navigation }) => {
   const { tour } = route.params;
 
-  const city = tour.name.toLowerCase();
+  const city = tour.name.toLowerCase().replace(/ /g, '_');
+
 
   return (
     <View style={styles.container}>

@@ -14,6 +14,8 @@ import BottomBar from "./src/components/BottomBar";
 import MapScreen from "./src/screens/MapScreen";
 import TransportOptionsScreen from "./src/screens/TransportOptionsScreen";
 
+import { LogBox } from 'react-native';
+
 import { Alert, Platform } from "react-native";
 import messaging from "@react-native-firebase/messaging";
 
@@ -33,6 +35,10 @@ import { GlobalProvider } from "./GlobalContext";
 import ViewTransportScreen from "./src/screens/ViewTransportScreen";
 import EditProfileScreen from "./src/screens/EditProfileScreen";
 import AddFolderScreen from "./src/screens/AddFolderScreen";
+import ViewProfileScreen from "./src/screens/ViewProfileScreen";
+
+LogBox.ignoreLogs(['Warning: ...']); // Ignore log notification by message
+LogBox.ignoreAllLogs();//Ignore all log notifications
 
 async function createNotificationChannel() {
   if (Platform.OS === "android") {
@@ -127,6 +133,9 @@ const App = () => {
             component={ForgetPasswordScreen}
           />
           <Stack.Screen name="ResetPassword" component={ResetPasswordScreen} />
+
+          <Stack.Screen name="ViewProfile" component={ViewProfileScreen} />
+
 
           <Stack.Screen
             name="BottomBar"

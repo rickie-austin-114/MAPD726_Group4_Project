@@ -66,6 +66,9 @@ const ViewFolderScreen = ({ route, navigation }) => {
   const toggleSwitch = () => {
     setListCritical(!listCritical);
   };
+  const viewProfile = (tour) => {
+    navigation.navigate("ViewDestination", { tour });
+  };
 
   useEffect(() => {
     fetchTours();

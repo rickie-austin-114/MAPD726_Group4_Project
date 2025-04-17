@@ -85,15 +85,6 @@ const RegisterScreen = ({ navigation }) => {
       className="flex-1 bg-white"
       style={{ backgroundColor: storeColors.bg }}
     >
-      {/* 
-      <SafeAreaView className="flex">
-        <View className="flex-row justify-center">
-          <Image
-            source={require("../assets/tourvia.png")}
-            style={{ width: 200, height: 200, resizeMode: "stretch" }}
-          />
-        </View>
-      </SafeAreaView> */}
 
       <View
         className="flex-1 bg-white px-8 pt-8"

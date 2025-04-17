@@ -1,0 +1,70 @@
+{
+  "project_info": {
+    "project_number": "518815540074",
+    "project_id": "authentication1-1f950",
+    "storage_bucket": "authentication1-1f950.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:518815540074:android:8754de94658829559d7b13",
+        "android_client_info": {
+          "package_name": "com.rickieaustin114.mapd726"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "518815540074-62r1qul71957t5av3n8hvme3s4chko0t.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.rickieaustin114.mapd726",
+            "certificate_hash": "aba5aa844571b6c1a395995faa523f50c328cd98"
+          }
+        },
+        {
+          "client_id": "518815540074-72fu299ufs2iu2fo8s871qigh96mb9mi.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.rickieaustin114.mapd726",
+            "certificate_hash": "f21bad476e91a693cb37a86608994f654d154473"
+          }
+        },
+        {
+          "client_id": "518815540074-vq90bk34e9ujh0jj6uitb4u4fbslr7vl.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.rickieaustin114.mapd726",
+            "certificate_hash": "0db7de317de216a2dd44822b1be1ef9571b24f70"
+          }
+        },
+        {
+          "client_id": "518815540074-n01vhhjpeacntd87utfrnuquaei4pmpq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDqihBUEPn2S4OCqw7rh2yPF_8om2x0_Eo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "518815540074-n01vhhjpeacntd87utfrnuquaei4pmpq.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "518815540074-7th8q4uh5uflpf146cmicmcqba4bjg8t.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.rickieaustin114.mapd726"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -98,13 +98,7 @@ const ViewTransportScreen = ({ route, navigation }) => {
   };
 
   return (
-    // <View style={styles.container}>
-    //   <TextInput placeholder="Email" value={email} onChangeText={setEmail} />
-    //   <TextInput placeholder="Password" value={password} onChangeText={setPassword} secureTextEntry />
-    //   <Button title="Login" onPress={handleLogin} />
-    //   <Button title="Register" onPress={handleRegister} />
 
-    // </View>
 
     <View
       className="flex-1 bg-white"

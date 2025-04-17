@@ -88,23 +88,15 @@ const ViewHotelScreen = ({ route, navigation }) => {
 
   const fetchFolders = async () => {
     try {
-      //if (activeCategory === "All") {
       const response = await axios.get(`${backendURL}folders`);
       setFolder(response.data);
-      //}
     } catch (error) {
       setError(error.response?.data?.message || "An error occurred");
     }
   };
 
   return (
-    // <View style={styles.container}>
-    //   <TextInput placeholder="Email" value={email} onChangeText={setEmail} />
-    //   <TextInput placeholder="Password" value={password} onChangeText={setPassword} secureTextEntry />
-    //   <Button title="Login" onPress={handleLogin} />
-    //   <Button title="Register" onPress={handleRegister} />
 
-    // </View>
 
     <View
       className="flex-1 bg-white"

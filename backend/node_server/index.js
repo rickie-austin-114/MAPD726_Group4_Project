@@ -20,6 +20,8 @@ const MONGODB_URI = process.env.MONGODB_URI;
 // Middleware
 app.use(cors());
 app.use(bodyParser.json());
+app.use(express.json());
+
 
 
 const usersRoutes = require('./routes/usersRoutes');
@@ -45,12 +47,8 @@ app.get('/', async (req, res) => {
 
 // MongoDB connection
 mongoose
-  .connect(MONGODB_URI, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  })
-  .then(() => console.log("MongoDB connected"))
-  .catch((err) => console.error("MongoDB connection error:", err));
+  .connect(MONGODB_URI)
+  .then(() =>  {
 
 
 app.use("/api/users", usersRoutes)
@@ -99,9 +97,14 @@ app.post('/validate-id-token', async (req, res) => {
   }
 });
 
-
-
 // Start the server
-app.listen(PORT, () => {
+
+
+  })
+
+.catch((err) => console.error("MongoDB connection error:", err));
+
+const server = app.listen(PORT, () => {
   console.log(`Server running on http://localhost:${PORT}`);
 });
+module.exports = { app, server };  // Add this line

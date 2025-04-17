@@ -159,7 +159,7 @@ const TransportOptionsScreen = ({ route, navigation }) => {
           style={{ color: storeColors.text }}
           className="ml-4 text-3xl font-bold"
         >
-          Transportation Options from {city}, {country} to {destination}
+          Transportation Options from {city} to {destination}
         </Text>
       </View>
 

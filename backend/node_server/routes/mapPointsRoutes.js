@@ -41,8 +41,8 @@ router.post("/", async (req, res) => {
   const { name, latitude, longitude , location, description,  } = req.body;
 
   const tour = new MapPoint({
-    name, ratings, location, description, price , image, 
-  });
+    name, latitude, longitude , location, description,
+    });
 
   try {
     const savedTour = await tour.save();

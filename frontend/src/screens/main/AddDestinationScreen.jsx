@@ -128,24 +128,6 @@ const AddDestinationScreen = ({ navigation }) => {
             style={{ backgroundColor: storeColors.placeHolders }}
           />
 
-          <Text className="text-gray-700 ml-4">Latitude</Text>
-          <TextInput
-            className="p-4 bg-gray-100 text-gray-700 rounded-2xl mb-3"
-            placeholder="Latitude"
-            value={latitude}
-            onChangeText={setLatitude}
-            style={{ backgroundColor: storeColors.placeHolders }}
-          />
-
-          <Text className="text-gray-700 ml-4">Longitude</Text>
-          <TextInput
-            className="p-4 bg-gray-100 text-gray-700 rounded-2xl mb-3"
-            placeholder="Longitude"
-            value={longitude}
-            onChangeText={setLongitude}
-            style={{ backgroundColor: storeColors.placeHolders }}
-          />
-
           <Pressable onPress={createDestination} style={styles.button}>
             <Text style={styles.text}>Create Destination</Text>
           </Pressable>

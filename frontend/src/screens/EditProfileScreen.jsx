@@ -103,15 +103,6 @@ const EditProfileScreen = ({ navigation, route }) => {
       className="flex-1 bg-white"
       style={{ backgroundColor: storeColors.bg }}
     >
-      {/* 
-      <SafeAreaView className="flex">
-        <View className="flex-row justify-center">
-          <Image
-            source={require("../assets/tourvia.png")}
-            style={{ width: 200, height: 200, resizeMode: "stretch" }}
-          />
-        </View>
-      </SafeAreaView> */}
 
       <View
         className="flex-1 bg-white px-8 pt-8"
@@ -121,9 +112,9 @@ const EditProfileScreen = ({ navigation, route }) => {
           className="text-gray-900 ml-4"
           style={{ fontSize: 40, fontWeight: "bold" }}
         >
-          Sign Up
+          Edit
         </Text>
-        <Text className="text-gray-700 ml-4">Create Your Account</Text>
+        <Text className="text-gray-700 ml-4">Change Your Profile</Text>
 
         <Text className="text-gray-700 ml-4"></Text>
 

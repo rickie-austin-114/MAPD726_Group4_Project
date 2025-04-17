@@ -31,7 +31,8 @@ import {
   PlusIcon,
   PencilSquareIcon,
   MagnifyingGlassIcon,
-  StarIcon
+  StarIcon,
+  TrashIcon
 } from "react-native-heroicons/solid";
 import { withDecay } from "react-native-reanimated";
 import { storeColors } from "../theme";
@@ -84,6 +85,13 @@ const FoldersListScreen = ({ route, navigation }) => {
   const addFolder = (id) => {
     navigation.navigate("AddFolder", { id });
   };
+
+
+  const deleteFolder = async (id) => {
+    const res = await axios.delete(`${backendURL}folders/${id}`);
+    fetchTours();
+  };
+
 
 
 
@@ -179,6 +187,16 @@ const FoldersListScreen = ({ route, navigation }) => {
                     className="bg-blue-400 p-2 px-4 rounded-full mr-2"
                   >
                     <MagnifyingGlassIcon color={storeColors.text} size="20" />
+                  </TouchableOpacity>
+
+
+                  <TouchableOpacity
+                    onPress={() => {
+                      deleteFolder(tour._id);
+                    }}
+                    className="bg-blue-400 p-2 px-4 rounded-full mr-2"
+                  >
+                    <TrashIcon color={storeColors.text} size="20" />
                   </TouchableOpacity>
 
                 </View>

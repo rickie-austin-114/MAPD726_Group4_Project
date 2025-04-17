@@ -102,10 +102,8 @@ const ViewDestinationScreen = ({ route, navigation }) => {
 
   const fetchFolders = async () => {
     try {
-      //if (activeCategory === "All") {
       const response = await axios.get(`${backendURL}folders`);
       setFolder(response.data);
-      //}
     } catch (error) {
       setError(error.response?.data?.message || "An error occurred");
     }
@@ -115,13 +113,7 @@ const ViewDestinationScreen = ({ route, navigation }) => {
     fetchComments();
   }, []);
   return (
-    // <View style={styles.container}>
-    //   <TextInput placeholder="Email" value={email} onChangeText={setEmail} />
-    //   <TextInput placeholder="Password" value={password} onChangeText={setPassword} secureTextEntry />
-    //   <Button title="Login" onPress={handleLogin} />
-    //   <Button title="Register" onPress={handleRegister} />
 
-    // </View>
 
     <View
       className="flex-1 bg-white"
@@ -158,12 +150,6 @@ const ViewDestinationScreen = ({ route, navigation }) => {
                 <Text>Tourist Attractions</Text>
               </TouchableOpacity>
 
-              {/* <TouchableOpacity
-                onPress={() => {}}
-                className="bg-green-200 p-3 px-4 rounded-full mr-2"
-              >
-                <Text>Group Tours</Text>
-              </TouchableOpacity> */}
 
               <TouchableOpacity
                 onPress={viewRestaurants}

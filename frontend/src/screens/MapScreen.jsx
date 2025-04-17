@@ -1,13 +1,16 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { StyleSheet, View } from "react-native";
 import MapView, { Marker, Polyline } from "react-native-maps";
+
+import axios from "axios";
+
 
 const MapScreen = ({ route, navigation }) => {
 
   const { tour } = route.params;
 
   // Initialize array of 5 coordinates (example: Paris landmarks)
-  const [coordinates] = useState([
+  const [coordinates, setCoordinates] = useState([
     {
       id: 21342314234,
       name: "Eiffel Tower",
@@ -45,25 +48,39 @@ const MapScreen = ({ route, navigation }) => {
     }
   ]);
 
-  // Calculate initial region based on first point
-  const initialRegion = {
-    latitude: coordinates[0].latitude,
-    longitude: coordinates[0].longitude,
-    latitudeDelta: 0.2,  // Wider zoom to show all points
-    longitudeDelta: 0.2
-  };
+  const fetchTourData = async () => {
+    const res = await axios.get(`https://ninth-rhino-450106-u8.df.r.appspot.com/api/mappoints/${tour.name}`)
+    console.log(res.data);
+
+    for (let i = 0; i < res.data.length; i++) {
+      res.data[i].id = i;;
+    }
+
+    setCoordinates(res.data);
+  }
+
+  useEffect(() => {
+    fetchTourData();
+  }, []);
+
 
   return (
     <View style={styles.container}>
       <MapView
         style={styles.map}
-        initialRegion={initialRegion}
+        region={{
+          latitude: coordinates[0].latitude,
+          longitude: coordinates[0].longitude,
+          latitudeDelta: 0.2,  // Wider zoom to show all points
+          longitudeDelta: 0.2
+        }}
         showsUserLocation={false}
+
       >
         {/* Render markers for each point */}
         {coordinates.map((point) => (
           <Marker
-            key={point.id}
+            id={point.id}
             coordinate={{
               latitude: point.latitude,
               longitude: point.longitude
