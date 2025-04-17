@@ -1,5 +1,5 @@
 // screens/LoginScreen.js
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import { StripeProvider, useStripe } from "@stripe/stripe-react-native";
 import {
   View,
@@ -29,10 +29,17 @@ import {
 } from "react-native-heroicons/solid";
 import ShareButton from "../components/ShareButton";
 
+import { GlobalContext } from "../../GlobalContext";
+import DropdownCheckboxList from "../components/DropdownCheckboxList";
+
+
+
 const ViewDestinationScreen = ({ route, navigation }) => {
   const [folder, setFolder] = useState([]);
   const [comments, setComments] = useState([]);
 
+    const { usernameGlobal, setUsernameGlobal, profilePictureGlobal } = useContext(GlobalContext);
+  
   const [userComment, setUserComment] = useState("");
 
   const { tour } = route.params;
@@ -54,7 +61,7 @@ const ViewDestinationScreen = ({ route, navigation }) => {
       const url = `${backendURL}api/comments`;
       const data = {
         content: userComment,
-        author: "Rickie",
+        author: usernameGlobal,
         tour: tour._id,
         // Add more key-value pairs as needed
       };
@@ -194,6 +201,7 @@ const ViewDestinationScreen = ({ route, navigation }) => {
           </View>
           <Text> </Text>
 
+          <DropdownCheckboxList id={tour._id} />
           <ShareButton />
 
           <Text className="text-gray-700 ml-4">Rating: {tour.ratings}</Text>

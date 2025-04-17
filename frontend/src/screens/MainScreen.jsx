@@ -57,7 +57,7 @@ const MainScreen = ({ route, navigation }) => {
   const categories = ["All", "Europe", "America", "Asia"];
   const [activeCategory, setActiveCategory] = useState("All");
 
-  const { username, setUsername, profileImage, setProfileImage } = useContext(GlobalContext);
+  const { usernameGlobal, setUsernameGlobal, profilePictureGlobal } = useContext(GlobalContext);
 
   //const { token } = route.params;
 
@@ -129,7 +129,7 @@ const MainScreen = ({ route, navigation }) => {
           style={{ color: storeColors.text }}
           className="ml-4 text-3xl font-bold"
         >
-          Hello {username}!
+          Hello {usernameGlobal}!
         </Text>
         <Text
           style={{ color: storeColors.text }}

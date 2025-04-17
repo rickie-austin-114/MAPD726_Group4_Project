@@ -1,12 +1,16 @@
-import React from "react";
+import React, { useContext } from "react";
 import { View, Text, Button, Platform, Alert, StyleSheet, Pressable } from "react-native";
 import { useStripe } from "@stripe/stripe-react-native";
 import axios from "axios";
 
 import { backendURL } from '../config';
+import { GlobalContext } from "../../GlobalContext";
 
 
 function PaymentScreen(props) {
+  const { idGlobal } = useContext(GlobalContext);
+
+  
 
   const name = props.name || "payment";
   const description = props.description || "thank you";
@@ -50,6 +54,7 @@ function PaymentScreen(props) {
           description: description, 
           image: image,
           price: amount,
+          userId: idGlobal,
         })
       }
     } catch (error) {

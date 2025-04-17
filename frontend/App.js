@@ -10,7 +10,6 @@ import ResetPasswordScreen from "./src/screens/auth/ResetPasswordScreen";
 import ViewDestinationScreen from "./src/screens/ViewDestinationScreen";
 import ViewFolderScreen from "./src/screens/ViewFolderScreen";
 import FoldersListScreen from "./src/screens/FoldersListScreen";
-import ViewProfileScreen from "./src/screens/ViewProfileScreen";
 import BottomBar from "./src/components/BottomBar";
 import MapScreen from "./src/screens/MapScreen";
 import TransportOptionsScreen from "./src/screens/TransportOptionsScreen";
@@ -32,6 +31,8 @@ import ViewRestaurantScreen from "./src/screens/ViewRestaurantScreen";
 import ListRestaurantsScreen from "./src/screens/ListRestaurantsScreen";
 import { GlobalProvider } from "./GlobalContext";
 import ViewTransportScreen from "./src/screens/ViewTransportScreen";
+import EditProfileScreen from "./src/screens/EditProfileScreen";
+import AddFolderScreen from "./src/screens/AddFolderScreen";
 
 async function createNotificationChannel() {
   if (Platform.OS === "android") {
@@ -158,6 +159,8 @@ const App = () => {
           <Stack.Screen name="ListHotels" component={ListHotelsScreen} />
 
           <Stack.Screen name="ViewHotel" component={ViewHotelScreen} />
+          
+          <Stack.Screen name="AddFolder" component={AddFolderScreen} />
 
 
 
@@ -174,6 +177,9 @@ const App = () => {
 
           <Stack.Screen name="ViewFolder" component={ViewFolderScreen} />
           <Stack.Screen name="FoldersList" component={FoldersListScreen} />
+
+          <Stack.Screen name="EditProfile" component={EditProfileScreen} />
+
 
           {/* <Stack.Screen name="ViewProfile" component={ViewProfileScreen} /> */}
 

@@ -4,6 +4,7 @@ const orderSchema = new mongoose.Schema({
   name: { type: String, required: true },
   price: { type: Number, required: true },
   description: { type: String, default: "" },
+  userId: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
   image: {
     type: String,
     default:

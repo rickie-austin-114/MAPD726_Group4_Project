@@ -1,12 +1,14 @@
 const express = require("express")
-const Order = require("../models/Order"); // User model
+const MapPoint = require("../models/MapPoint"); // User model
 const router = express.Router();
+
+
 
 // GET all tours
 router.get("/", async (req, res) => {
   try {
     const search = req.query.search ?? "";
-    const restaurants = await Order.find({
+    const restaurants = await MapPoint.find({
       name: { $regex: new RegExp(`^${search}`, "i") },
     }); // 'i' for case-insensitive
     res.json(restaurants);
@@ -16,14 +18,16 @@ router.get("/", async (req, res) => {
 });
 
 
-// GET all tours
-router.get("/:id", async (req, res) => {
+// GET a single destination by id
+router.get("/:location", async (req, res) => {
   try {
-    const id = req.params.id;
-    const restaurants = await Order.find({
-      userId: id,
-    }); // 'i' for case-insensitive
-    res.json(restaurants);
+    let tour = await MapPoint.find({ location: req.params.location });
+    if (!tour) return res.status(404).json({ message: "Tour not found" });
+    //tour = tour.toObject();
+    // const crit = await isCritical(req.params.id);
+    // destination.condition = crit;
+
+    res.json(tour);
   } catch (err) {
     res.status(500).json({ message: err.message });
   }
@@ -32,15 +36,12 @@ router.get("/:id", async (req, res) => {
 
 
 
-
-
-
 // POST a new tour
 router.post("/", async (req, res) => {
-  const { name, price , description, image, userId  } = req.body;
+  const { name, latitude, longitude , location, description,  } = req.body;
 
-  const tour = new Order({
-    name, price , description, image, userId
+  const tour = new MapPoint({
+    name, ratings, location, description, price , image, 
   });
 
   try {
@@ -56,17 +57,16 @@ router.post("/", async (req, res) => {
   }
 });
 
-
 // PUT update a tour by name
 router.put("/:id", async (req, res) => {
   try {
-    const { name, price , description, image, orderDate, userId } = req.body;
+    const { name, latitude, longitude , location, description,  } = req.body;
 
     const updateData = {
-      name, price , description, image, orderDate , userId
+        name, latitude, longitude , location, description, 
     };
 
-    const updatedTour = await Order.findOneAndUpdate(
+    const updatedTour = await Tour.findOneAndUpdate(
       { _id: req.params.id },
       updateData,
       { new: true, runValidators: true }
@@ -83,7 +83,7 @@ router.put("/:id", async (req, res) => {
 // DELETE a tours
 router.delete("/:id", async (req, res) => {
   try {
-    const result = await Order.findByIdAndDelete(req.params.id);
+    const result = await MapPoint.findByIdAndDelete(req.params.id);
     if (result) {
       return res
         .status(200)

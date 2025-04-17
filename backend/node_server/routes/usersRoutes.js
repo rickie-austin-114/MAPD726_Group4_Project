@@ -4,7 +4,6 @@ const User = require("../models/User"); // User model
 const router = express.Router();
 
 // CRUD Endpoints
-
 // Create a user from google
 router.post("/", async (req, res) => {
   try {

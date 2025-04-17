@@ -1,27 +1,36 @@
-import React, { createContext, useState } from 'react';
+import React, { createContext, useState } from "react";
 
 export const GlobalContext = createContext();
 
 export const GlobalProvider = ({ children }) => {
-  const [globalVar, setGlobalVar] = useState("initialValue");
+  const [isAdminGlobal, setIsAdminGlobal] = useState(false);
+  const [ageGlobal, setAgeGlobal] = useState("");
+  const [genderGlobal, setGenderGlobal] = useState("");
+  const [profilePictureGlobal, setProfilePictureGlobal] = useState("");
 
-  const [isAdmin, setIsAdmin] = useState(true);
 
-  const [username, setUsername] = useState("Rickie Au");
-  const [profileImage, setProfileImage] = useState("");
+  const [usernameGlobal, setUsernameGlobal] = useState("");
+  const [phoneGlobal, setPhoneGlobal] = useState("");
 
+  const [idGlobal, setIdGlobal] = useState("");
 
   return (
     <GlobalContext.Provider
       value={{
-        globalVar,
-        setGlobalVar,
-        isAdmin,
-        setIsAdmin,
-        username,
-        setUsername,
-        profileImage,
-        setProfileImage,
+        isAdminGlobal,
+        setIsAdminGlobal,
+        usernameGlobal,
+        setUsernameGlobal,
+        phoneGlobal,
+        setPhoneGlobal,
+        ageGlobal,
+        setAgeGlobal,
+        genderGlobal,
+        setGenderGlobal,
+        profilePictureGlobal,
+        setProfilePictureGlobal,
+        idGlobal,
+        setIdGlobal,
       }}
     >
       {children}

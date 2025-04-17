@@ -10,41 +10,56 @@ import {
   Image,
   Text,
   Pressable,
+  Keyboard,
 } from "react-native";
 import axios from "axios";
 import { SafeAreaView } from "react-native-safe-area-context";
 import {
   createUserWithEmailAndPassword,
-  sendEmailVerification
+  sendEmailVerification,
 } from "@react-native-firebase/auth";
 
 import { storeColors } from "../../theme";
 import "../../../global.css";
 import { app, auth } from "../../../firebaseConfig";
-import { backendURL } from '../../config';
-
-
+import { backendURL } from "../../config";
 
 const RegisterScreen = ({ navigation }) => {
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [age, setAge] = useState("");
 
-
+  const [gender, setGender] = useState("");
+  const [profilePicture, setProfilePicture] = useState("");
 
   const handleRegister = async () => {
     try {
+      Keyboard.dismiss(); // Add this before auth calls
+
+      console.log("Registering user...");
+
+      console.log("Name: ", name);
+      console.log("Phone: ", phone);
+      console.log("Email: ", email);
+      console.log("Password: ", password);
+
+      console.log(`${backendURL}api/auth/register`);
 
       const res = await axios.post(`${backendURL}api/auth/register`, {
         name,
         phone,
         email,
         password,
+        age,
+        gender,
+        profilePicture,
       });
 
-      console.log(res.status)
-      
+      console.log("Response from server: ");
+      console.log(res.status);
+
       if (res.status !== 201) {
         throw new Error("User already exist!");
       }
@@ -55,7 +70,7 @@ const RegisterScreen = ({ navigation }) => {
         password
       );
       // Send verification email
-      await userCr,edential.user.sendEmailVerification();
+      await userCredential.user.sendEmailVerification();
 
       Alert.alert("Registration Successful!");
       navigation.navigate("Login");
@@ -70,7 +85,7 @@ const RegisterScreen = ({ navigation }) => {
       className="flex-1 bg-white"
       style={{ backgroundColor: storeColors.bg }}
     >
-{/* 
+      {/* 
       <SafeAreaView className="flex">
         <View className="flex-row justify-center">
           <Image
@@ -79,25 +94,20 @@ const RegisterScreen = ({ navigation }) => {
           />
         </View>
       </SafeAreaView> */}
-      
+
       <View
         className="flex-1 bg-white px-8 pt-8"
         style={{ backgroundColor: storeColors.bg }}
-        >
+      >
         <Text
           className="text-gray-900 ml-4"
           style={{ fontSize: 40, fontWeight: "bold" }}
         >
           Sign Up
         </Text>
-        <Text className="text-gray-700 ml-4">
-            Create Your Account
-        </Text>
+        <Text className="text-gray-700 ml-4">Create Your Account</Text>
 
-        <Text className="text-gray-700 ml-4">
-
-        </Text>
-
+        <Text className="text-gray-700 ml-4"></Text>
 
         <Text className="text-gray-700 ml-4">Name</Text>
         <TextInput
@@ -115,6 +125,33 @@ const RegisterScreen = ({ navigation }) => {
           placeholder="Phone"
           value={phone}
           onChangeText={setPhone}
+        />
+
+        <Text className="text-gray-700 ml-4">Age</Text>
+        <TextInput
+          className="p-4 bg-gray-100 text-gray-700 rounded-2xl mb-3"
+          style={{ backgroundColor: storeColors.placeHolders }}
+          placeholder="Age"
+          value={age}
+          onChangeText={setAge}
+        />
+
+        <Text className="text-gray-700 ml-4">Gender</Text>
+        <TextInput
+          className="p-4 bg-gray-100 text-gray-700 rounded-2xl mb-3"
+          style={{ backgroundColor: storeColors.placeHolders }}
+          placeholder="Gender"
+          value={gender}
+          onChangeText={setGender}
+        />
+
+        <Text className="text-gray-700 ml-4">Profile Picture</Text>
+        <TextInput
+          className="p-4 bg-gray-100 text-gray-700 rounded-2xl mb-3"
+          style={{ backgroundColor: storeColors.placeHolders }}
+          placeholder="Profile Picture"
+          value={profilePicture}
+          onChangeText={setProfilePicture}
         />
 
         <Text className="text-gray-700 ml-4">Email Address</Text>
@@ -139,8 +176,6 @@ const RegisterScreen = ({ navigation }) => {
         <Pressable onPress={handleRegister} style={styles.button}>
           <Text style={styles.text}>Sign Up</Text>
         </Pressable>
-
-        
       </View>
     </View>
   );

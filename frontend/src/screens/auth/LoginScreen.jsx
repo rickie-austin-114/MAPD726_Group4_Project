@@ -10,7 +10,8 @@ import {
   Image,
   Text,
   Pressable,
-  TouchableOpacity
+  TouchableOpacity,
+  Keyboard,
 } from "react-native";
 import axios from "axios";
 import { SafeAreaView } from "react-native-safe-area-context";
@@ -33,7 +34,21 @@ const LoginScreen = ({ navigation }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const { isAdmin, setIsAdmin, username, setUsername, profileImage, setProfileImage } = useContext(GlobalContext);
+  const {         
+    isAdminGlobal,
+    setIsAdminGlobal,
+    usernameGlobal,
+    setUsernameGlobal,
+    phoneGlobal,
+    setPhoneGlobal,
+    ageGlobal,
+    setAgeGlobal,
+    genderGlobal,
+    setGenderGlobal,
+    profilePictureGlobal,
+    setProfilePictureGlobal,
+    idGlobal,
+    setIdGlobal } = useContext(GlobalContext);
 
 
   useEffect(() => {
@@ -48,18 +63,33 @@ const LoginScreen = ({ navigation }) => {
   const handleLogin = async () => {
     try {
 
-
+      console.log("Logging in user...");
       await signInWithEmailAndPassword(auth, email, password);
+
+
       /*
       const response = await axios.post(`${baseURL}api/login`, {
         email,
         password,
       });*/
       Alert.alert("Login Successful!");
+
+
+      const res2 = await axios.get(`${backendURL}api/users/email/${email}`);
+
+      console.log(res2.data.isAdmin);
+
+      setIsAdminGlobal(res2.data.isAdmin);
+      setUsernameGlobal(res2.data.name);
+      setPhoneGlobal(res2.data.phone);
+      setAgeGlobal(res2.data.age);
+      setGenderGlobal(res2.data.gender);
+      setProfilePictureGlobal(res2.data.profilePicture);
+      setIdGlobal(res2.data._id);
       // Store token and navigate to Account
       const token = "rickie"// response.data.token;
       // You might want to store the token using AsyncStorage for later use
-      navigation.navigate("Main", { token });
+      navigation.navigate("BottomBar", { token });
     } catch (error) {
       Alert.alert("Login Failed", error.response.data.message);
     }
@@ -87,9 +117,6 @@ const LoginScreen = ({ navigation }) => {
       const name = user["name"];
       const profilePicture = user["photo"]
 
-      setUsername(name);
-      setProfileImage(profilePicture);
-
 
 
 
@@ -100,7 +127,6 @@ const LoginScreen = ({ navigation }) => {
       });
 
 
-
       if (idToken !== null) {
         console.log("User signed in successfully with Google!");
 
@@ -108,7 +134,16 @@ const LoginScreen = ({ navigation }) => {
 
         console.log(res2.data.isAdmin);
 
-        setIsAdmin(res2.data.isAdmin);
+        setIsAdminGlobal(res2.data.isAdmin);
+        setUsernameGlobal(res2.data.name);
+        setPhoneGlobal(res2.data.phone);
+        setAgeGlobal(res2.data.age);
+        setGenderGlobal(res2.data.gender);
+        setProfilePictureGlobal(res2.data.profilePicture);
+        setIdGlobal(res2.data._id);
+
+
+
   
         Alert.alert("Login Successful!");
         const token = "google"// response.data.token;

@@ -1,31 +1,42 @@
 const express = require("express")
 const router = express.Router();
 
+const bcrypt = require("bcrypt");
+
 const User = require("../models/User"); // User model
 
 // registration endpoint for the 
 router.post("/register", async (req, res) => {
   try {
-    const { name, phone, email, password } = req.body;
+    const { name, phone, email, password, age, gender, profilePicture } = req.body;
 
     const existingUser = await User.findOne({ email: email });
 
-    console.log(existingUser);
     
-    if (existingUser) {
+    if (!!existingUser) {
+
+      console.log("User with this email already exists.");
       return res.status(400).json({ error: "User with this email already exists." });
     }
+
+
     const hashedPassword = await bcrypt.hash(password, 10);
+
+
+    
     const user = new User({
       name,
       phone,
       email,
       password: hashedPassword,
+      age, gender, profilePicture,
     });
+
+
     await user.save();
-    res.status(201).json({ message: "User registered!" });
+    return res.status(201).json({ message: "User registered!" });
   } catch (error) {
-    res.status(400).json({ message: "Error" });
+    res.status(400).json({ message: "Error registering user", error });
   }
 });
 

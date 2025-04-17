@@ -1,5 +1,5 @@
 // src/screens/ListPatientsScreen.tsx
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import {
   View,
   Text,
@@ -36,9 +36,11 @@ import {
 import { withDecay } from "react-native-reanimated";
 import { storeColors } from "../theme";
 import { backendURL } from '../config';
-
+import { GlobalContext } from "../../GlobalContext";
 
 const FoldersListScreen = ({ route, navigation }) => {
+
+  const { idGlobal } = useContext(GlobalContext);
 
   const screenHeight = Dimensions.get('window').height;
 
@@ -55,11 +57,10 @@ const FoldersListScreen = ({ route, navigation }) => {
 
 
 
-
   const fetchTours = async () => {
     try {
       //if (activeCategory === "All") {
-        const response = await axios.get(`${backendURL}folders`);
+        const response = await axios.get(`${backendURL}folders/user/${idGlobal}`);
         setTours(response.data);
       //}
     } catch (error) {

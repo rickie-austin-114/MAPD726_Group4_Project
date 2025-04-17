@@ -1,5 +1,5 @@
 // screens/RegisterScreen.js
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import {
   View,
   TextInput,
@@ -10,6 +10,7 @@ import {
   Image,
   Text,
   Pressable,
+  ScrollView
 } from "react-native";
 import axios from "axios";
 import "../../global.css";
@@ -20,19 +21,38 @@ import {
   sendEmailVerification
 } from "@react-native-firebase/auth";
 import { backendURL } from '../config';
+import { GlobalContext } from "../../GlobalContext";
+
+import { useIsFocused } from "@react-navigation/native";
 
 import { app, auth } from "../../firebaseConfig";
 
 const ViewProfileScreen = ({ navigation, route }) => {
 
-  const { id } = route.params;
   const [userInfo, setUserInfo] = useState({});
 
+  const isFocused = useIsFocused();
+  
+  const {         
+    isAdminGlobal,
+    setIsAdminGlobal,
+    usernameGlobal,
+    setUsernameGlobal,
+    phoneGlobal,
+    setPhoneGlobal,
+    ageGlobal,
+    setAgeGlobal,
+    genderGlobal,
+    setGenderGlobal,
+    profilePictureGlobal,
+    setProfilePictureGlobal,
+    idGlobal,
+    setIdGlobal } = useContext(GlobalContext);
 
 
   const fetchUserInformation = async () => {
     try {
-      const user = await axios.get(`${backendURL}api/users/${id}`); //67b73ee28885fbfe362254a1
+      const user = await axios.get(`${backendURL}api/users/${idGlobal}`); //67b73ee28885fbfe362254a1
 
       console.log(user);
       console.log(user.data)
@@ -46,7 +66,7 @@ const ViewProfileScreen = ({ navigation, route }) => {
 
   useEffect(() => {
     fetchUserInformation()
-  }, [])
+  }, [isFocused])
 
   return (
     <View
@@ -83,8 +103,13 @@ const ViewProfileScreen = ({ navigation, route }) => {
 
         <Text> </Text>
 
-        <Text className="text-gray-700 ml-4">{userInfo.gender}</Text>
+        <Text className="text-gray-700 ml-4">Gender: {userInfo.gender}</Text>
         <Text> </Text>
+
+        <Text className="text-gray-700 ml-4">Phone: {userInfo.phone}</Text>
+        <Text> </Text>
+
+        <Button onPress={() => navigation.navigate("EditProfile")} title="Edit Profile" />
 
 
 

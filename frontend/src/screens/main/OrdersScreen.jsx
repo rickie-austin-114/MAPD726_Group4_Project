@@ -1,5 +1,5 @@
 // src/screens/ListPatientsScreen.tsx
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import {
   View,
   Text,
@@ -37,7 +37,7 @@ import {
 } from "react-native-heroicons/solid";
 import { storeColors } from "../../theme/index.js";
 import StarRating from "../../components/StarRating";
-
+import { GlobalContext } from "../../../GlobalContext.jsx";
 import { backendURL } from "../../config.js";
 
 import Spacer from "../../components/Spacer.jsx";
@@ -54,12 +54,14 @@ const OrdersScreen = ({ route, navigation }) => {
   const isFocused = useIsFocused();
   const [activeCategory, setActiveCategory] = useState("All");
 
+  const { idGlobal } = useContext(GlobalContext);
+
 //  const { name } = route.params;
 
   const fetchTours = async () => {
     try {
         
-    const url = `${backendURL}api/orders/`;
+    const url = `${backendURL}api/orders/${idGlobal}`;
     console.log(url);
     const response = await axios.get(url);
     console.log(response.data);

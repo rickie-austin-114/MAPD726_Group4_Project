@@ -9,6 +9,8 @@ import {
   Image,
   Text,
   Pressable,
+  Keyboard,
+
 } from "react-native";
 import axios from "axios";
 import { SafeAreaView } from "react-native-safe-area-context";
